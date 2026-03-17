@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>BSC Mock World Cup 2026</title>
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green-dark: #1a472a;
+  --green-mid: #245a38;
+  --green-light: #2d6e45;
+  --gold: #d4af37;
+  --gold-light: #e8c94a;
+  --gold-dim: rgba(212, 175, 55, 0.15);
+  --white: #ffffff;
+  --gray-light: #f4f4f4;
+  --gray: #e0e0e0;
+  --gray-mid: #999;
+  --gray-dark: #333;
+  --qualified-bg: rgba(212, 175, 55, 0.1);
+  --card-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  --radius: 10px;
+}
+
+html { font-size: 16px; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: var(--gray-light);
+  color: var(--gray-dark);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== HEADER ===== */
+.header {
+  background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%);
+  color: var(--white);
+  padding: 16px 16px 12px;
+  text-align: center;
+  position: relative;
+}
+.header h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.header .subtitle {
+  font-size: 0.75rem;
+  color: var(--gold);
+  margin-top: 2px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.week-badge {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--green-dark);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 12px;
+  margin-top: 8px;
+  letter-spacing: 0.5px;
+}
+
+/* ===== TAB NAV ===== */
+.tab-nav {
+  display: flex;
+  background: var(--green-dark);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 2px solid var(--gold);
+}
+.tab-nav button {
+  flex: 1;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.6);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 10px 4px 8px;
+  cursor: pointer;
+  transition: color 0.2s, border-bottom 0.2s;
+  border-bottom: 3px solid transparent;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.tab-nav button.active {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+.tab-nav button:hover { color: var(--white); }
+
+/* ===== TAB CONTENT ===== */
+.tab-content { display: none; padding: 12px; max-width: 720px; margin: 0 auto; }
+.tab-content.active { display: block; animation: fadeIn 0.25s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ===== CARDS ===== */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.card-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--green-dark);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.card-title .flag { font-size: 1rem; margin-right: 4px; }
+
+/* ===== ANNOUNCEMENT CARDS ===== */
+.announcement {
+  border-left: 4px solid var(--gold);
+}
+.announcement .date {
+  font-size: 0.7rem;
+  color: var(--gray-mid);
+  margin-bottom: 4px;
+}
+.announcement p { font-size: 0.85rem; line-height: 1.5; }
+
+/* ===== COUNTDOWN ===== */
+.countdown-card {
+  background: linear-gradient(135deg, var(--green-dark), var(--green-light));
+  color: var(--white);
+  text-align: center;
+}
+.countdown-card .label { font-size: 0.8rem; color: var(--gold); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+.countdown-card .value { font-size: 2rem; font-weight: 800; margin: 6px 0; }
+.countdown-card .sub { font-size: 0.75rem; opacity: 0.8; }
+
+/* ===== GROUP CARDS ===== */
+.group-card { overflow: hidden; }
+.group-header {
+  background: var(--green-dark);
+  color: var(--white);
+  margin: -16px -16px 12px;
+  padding: 10px 16px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.group-team {
+  display: flex;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--gray);
+  font-size: 0.82rem;
+}
+.group-team:last-child { border-bottom: none; }
+.group-team .flag { font-size: 1.2rem; margin-right: 8px; flex-shrink: 0; }
+.group-team .country { font-weight: 600; margin-right: 6px; }
+.group-team .bsc-name { color: var(--gray-mid); font-size: 0.75rem; }
+
+/* ===== STANDINGS TABLE ===== */
+.standings-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.standings-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.72rem;
+  min-width: 420px;
+}
+.standings-table th {
+  background: var(--green-dark);
+  color: var(--gold);
+  padding: 8px 4px;
+  text-align: center;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  white-space: nowrap;
+}
+.standings-table th:first-child, .standings-table th:nth-child(2) { text-align: left; }
+.standings-table td {
+  padding: 7px 4px;
+  text-align: center;
+  border-bottom: 1px solid var(--gray);
+  white-space: nowrap;
+}
+.standings-table td:first-child { text-align: center; font-weight: 600; width: 28px; }
+.standings-table td:nth-child(2) { text-align: left; }
+.standings-table tr.qualified { background: var(--qualified-bg); }
+.standings-table .team-cell { display: flex; align-items: center; gap: 4px; }
+.standings-table .team-cell .flag { font-size: 1rem; }
+.standings-table .pts { font-weight: 700; color: var(--green-dark); }
+
+/* Small group standings */
+.group-standings { margin-top: 10px; }
+.group-standings .standings-table { min-width: 100%; }
+.group-standings .standings-table th, .group-standings .standings-table td { padding: 5px 3px; font-size: 0.68rem; }
+
+/* ===== SCHEDULE ===== */
+.week-section { margin-bottom: 16px; }
+.week-header {
+  background: var(--green-dark);
+  color: var(--white);
+  padding: 10px 14px;
+  border-radius: var(--radius) var(--radius) 0 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.week-header.current { background: linear-gradient(135deg, var(--green-dark), var(--green-light)); border-left: 4px solid var(--gold); }
+.week-header .week-date { font-size: 0.7rem; color: var(--gold); font-weight: 500; }
+.match-list {
+  background: var(--white);
+  border-radius: 0 0 var(--radius) var(--radius);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+}
+.match-row {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--gray);
+  font-size: 0.8rem;
+}
+.match-row:last-child { border-bottom: none; }
+.match-team {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.match-team.away { justify-content: flex-end; text-align: right; flex-direction: row-reverse; }
+.match-team .flag { font-size: 1.1rem; }
+.match-team .name { font-weight: 600; font-size: 0.78rem; }
+.match-vs {
+  padding: 0 8px;
+  font-size: 0.7rem;
+  color: var(--gray-mid);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.match-score {
+  background: var(--green-dark);
+  color: var(--white);
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+  min-width: 50px;
+  text-align: center;
+}
+.match-label {
+  font-size: 0.65rem;
+  color: var(--gray-mid);
+  margin-top: 2px;
+  text-align: center;
+  width: 100%;
+}
+.match-row-wrap { border-bottom: 1px solid var(--gray); }
+.match-row-wrap:last-child { border-bottom: none; }
+.match-row-wrap .match-row { border-bottom: none; }
+.challenge-badge {
+  display: inline-block;
+  background: var(--gold-dim);
+  color: #b8960a;
+  font-size: 0.6rem;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin-left: 4px;
+}
+
+/* ===== BRACKET ===== */
+.bracket-container { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 16px; }
+.bracket {
+  display: flex;
+  gap: 12px;
+  min-width: 700px;
+  align-items: flex-start;
+  padding: 8px 0;
+}
+.bracket-round {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 150px;
+}
+.bracket-round-title {
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--green-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--gold);
+  margin-bottom: 4px;
+}
+.bracket-match {
+  background: var(--white);
+  border-radius: 6px;
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  border: 1px solid var(--gray);
+}
+.bracket-team {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 8px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  border-bottom: 1px solid var(--gray);
+}
+.bracket-team:last-child { border-bottom: none; }
+.bracket-team.winner { background: var(--gold-dim); font-weight: 700; }
+.bracket-team.tbd { color: var(--gray-mid); font-style: italic; }
+.bracket-team .flag { font-size: 0.9rem; }
+.bracket-team .score { margin-left: auto; font-weight: 700; font-size: 0.72rem; color: var(--green-dark); }
+.bracket-spacer { height: 20px; }
+
+/* Third place match */
+.third-place { margin-top: 20px; }
+.third-place .card-title { color: var(--gold); }
+
+/* Consolation section */
+.consolation-section { margin-top: 24px; }
+.consolation-section .card-title { margin-bottom: 12px; }
+
+/* ===== FILTER PILLS ===== */
+.filter-bar {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.filter-pill {
+  background: var(--white);
+  border: 1.5px solid var(--gray);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--gray-dark);
+}
+.filter-pill.active {
+  background: var(--green-dark);
+  color: var(--gold);
+  border-color: var(--green-dark);
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  padding: 24px 16px;
+  font-size: 0.7rem;
+  color: var(--gray-mid);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (min-width: 600px) {
+  .tab-content { padding: 20px; }
+  .tab-nav button { font-size: 0.8rem; padding: 12px 8px 10px; }
+  .header h1 { font-size: 1.5rem; }
+  .groups-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .groups-grid .card { margin-bottom: 0; }
+}
+
+/* ===== UTILITY ===== */
+.text-center { text-align: center; }
+.text-gold { color: var(--gold); }
+.mb-8 { margin-bottom: 8px; }
+.mt-12 { margin-top: 12px; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <h1>BSC Mock World Cup 2026</h1>
+  <div class="subtitle">Belmont Soccer Club</div>
+  <div class="week-badge" id="weekBadge">Week 1 - Group Stage</div>
+</header>
+
+<!-- Tab Navigation -->
+<nav class="tab-nav">
+  <button class="active" onclick="switchTab('home')">Home</button>
+  <button onclick="switchTab('groups')">Groups</button>
+  <button onclick="switchTab('standings')">Standings</button>
+  <button onclick="switchTab('schedule')">Schedule</button>
+  <button onclick="switchTab('bracket')">Bracket</button>
+</nav>
+
+<!-- Home Tab -->
+<div id="tab-home" class="tab-content active"></div>
+
+<!-- Groups Tab -->
+<div id="tab-groups" class="tab-content"></div>
+
+<!-- Standings Tab -->
+<div id="tab-standings" class="tab-content"></div>
+
+<!-- Schedule Tab -->
+<div id="tab-schedule" class="tab-content"></div>
+
+<!-- Bracket Tab -->
+<div id="tab-bracket" class="tab-content"></div>
+
+<!-- Footer -->
+<div class="footer">BSC Mock World Cup 2026 &middot; Belmont Soccer Club</div>
+
+<script>
+// =============================================================================
+// ===== WEEKLY UPDATE SECTION =================================================
+// =============================================================================
+// Update currentWeek each Monday (1-7). Update RESULTS and BRACKET as season
+// progresses. Update ANNOUNCEMENTS with current news.
+// =============================================================================
+
+const CURRENT_WEEK = 1; // 1=Apr 20, 2=Apr 27, 3=May 4, 4=May 11, 5=May 18, 6=May 25, 7=Jun 1
+
+const WEEK_DATES = {
+  1: "April 20",
+  2: "April 27",
+  3: "May 4",
+  4: "May 11",
+  5: "May 18",
+  6: "May 25",
+  7: "June 1"
+};
+
+const WEEK_LABELS = {
+  1: "Group Stage - Matchday 1",
+  2: "Group Stage - Matchday 2",
+  3: "Group Stage - Matchday 3",
+  4: "Round of 16",
+  5: "Quarterfinals",
+  6: "Semifinals",
+  7: "Final & Third Place"
+};
+
+// ===== ANNOUNCEMENTS =====
+// Add/remove announcements each week. Most recent first.
+const ANNOUNCEMENTS = [
+  {
+    date: "April 14, 2026",
+    text: "Welcome to the BSC Mock World Cup 2026! Opening ceremonies and Matchday 1 kick off on April 20. Check the Groups and Schedule tabs to see your team's draw. Good luck to all 33 teams!"
+  },
+  {
+    date: "April 10, 2026",
+    text: "The group draw is complete! 33 BSC teams have been assigned to 12 groups. Check out which World Cup country your team represents."
+  }
+];
+
+// ===== TEAMS =====
+// id, bscName, country, flag (emoji), group, grade, gender
+const TEAMS = [
+  // Group A (3 teams)
+  { id: 1,  bscName: "3rd Girls Team 1",  country: "Brazil",       flag: "\ud83c\udde7\ud83c\uddf7", group: "A", grade: "3rd", gender: "Girls" },
+  { id: 2,  bscName: "3rd Girls Team 2",  country: "Germany",      flag: "\ud83c\udde9\ud83c\uddea", group: "A", grade: "3rd", gender: "Girls" },
+  { id: 3,  bscName: "3rd Girls Team 3",  country: "Japan",        flag: "\ud83c\uddef\ud83c\uddf5", group: "A", grade: "3rd", gender: "Girls" },
+
+  // Group B (3 teams)
+  { id: 4,  bscName: "3rd Boys Team 1",   country: "Argentina",    flag: "\ud83c\udde6\ud83c\uddf7", group: "B", grade: "3rd", gender: "Boys" },
+  { id: 5,  bscName: "3rd Boys Team 2",   country: "France",       flag: "\ud83c\uddeb\ud83c\uddf7", group: "B", grade: "3rd", gender: "Boys" },
+  { id: 6,  bscName: "3rd Boys Team 3",   country: "England",      flag: "\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f", group: "B", grade: "3rd", gender: "Boys" },
+
+  // Group C (3 teams)
+  { id: 7,  bscName: "3rd Boys Team 4",   country: "Spain",        flag: "\ud83c\uddea\ud83c\uddf8", group: "C", grade: "3rd", gender: "Boys" },
+  { id: 8,  bscName: "4th Girls Team 1",  country: "Netherlands",  flag: "\ud83c\uddf3\ud83c\uddf1", group: "C", grade: "4th", gender: "Girls" },
+  { id: 9,  bscName: "4th Girls Team 2",  country: "Portugal",     flag: "\ud83c\uddf5\ud83c\uddf9", group: "C", grade: "4th", gender: "Girls" },
+
+  // Group D (3 teams)
+  { id: 10, bscName: "4th Girls Team 3",  country: "Italy",        flag: "\ud83c\uddee\ud83c\uddf9", group: "D", grade: "4th", gender: "Girls" },
+  { id: 11, bscName: "4th Boys Team 1",   country: "Mexico",       flag: "\ud83c\uddf2\ud83c\uddfd", group: "D", grade: "4th", gender: "Boys" },
+  { id: 12, bscName: "4th Boys Team 2",   country: "South Korea",  flag: "\ud83c\uddf0\ud83c\uddf7", group: "D", grade: "4th", gender: "Boys" },
+
+  // Group E (3 teams)
+  { id: 13, bscName: "4th Boys Team 3",   country: "Belgium",      flag: "\ud83c\udde7\ud83c\uddea", group: "E", grade: "4th", gender: "Boys" },
+  { id: 14, bscName: "4th Boys Team 4",   country: "Croatia",      flag: "\ud83c\udded\ud83c\uddf7", group: "E", grade: "4th", gender: "Boys" },
+  { id: 15, bscName: "5th Girls Team 1",  country: "USA",          flag: "\ud83c\uddfa\ud83c\uddf8", group: "E", grade: "5th", gender: "Girls" },
+
+  // Group F (3 teams)
+  { id: 16, bscName: "5th Girls Team 2",  country: "Colombia",     flag: "\ud83c\udde8\ud83c\uddf4", group: "F", grade: "5th", gender: "Girls" },
+  { id: 17, bscName: "5th Boys Team 1",   country: "Uruguay",      flag: "\ud83c\uddfa\ud83c\uddfe", group: "F", grade: "5th", gender: "Boys" },
+  { id: 18, bscName: "5th Boys Team 2",   country: "Senegal",      flag: "\ud83c\uddf8\ud83c\uddf3", group: "F", grade: "5th", gender: "Boys" },
+
+  // Group G (3 teams)
+  { id: 19, bscName: "5th Boys Team 3",   country: "Denmark",      flag: "\ud83c\udde9\ud83c\uddf0", group: "G", grade: "5th", gender: "Boys" },
+  { id: 20, bscName: "6th Girls Team 1",  country: "Australia",    flag: "\ud83c\udde6\ud83c\uddfa", group: "G", grade: "6th", gender: "Girls" },
+  { id: 21, bscName: "6th Girls Team 2",  country: "Switzerland",  flag: "\ud83c\udde8\ud83c\udded", group: "G", grade: "6th", gender: "Girls" },
+
+  // Group H (3 teams)
+  { id: 22, bscName: "6th Girls Team 3",  country: "Ghana",        flag: "\ud83c\uddec\ud83c\udded", group: "H", grade: "6th", gender: "Girls" },
+  { id: 23, bscName: "6th Boys Team 1",   country: "Nigeria",      flag: "\ud83c\uddf3\ud83c\uddec", group: "H", grade: "6th", gender: "Boys" },
+  { id: 24, bscName: "6th Boys Team 2",   country: "Poland",       flag: "\ud83c\uddf5\ud83c\uddf1", group: "H", grade: "6th", gender: "Boys" },
+
+  // Group I (3 teams)
+  { id: 25, bscName: "6th Boys Team 3",   country: "Sweden",       flag: "\ud83c\uddf8\ud83c\uddea", group: "I", grade: "6th", gender: "Boys" },
+  { id: 26, bscName: "7th Girls Team 1",  country: "Chile",        flag: "\ud83c\udde8\ud83c\uddf1", group: "I", grade: "7th", gender: "Girls" },
+  { id: 27, bscName: "7th Girls Team 2",  country: "Cameroon",     flag: "\ud83c\udde8\ud83c\uddf2", group: "I", grade: "7th", gender: "Girls" },
+
+  // Group J (2 teams)
+  { id: 28, bscName: "7th Boys Team 1",   country: "Morocco",      flag: "\ud83c\uddf2\ud83c\udde6", group: "J", grade: "7th", gender: "Boys" },
+  { id: 29, bscName: "7th Boys Team 2",   country: "Serbia",       flag: "\ud83c\uddf7\ud83c\uddf8", group: "J", grade: "7th", gender: "Boys" },
+
+  // Group K (2 teams)
+  { id: 30, bscName: "8th Girls Team 1",  country: "Canada",       flag: "\ud83c\udde8\ud83c\udde6", group: "K", grade: "8th", gender: "Girls" },
+  { id: 31, bscName: "8th Girls Team 2",  country: "Costa Rica",   flag: "\ud83c\udde8\ud83c\uddf7", group: "K", grade: "8th", gender: "Girls" },
+
+  // Group L (2 teams)
+  { id: 32, bscName: "8th Boys Team 1",   country: "Ecuador",      flag: "\ud83c\uddea\ud83c\udde8", group: "L", grade: "8th", gender: "Boys" },
+  { id: 33, bscName: "8th Boys Team 2",   country: "Wales",        flag: "\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc77\udb40\udc6c\udb40\udc73\udb40\udc7f", group: "L", grade: "8th", gender: "Boys" }
+];
+
+// ===== GROUPS =====
+const GROUPS = {
+  A: [1, 2, 3],
+  B: [4, 5, 6],
+  C: [7, 8, 9],
+  D: [10, 11, 12],
+  E: [13, 14, 15],
+  F: [16, 17, 18],
+  G: [19, 20, 21],
+  H: [22, 23, 24],
+  I: [25, 26, 27],
+  J: [28, 29],
+  K: [30, 31],
+  L: [32, 33]
+};
+
+// Challenge match opponents (not real BSC teams, just display names for
+// groups-of-2 challenge matches). These represent unassigned World Cup
+// countries used as practice opponents.
+const CHALLENGE_COUNTRIES = [
+  { country: "Peru",        flag: "\ud83c\uddf5\ud83c\uddea" },
+  { country: "Paraguay",    flag: "\ud83c\uddf5\ud83c\uddfe" },
+  { country: "Tunisia",     flag: "\ud83c\uddf9\ud83c\uddf3" },
+  { country: "Iran",        flag: "\ud83c\uddee\ud83c\uddf7" },
+  { country: "Saudi Arabia",flag: "\ud83c\uddf8\ud83c\udde6" },
+  { country: "Algeria",     flag: "\ud83c\udde9\ud83c\uddff" },
+  { country: "Egypt",       flag: "\ud83c\uddea\ud83c\uddec" },
+  { country: "Scotland",    flag: "\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc73\udb40\udc63\udb40\udc74\udb40\udc7f" },
+  { country: "Norway",      flag: "\ud83c\uddf3\ud83c\uddf4" },
+  { country: "Austria",     flag: "\ud83c\udde6\ud83c\uddf9" },
+  { country: "Czech Republic", flag: "\ud83c\udde8\ud83c\uddff" },
+  { country: "Turkey",      flag: "\ud83c\uddf9\ud83c\uddf7" }
+];
+
+// ===== SCHEDULE =====
+// Each match: { home: teamId, away: teamId, group: "A", type: "group"|"challenge"|"r16"|"qf"|"sf"|"final"|"third"|"consolation" }
+// For challenge matches in groups of 2: away can be a string like "challenge:0" referencing CHALLENGE_COUNTRIES index
+// homeScore/awayScore: null until results entered
+const SCHEDULE = {
+  // ----- WEEK 1: Group Stage Matchday 1 -----
+  1: [
+    // Groups of 3: first pair plays (team 1 vs team 2)
+    { home: 1,  away: 2,  group: "A", type: "group" },
+    { home: 4,  away: 5,  group: "B", type: "group" },
+    { home: 7,  away: 8,  group: "C", type: "group" },
+    { home: 10, away: 11, group: "D", type: "group" },
+    { home: 13, away: 14, group: "E", type: "group" },
+    { home: 16, away: 17, group: "F", type: "group" },
+    { home: 19, away: 20, group: "G", type: "group" },
+    { home: 22, away: 23, group: "H", type: "group" },
+    { home: 25, away: 26, group: "I", type: "group" },
+    // Groups of 2: head-to-head
+    { home: 28, away: 29, group: "J", type: "group" },
+    { home: 30, away: 31, group: "K", type: "group" },
+    { home: 32, away: 33, group: "L", type: "group" }
+  ],
+
+  // ----- WEEK 2: Group Stage Matchday 2 -----
+  2: [
+    // Groups of 3: second pair (team 1 vs team 3)
+    { home: 1,  away: 3,  group: "A", type: "group" },
+    { home: 4,  away: 6,  group: "B", type: "group" },
+    { home: 7,  away: 9,  group: "C", type: "group" },
+    { home: 10, away: 12, group: "D", type: "group" },
+    { home: 13, away: 15, group: "E", type: "group" },
+    { home: 16, away: 18, group: "F", type: "group" },
+    { home: 19, away: 21, group: "G", type: "group" },
+    { home: 22, away: 24, group: "H", type: "group" },
+    { home: 25, away: 27, group: "I", type: "group" },
+    // Groups of 2: challenge matches
+    { home: 28, away: "challenge:0", group: "J", type: "challenge" },
+    { home: 29, away: "challenge:1", group: "J", type: "challenge" },
+    { home: 30, away: "challenge:2", group: "K", type: "challenge" },
+    { home: 31, away: "challenge:3", group: "K", type: "challenge" },
+    { home: 32, away: "challenge:4", group: "L", type: "challenge" },
+    { home: 33, away: "challenge:5", group: "L", type: "challenge" }
+  ],
+
+  // ----- WEEK 3: Group Stage Matchday 3 -----
+  3: [
+    // Groups of 3: third pair (team 2 vs team 3)
+    { home: 2,  away: 3,  group: "A", type: "group" },
+    { home: 5,  away: 6,  group: "B", type: "group" },
+    { home: 8,  away: 9,  group: "C", type: "group" },
+    { home: 11, away: 12, group: "D", type: "group" },
+    { home: 14, away: 15, group: "E", type: "group" },
+    { home: 17, away: 18, group: "F", type: "group" },
+    { home: 20, away: 21, group: "G", type: "group" },
+    { home: 23, away: 24, group: "H", type: "group" },
+    { home: 26, away: 27, group: "I", type: "group" },
+    // Groups of 2: challenge matches
+    { home: 28, away: "challenge:6", group: "J", type: "challenge" },
+    { home: 29, away: "challenge:7", group: "J", type: "challenge" },
+    { home: 30, away: "challenge:8", group: "K", type: "challenge" },
+    { home: 31, away: "challenge:9", group: "K", type: "challenge" },
+    { home: 32, away: "challenge:10", group: "L", type: "challenge" },
+    { home: 33, away: "challenge:11", group: "L", type: "challenge" }
+  ],
+
+  // ----- WEEK 4: Round of 16 -----
+  // Matchups determined after group stage. Placeholder structure:
+  // Typical seeding: 1A vs 2B, 1C vs 2D, etc. + best 3rd-place finishers
+  4: [
+    // R16 matches — filled after Week 3 results
+    // { home: null, away: null, matchId: "R16-1", type: "r16" },
+    // ... 8 matches
+  ],
+
+  // ----- WEEK 5: Quarterfinals -----
+  5: [],
+
+  // ----- WEEK 6: Semifinals -----
+  6: [],
+
+  // ----- WEEK 7: Final + Third Place -----
+  7: []
+};
+
+// ===== RESULTS =====
+// Map of "weekNum-matchIndex" -> { homeScore, awayScore }
+// Example: "1-0": { homeScore: 2, awayScore: 1 } means Week 1, first match
+// Leave empty until results are submitted each week.
+const RESULTS = {
+  // "1-0": { homeScore: 2, awayScore: 1 },
+};
+
+// ===== BRACKET =====
+// Knockout bracket data — filled after Week 3.
+// Each slot: { teamId: null, score: null } or { teamId: 4, score: 2 }
+const BRACKET = {
+  r16: [
+    { match: 1, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "1A vs 2B" },
+    { match: 2, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "1C vs 2D" },
+    { match: 3, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "1E vs 2F" },
+    { match: 4, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "1G vs 2H" },
+    { match: 5, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "1B vs 2A" },
+    { match: 6, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "1D vs 2C" },
+    { match: 7, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "1F vs 2E" },
+    { match: 8, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "1I vs Best 3rd" }
+  ],
+  qf: [
+    { match: 1, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "W-R16.1 vs W-R16.2" },
+    { match: 2, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "W-R16.3 vs W-R16.4" },
+    { match: 3, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "W-R16.5 vs W-R16.6" },
+    { match: 4, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "W-R16.7 vs W-R16.8" }
+  ],
+  sf: [
+    { match: 1, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "W-QF.1 vs W-QF.2" },
+    { match: 2, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "W-QF.3 vs W-QF.4" }
+  ],
+  third: { home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "3rd Place Match" },
+  final: { home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "Final" }
+};
+
+// ===== CONSOLATION STANDINGS =====
+// Teams that don't qualify for the R16 play consolation matches in Weeks 4-7.
+// Their consolation results accumulate here. Same format as RESULTS.
+// Key: "C-weekNum-matchIndex"
+const CONSOLATION_SCHEDULE = {
+  // 4: [ { home: teamId, away: teamId, type: "consolation" }, ... ],
+  // 5: [], 6: [], 7: []
+};
+const CONSOLATION_RESULTS = {};
+
+// =============================================================================
+// ===== END WEEKLY UPDATE SECTION =============================================
+// =============================================================================
+
+
+// ===== HELPER FUNCTIONS =====
+function getTeam(id) {
+  return TEAMS.find(t => t.id === id);
+}
+
+function getChallengeOpponent(ref) {
+  const idx = parseInt(ref.split(":")[1]);
+  return CHALLENGE_COUNTRIES[idx] || { country: "TBD", flag: "\u2753" };
+}
+
+function getMatchResult(week, matchIndex) {
+  const key = week + "-" + matchIndex;
+  return RESULTS[key] || null;
+}
+
+// ===== STANDINGS CALCULATION =====
+function calcStandings(teamIds, weekFilter) {
+  const stats = {};
+  teamIds.forEach(id => {
+    stats[id] = { mp: 0, w: 0, d: 0, l: 0, gf: 0, ga: 0, gd: 0, pts: 0 };
+  });
+
+  // Iterate through group-stage weeks (1-3)
+  const weeks = weekFilter || [1, 2, 3];
+  weeks.forEach(week => {
+    const matches = SCHEDULE[week] || [];
+    matches.forEach((match, idx) => {
+      if (match.type !== "group") return;
+      const result = getMatchResult(week, idx);
+      if (!result) return;
+      const hId = match.home;
+      const aId = match.away;
+      if (!stats[hId] || !stats[aId]) return;
+
+      stats[hId].mp++;
+      stats[aId].mp++;
+      stats[hId].gf += result.homeScore;
+      stats[hId].ga += result.awayScore;
+      stats[aId].gf += result.awayScore;
+      stats[aId].ga += result.homeScore;
+
+      if (result.homeScore > result.awayScore) {
+        stats[hId].w++; stats[hId].pts += 3;
+        stats[aId].l++;
+      } else if (result.homeScore < result.awayScore) {
+        stats[aId].w++; stats[aId].pts += 3;
+        stats[hId].l++;
+      } else {
+        stats[hId].d++; stats[hId].pts += 1;
+        stats[aId].d++; stats[aId].pts += 1;
+      }
+    });
+  });
+
+  // Calculate GD
+  teamIds.forEach(id => {
+    stats[id].gd = stats[id].gf - stats[id].ga;
+  });
+
+  // Sort: pts desc, gd desc, gf desc
+  const sorted = [...teamIds].sort((a, b) => {
+    if (stats[b].pts !== stats[a].pts) return stats[b].pts - stats[a].pts;
+    if (stats[b].gd !== stats[a].gd) return stats[b].gd - stats[a].gd;
+    if (stats[b].gf !== stats[a].gf) return stats[b].gf - stats[a].gf;
+    return 0;
+  });
+
+  return sorted.map(id => ({ teamId: id, ...stats[id] }));
+}
+
+function calcOverallStandings() {
+  const allIds = TEAMS.map(t => t.id);
+  return calcStandings(allIds);
+}
+
+// ===== TAB SWITCHING =====
+function switchTab(tabName) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-nav button').forEach(btn => btn.classList.remove('active'));
+  document.getElementById('tab-' + tabName).classList.add('active');
+  document.querySelectorAll('.tab-nav button').forEach(btn => {
+    if (btn.textContent.toLowerCase().replace(/\s/g, '') === tabName.replace(/\s/g, '')) btn.classList.add('active');
+  });
+  // Re-render dynamic content
+  if (tabName === 'groups') renderGroups();
+  if (tabName === 'standings') renderStandings();
+  if (tabName === 'schedule') renderSchedule();
+  if (tabName === 'bracket') renderBracket();
+  if (tabName === 'home') renderHome();
+}
+
+// ===== RENDER: HOME =====
+function renderHome() {
+  const el = document.getElementById('tab-home');
+  let html = '';
+
+  // Countdown / Status
+  const weekDates = {
+    1: new Date(2026, 3, 20), 2: new Date(2026, 3, 27), 3: new Date(2026, 4, 4),
+    4: new Date(2026, 4, 11), 5: new Date(2026, 4, 18), 6: new Date(2026, 4, 25),
+    7: new Date(2026, 5, 1)
+  };
+  const now = new Date();
+  const nextDate = weekDates[CURRENT_WEEK];
+  const diff = nextDate ? Math.ceil((nextDate - now) / (1000 * 60 * 60 * 24)) : 0;
+
+  if (CURRENT_WEEK <= 7 && diff > 0) {
+    html += '<div class="card countdown-card">';
+    html += '<div class="label">Next Match Day</div>';
+    html += '<div class="value">' + diff + ' day' + (diff !== 1 ? 's' : '') + '</div>';
+    html += '<div class="sub">' + WEEK_LABELS[CURRENT_WEEK] + ' \u2014 ' + WEEK_DATES[CURRENT_WEEK] + '</div>';
+    html += '</div>';
+  } else if (CURRENT_WEEK <= 7) {
+    html += '<div class="card countdown-card">';
+    html += '<div class="label">Today</div>';
+    html += '<div class="value">' + WEEK_LABELS[CURRENT_WEEK] + '</div>';
+    html += '<div class="sub">' + WEEK_DATES[CURRENT_WEEK] + '</div>';
+    html += '</div>';
+  } else {
+    html += '<div class="card countdown-card">';
+    html += '<div class="label">Tournament Complete</div>';
+    html += '<div class="value">\ud83c\udfc6</div>';
+    html += '<div class="sub">Thanks for a great season!</div>';
+    html += '</div>';
+  }
+
+  // Current week info
+  html += '<div class="card">';
+  html += '<div class="card-title">Week ' + CURRENT_WEEK + ' \u2014 ' + (WEEK_LABELS[CURRENT_WEEK] || '') + '</div>';
+  html += '<p style="font-size:0.82rem;line-height:1.5;color:var(--gray-mid);">';
+  if (CURRENT_WEEK <= 3) {
+    html += 'Group stage matches are underway. Check the Schedule tab for this week\'s matchups and the Groups tab for current standings.';
+  } else if (CURRENT_WEEK === 4) {
+    html += 'The knockout rounds begin! The top 16 teams compete in the Round of 16. Check the Bracket tab to see the matchups.';
+  } else if (CURRENT_WEEK <= 6) {
+    html += 'Knockout rounds continue. Every match is win-or-go-home. Check the Bracket tab for the latest results.';
+  } else {
+    html += 'Championship week! The Final and Third Place match will crown our BSC World Cup champion.';
+  }
+  html += '</p></div>';
+
+  // Announcements
+  ANNOUNCEMENTS.forEach(a => {
+    html += '<div class="card announcement">';
+    html += '<div class="date">' + a.date + '</div>';
+    html += '<p>' + a.text + '</p>';
+    html += '</div>';
+  });
+
+  // Quick look: how many teams
+  html += '<div class="card">';
+  html += '<div class="card-title">Tournament at a Glance</div>';
+  html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:0.82rem;">';
+  html += '<div><strong>33</strong> Teams</div>';
+  html += '<div><strong>12</strong> Groups</div>';
+  html += '<div><strong>7</strong> Weeks</div>';
+  html += '<div><strong>16</strong> Knockout Spots</div>';
+  html += '</div></div>';
+
+  el.innerHTML = html;
+}
+
+// ===== RENDER: GROUPS =====
+function renderGroups() {
+  const el = document.getElementById('tab-groups');
+  let html = '<div class="groups-grid">';
+
+  Object.keys(GROUPS).forEach(letter => {
+    const teamIds = GROUPS[letter];
+    const standings = calcStandings(teamIds);
+    const hasResults = standings.some(s => s.mp > 0);
+
+    html += '<div class="card group-card">';
+    html += '<div class="group-header">Group ' + letter + '</div>';
+
+    if (!hasResults) {
+      // Just show team list
+      teamIds.forEach(id => {
+        const t = getTeam(id);
+        html += '<div class="group-team">';
+        html += '<span class="flag">' + t.flag + '</span>';
+        html += '<span class="country">' + t.country + '</span>';
+        html += '<span class="bsc-name">' + t.bscName + '</span>';
+        html += '</div>';
+      });
+    } else {
+      // Show standings table
+      html += '<div class="group-standings"><div class="standings-table-wrap">';
+      html += '<table class="standings-table">';
+      html += '<thead><tr><th>#</th><th>Team</th><th>MP</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>Pts</th></tr></thead>';
+      html += '<tbody>';
+      standings.forEach((s, i) => {
+        const t = getTeam(s.teamId);
+        html += '<tr>';
+        html += '<td>' + (i + 1) + '</td>';
+        html += '<td><div class="team-cell"><span class="flag">' + t.flag + '</span> ' + t.country + '</div></td>';
+        html += '<td>' + s.mp + '</td><td>' + s.w + '</td><td>' + s.d + '</td><td>' + s.l + '</td>';
+        html += '<td>' + s.gf + '</td><td>' + s.ga + '</td><td>' + (s.gd >= 0 ? '+' : '') + s.gd + '</td>';
+        html += '<td class="pts">' + s.pts + '</td>';
+        html += '</tr>';
+      });
+      html += '</tbody></table></div></div>';
+    }
+
+    html += '</div>';
+  });
+
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+// ===== RENDER: STANDINGS =====
+function renderStandings() {
+  const el = document.getElementById('tab-standings');
+  const standings = calcOverallStandings();
+  const hasResults = standings.some(s => s.mp > 0);
+
+  let html = '';
+  html += '<div class="card">';
+  html += '<div class="card-title">Overall Standings</div>';
+
+  if (!hasResults) {
+    html += '<p style="font-size:0.82rem;color:var(--gray-mid);text-align:center;padding:20px 0;">Standings will appear after Week 1 results are entered.</p>';
+  } else {
+    html += '<div class="standings-table-wrap">';
+    html += '<table class="standings-table">';
+    html += '<thead><tr><th>#</th><th>Team</th><th>Grp</th><th>MP</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>Pts</th></tr></thead>';
+    html += '<tbody>';
+    standings.forEach((s, i) => {
+      const t = getTeam(s.teamId);
+      const qualified = i < 16;
+      html += '<tr class="' + (qualified ? 'qualified' : '') + '">';
+      html += '<td>' + (i + 1) + '</td>';
+      html += '<td><div class="team-cell"><span class="flag">' + t.flag + '</span> ' + t.country + '</div></td>';
+      html += '<td>' + t.group + '</td>';
+      html += '<td>' + s.mp + '</td><td>' + s.w + '</td><td>' + s.d + '</td><td>' + s.l + '</td>';
+      html += '<td>' + s.gf + '</td><td>' + s.ga + '</td><td>' + (s.gd >= 0 ? '+' : '') + s.gd + '</td>';
+      html += '<td class="pts">' + s.pts + '</td>';
+      html += '</tr>';
+    });
+    html += '</tbody></table></div>';
+    html += '<div style="margin-top:8px;font-size:0.7rem;color:var(--gray-mid);display:flex;align-items:center;gap:6px;">';
+    html += '<span style="display:inline-block;width:12px;height:12px;background:var(--qualified-bg);border:1px solid var(--gold);border-radius:2px;"></span>';
+    html += 'Top 16 qualify for Knockout Round';
+    html += '</div>';
+  }
+
+  html += '</div>';
+
+  // If no results, show all teams grouped by grade
+  if (!hasResults) {
+    html += '<div class="card">';
+    html += '<div class="card-title">All 33 Teams</div>';
+    const grades = ["3rd", "4th", "5th", "6th", "7th", "8th"];
+    grades.forEach(grade => {
+      const gradeTeams = TEAMS.filter(t => t.grade === grade);
+      html += '<div style="margin-bottom:12px;">';
+      html += '<div style="font-size:0.75rem;font-weight:700;color:var(--green-dark);margin-bottom:4px;">' + grade + ' Grade</div>';
+      gradeTeams.forEach(t => {
+        html += '<div class="group-team">';
+        html += '<span class="flag">' + t.flag + '</span>';
+        html += '<span class="country">' + t.country + '</span>';
+        html += '<span class="bsc-name">' + t.bscName + ' \u2014 Group ' + t.group + '</span>';
+        html += '</div>';
+      });
+      html += '</div>';
+    });
+    html += '</div>';
+  }
+
+  el.innerHTML = html;
+}
+
+// ===== RENDER: SCHEDULE =====
+function renderSchedule() {
+  const el = document.getElementById('tab-schedule');
+  let html = '';
+
+  for (let week = 1; week <= 7; week++) {
+    const matches = SCHEDULE[week] || [];
+    const isCurrent = week === CURRENT_WEEK;
+    const weekLabel = WEEK_LABELS[week] || 'Week ' + week;
+
+    html += '<div class="week-section">';
+    html += '<div class="week-header ' + (isCurrent ? 'current' : '') + '">';
+    html += '<span>Week ' + week + ' \u2014 ' + weekLabel + '</span>';
+    html += '<span class="week-date">' + (WEEK_DATES[week] || '') + '</span>';
+    html += '</div>';
+
+    if (matches.length === 0) {
+      html += '<div class="match-list"><div class="match-row" style="justify-content:center;color:var(--gray-mid);font-size:0.8rem;padding:16px;">Matchups TBD</div></div>';
+    } else {
+      html += '<div class="match-list">';
+      matches.forEach((match, idx) => {
+        const result = getMatchResult(week, idx);
+        const homeTeam = getTeam(match.home);
+        let awayTeam, awayFlag, awayName, isChallenge = false;
+
+        if (typeof match.away === 'string' && match.away.startsWith('challenge:')) {
+          const opp = getChallengeOpponent(match.away);
+          awayFlag = opp.flag;
+          awayName = opp.country;
+          isChallenge = true;
+        } else {
+          awayTeam = getTeam(match.away);
+          awayFlag = awayTeam ? awayTeam.flag : '';
+          awayName = awayTeam ? awayTeam.country : 'TBD';
+        }
+
+        html += '<div class="match-row-wrap">';
+        html += '<div class="match-row">';
+        html += '<div class="match-team home">';
+        html += '<span class="flag">' + (homeTeam ? homeTeam.flag : '') + '</span>';
+        html += '<span class="name">' + (homeTeam ? homeTeam.country : 'TBD') + '</span>';
+        html += '</div>';
+
+        if (result) {
+          html += '<div class="match-score">' + result.homeScore + ' \u2013 ' + result.awayScore + '</div>';
+        } else {
+          html += '<div class="match-vs">vs</div>';
+        }
+
+        html += '<div class="match-team away">';
+        html += '<span class="flag">' + awayFlag + '</span>';
+        html += '<span class="name">' + awayName + '</span>';
+        if (isChallenge) html += '<span class="challenge-badge">Challenge</span>';
+        html += '</div>';
+        html += '</div>';
+
+        // Match label
+        if (match.group) {
+          html += '<div class="match-label">Group ' + match.group + (match.type === 'challenge' ? ' \u2014 Challenge Match' : '') + '</div>';
+        } else if (match.label) {
+          html += '<div class="match-label">' + match.label + '</div>';
+        }
+
+        html += '</div>';
+      });
+      html += '</div>';
+    }
+
+    html += '</div>';
+  }
+
+  el.innerHTML = html;
+}
+
+// ===== RENDER: BRACKET =====
+function renderBracket() {
+  const el = document.getElementById('tab-bracket');
+  let html = '';
+
+  html += '<div class="card">';
+  html += '<div class="card-title">Knockout Bracket</div>';
+
+  if (CURRENT_WEEK < 4) {
+    html += '<p style="font-size:0.82rem;color:var(--gray-mid);text-align:center;padding:12px 0;">The knockout bracket will be determined after the group stage concludes (Week 3). Top 16 teams advance.</p>';
+  }
+
+  html += '<div class="bracket-container"><div class="bracket">';
+
+  // Round of 16
+  html += renderBracketRound('Round of 16', BRACKET.r16);
+
+  // Quarterfinals
+  html += renderBracketRound('Quarterfinals', BRACKET.qf);
+
+  // Semifinals
+  html += renderBracketRound('Semifinals', BRACKET.sf);
+
+  // Final
+  html += renderBracketRound('Final', [BRACKET.final]);
+
+  html += '</div></div></div>';
+
+  // Third place match
+  html += '<div class="card third-place">';
+  html += '<div class="card-title">Third Place Match</div>';
+  html += renderBracketMatchCard(BRACKET.third);
+  html += '</div>';
+
+  // Consolation standings
+  html += '<div class="consolation-section">';
+  html += '<div class="card">';
+  html += '<div class="card-title">Consolation Standings</div>';
+
+  if (CURRENT_WEEK < 4) {
+    html += '<p style="font-size:0.82rem;color:var(--gray-mid);text-align:center;padding:12px 0;">Teams finishing outside the top 16 will play consolation matches in Weeks 4\u20137. Standings will appear here.</p>';
+  } else {
+    // Show consolation standings once we have them
+    html += '<p style="font-size:0.82rem;color:var(--gray-mid);text-align:center;padding:12px 0;">Consolation standings will update as matches are played.</p>';
+  }
+
+  html += '</div></div>';
+
+  el.innerHTML = html;
+}
+
+function renderBracketRound(title, matches) {
+  let html = '<div class="bracket-round">';
+  html += '<div class="bracket-round-title">' + title + '</div>';
+
+  matches.forEach((m, i) => {
+    html += renderBracketMatchCard(m);
+    // Add spacers for alignment in earlier rounds
+    if (title === 'Round of 16' && i < matches.length - 1 && i % 2 === 1) {
+      // no spacer needed between pairs
+    }
+  });
+
+  html += '</div>';
+  return html;
+}
+
+function renderBracketMatchCard(m) {
+  let html = '<div class="bracket-match">';
+
+  const homeTeam = m.home.teamId ? getTeam(m.home.teamId) : null;
+  const awayTeam = m.away.teamId ? getTeam(m.away.teamId) : null;
+
+  const homeWinner = m.home.score !== null && m.away.score !== null && m.home.score > m.away.score;
+  const awayWinner = m.home.score !== null && m.away.score !== null && m.away.score > m.home.score;
+
+  html += '<div class="bracket-team ' + (homeWinner ? 'winner' : '') + (homeTeam ? '' : ' tbd') + '">';
+  html += '<span class="flag">' + (homeTeam ? homeTeam.flag : '') + '</span> ';
+  html += (homeTeam ? homeTeam.country : (m.label ? m.label.split(' vs ')[0] || 'TBD' : 'TBD'));
+  if (m.home.score !== null) html += '<span class="score">' + m.home.score + '</span>';
+  html += '</div>';
+
+  html += '<div class="bracket-team ' + (awayWinner ? 'winner' : '') + (awayTeam ? '' : ' tbd') + '">';
+  html += '<span class="flag">' + (awayTeam ? awayTeam.flag : '') + '</span> ';
+  html += (awayTeam ? awayTeam.country : (m.label ? m.label.split(' vs ')[1] || 'TBD' : 'TBD'));
+  if (m.away.score !== null) html += '<span class="score">' + m.away.score + '</span>';
+  html += '</div>';
+
+  html += '</div>';
+  return html;
+}
+
+// ===== WEEK BADGE =====
+function updateWeekBadge() {
+  const badge = document.getElementById('weekBadge');
+  if (CURRENT_WEEK <= 3) {
+    badge.textContent = 'Week ' + CURRENT_WEEK + ' \u2014 Group Stage';
+  } else if (CURRENT_WEEK === 4) {
+    badge.textContent = 'Week 4 \u2014 Round of 16';
+  } else if (CURRENT_WEEK === 5) {
+    badge.textContent = 'Week 5 \u2014 Quarterfinals';
+  } else if (CURRENT_WEEK === 6) {
+    badge.textContent = 'Week 6 \u2014 Semifinals';
+  } else {
+    badge.textContent = 'Week 7 \u2014 Finals';
+  }
+}
+
+// ===== INIT =====
+function init() {
+  updateWeekBadge();
+  renderHome();
+}
+
+init();
+</script>
+</body>
+</html>

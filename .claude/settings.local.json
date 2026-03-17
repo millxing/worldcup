@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(pip3 install:*)",
-      "Bash(python3 create_7wk_pdf.py)"
+      "Bash(python3 create_7wk_pdf.py)",
+      "Bash(python3 -c \":*)",
+      "mcp__Claude_Preview__preview_start"
     ]
   }
 }
