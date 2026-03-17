@@ -3,32 +3,42 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>BSC Mock World Cup 2026</title>
+<title>BSC World Cup 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ===== RESET & BASE ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --green-dark: #1a472a;
-  --green-mid: #245a38;
-  --green-light: #2d6e45;
-  --gold: #d4af37;
-  --gold-light: #e8c94a;
-  --gold-dim: rgba(212, 175, 55, 0.15);
+  --navy: #34374C;
+  --navy-deep: #2C2E3E;
+  --navy-light: #3d4058;
+  --red: #EE2B47;
+  --red-light: #f4556a;
+  --red-dim: rgba(238, 43, 71, 0.1);
+  --teal: #00668f;
   --white: #ffffff;
-  --gray-light: #f4f4f4;
+  --off-white: #F6F6F6;
   --gray: #e0e0e0;
-  --gray-mid: #999;
-  --gray-dark: #333;
-  --qualified-bg: rgba(212, 175, 55, 0.1);
-  --card-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  --gray-mid: #666666;
+  --gray-dark: #2C2E3E;
+  --qualified-bg: #fde8ec;
+  --card-shadow: 0 2px 12px rgba(0,0,0,0.08);
   --radius: 10px;
+  /* Legacy aliases for JS inline styles that reference old names */
+  --green-dark: var(--navy);
+  --gray-light: var(--off-white);
+  --gold: var(--red);
+  --gold-light: var(--red-light);
+  --gold-dim: var(--red-dim);
 }
 
 html { font-size: 16px; }
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  background: var(--gray-light);
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: var(--off-white);
   color: var(--gray-dark);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
@@ -36,20 +46,46 @@ body {
 
 /* ===== HEADER ===== */
 .header {
-  background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%);
+  background:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.02) 0px,
+      rgba(255,255,255,0.02) 1px,
+      transparent 1px,
+      transparent 12px
+    ),
+    linear-gradient(135deg, var(--navy-deep) 0%, var(--navy) 100%);
   color: var(--white);
-  padding: 16px 16px 12px;
+  padding: 20px 16px 14px;
   text-align: center;
   position: relative;
+  border-bottom: 3px solid var(--red);
+}
+.header-logo {
+  display: block;
+  margin: 0 auto -30px;
+  height: 180px;
+  width: auto;
+}
+.club-name {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 2px;
 }
 .header h1 {
-  font-size: 1.25rem;
+  font-family: 'Oswald', sans-serif;
+  font-size: 2rem;
   font-weight: 700;
-  letter-spacing: 0.5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 .header .subtitle {
   font-size: 0.75rem;
-  color: var(--gold);
+  color: #ffffff;
   margin-top: 2px;
   font-weight: 500;
   letter-spacing: 1px;
@@ -57,30 +93,32 @@ body {
 }
 .week-badge {
   display: inline-block;
-  background: var(--gold);
-  color: var(--green-dark);
+  background: var(--red);
+  color: var(--white);
+  font-family: 'Montserrat', sans-serif;
   font-size: 0.7rem;
   font-weight: 700;
-  padding: 3px 10px;
-  border-radius: 12px;
-  margin-top: 8px;
+  padding: 4px 14px;
+  border-radius: 20px;
+  margin-top: 10px;
   letter-spacing: 0.5px;
 }
 
 /* ===== TAB NAV ===== */
 .tab-nav {
   display: flex;
-  background: var(--green-dark);
+  background: var(--navy);
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 2px solid var(--gold);
+  border-bottom: none;
 }
 .tab-nav button {
   flex: 1;
   background: none;
   border: none;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255,255,255,0.5);
+  font-family: 'Montserrat', sans-serif;
   font-size: 0.72rem;
   font-weight: 600;
   padding: 10px 4px 8px;
@@ -91,15 +129,39 @@ body {
   letter-spacing: 0.5px;
 }
 .tab-nav button.active {
-  color: var(--gold);
-  border-bottom-color: var(--gold);
+  color: var(--white);
+  border-bottom-color: var(--red);
 }
 .tab-nav button:hover { color: var(--white); }
 
 /* ===== TAB CONTENT ===== */
 .tab-content { display: none; padding: 12px; max-width: 720px; margin: 0 auto; }
-.tab-content.active { display: block; animation: fadeIn 0.25s ease; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ===== STAGGERED CARD REVEAL ===== */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.card-reveal {
+  opacity: 0;
+  animation: slideUp 0.4s ease forwards;
+}
+.card-reveal:nth-child(1) { animation-delay: 0.05s; }
+.card-reveal:nth-child(2) { animation-delay: 0.1s; }
+.card-reveal:nth-child(3) { animation-delay: 0.15s; }
+.card-reveal:nth-child(4) { animation-delay: 0.2s; }
+.card-reveal:nth-child(5) { animation-delay: 0.25s; }
+.card-reveal:nth-child(6) { animation-delay: 0.3s; }
+.card-reveal:nth-child(7) { animation-delay: 0.35s; }
+.card-reveal:nth-child(8) { animation-delay: 0.4s; }
+
+/* ===== PULSE ANIMATION ===== */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
 
 /* ===== CARDS ===== */
 .card {
@@ -108,20 +170,22 @@ body {
   box-shadow: var(--card-shadow);
   padding: 16px;
   margin-bottom: 12px;
+  border-left: 3px solid var(--red);
 }
 .card-title {
+  font-family: 'Oswald', sans-serif;
   font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--green-dark);
+  font-weight: 600;
+  color: var(--navy);
   margin-bottom: 10px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
 }
 .card-title .flag { font-size: 1rem; margin-right: 4px; }
 
 /* ===== ANNOUNCEMENT CARDS ===== */
 .announcement {
-  border-left: 4px solid var(--gold);
+  border-left: 3px solid var(--teal);
 }
 .announcement .date {
   font-size: 0.7rem;
@@ -132,24 +196,46 @@ body {
 
 /* ===== COUNTDOWN ===== */
 .countdown-card {
-  background: linear-gradient(135deg, var(--green-dark), var(--green-light));
+  background: var(--navy-deep);
   color: var(--white);
   text-align: center;
+  border-left: 3px solid var(--red);
 }
-.countdown-card .label { font-size: 0.8rem; color: var(--gold); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-.countdown-card .value { font-size: 2rem; font-weight: 800; margin: 6px 0; }
-.countdown-card .sub { font-size: 0.75rem; opacity: 0.8; }
+.countdown-card .label {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.7rem;
+  color: var(--red);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+.countdown-card .value {
+  font-family: 'Oswald', sans-serif;
+  font-size: 4rem;
+  font-weight: 900;
+  margin: 6px 0;
+  animation: pulse 2s ease-in-out infinite;
+}
+.countdown-card .sub {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
 
 /* ===== GROUP CARDS ===== */
 .group-card { overflow: hidden; }
 .group-header {
-  background: var(--green-dark);
+  font-family: 'Oswald', sans-serif;
+  background: var(--navy);
   color: var(--white);
-  margin: -16px -16px 12px;
+  margin: -16px -16px 12px -16px;
   padding: 10px 16px;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-left: -19px;
+  padding-left: 19px;
 }
 .group-team {
   display: flex;
@@ -158,10 +244,23 @@ body {
   border-bottom: 1px solid var(--gray);
   font-size: 0.82rem;
 }
+.group-team:nth-child(even) { background: rgba(0,0,0,0.02); }
 .group-team:last-child { border-bottom: none; }
 .group-team .flag { font-size: 1.2rem; margin-right: 8px; flex-shrink: 0; }
 .group-team .country { font-weight: 600; margin-right: 6px; }
-.group-team .bsc-name { color: var(--gray-mid); font-size: 0.75rem; }
+.group-team .bsc-name { color: var(--gray-mid); font-size: 0.75rem; margin-left: auto; text-align: right; }
+.group-challenge-divider {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--gray-mid);
+  padding: 8px 0 4px;
+  border-top: 1px dashed var(--gray);
+  margin-top: 2px;
+}
+.group-team-challenge { opacity: 0.7; }
+.group-team-challenge .challenge-badge { margin-left: auto; }
 
 /* ===== STANDINGS TABLE ===== */
 .standings-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
@@ -170,13 +269,18 @@ body {
   border-collapse: collapse;
   font-size: 0.72rem;
   min-width: 420px;
+  font-family: 'Montserrat', sans-serif;
 }
 .standings-table th {
-  background: var(--green-dark);
-  color: var(--gold);
+  font-family: 'Oswald', sans-serif;
+  background: var(--navy);
+  color: var(--white);
   padding: 8px 4px;
   text-align: center;
   font-weight: 600;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   position: sticky;
   top: 0;
   white-space: nowrap;
@@ -188,12 +292,14 @@ body {
   border-bottom: 1px solid var(--gray);
   white-space: nowrap;
 }
+.standings-table tbody tr:nth-child(even) { background: var(--off-white); }
+.standings-table tbody tr:nth-child(odd) { background: var(--white); }
 .standings-table td:first-child { text-align: center; font-weight: 600; width: 28px; }
 .standings-table td:nth-child(2) { text-align: left; }
-.standings-table tr.qualified { background: var(--qualified-bg); }
+.standings-table tr.qualified { background: var(--red-dim) !important; }
 .standings-table .team-cell { display: flex; align-items: center; gap: 4px; }
 .standings-table .team-cell .flag { font-size: 1rem; }
-.standings-table .pts { font-weight: 700; color: var(--green-dark); }
+.standings-table .pts { font-weight: 700; color: var(--red); }
 
 /* Small group standings */
 .group-standings { margin-top: 10px; }
@@ -203,18 +309,21 @@ body {
 /* ===== SCHEDULE ===== */
 .week-section { margin-bottom: 16px; }
 .week-header {
-  background: var(--green-dark);
+  font-family: 'Oswald', sans-serif;
+  background: var(--navy);
   color: var(--white);
   padding: 10px 14px;
   border-radius: var(--radius) var(--radius) 0 0;
   font-size: 0.82rem;
   font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.week-header.current { background: linear-gradient(135deg, var(--green-dark), var(--green-light)); border-left: 4px solid var(--gold); }
-.week-header .week-date { font-size: 0.7rem; color: var(--gold); font-weight: 500; }
+.week-header.current { background: var(--red); border-left: none; }
+.week-header .week-date { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; color: rgba(255,255,255,0.8); font-weight: 500; text-transform: none; letter-spacing: 0; }
 .match-list {
   background: var(--white);
   border-radius: 0 0 var(--radius) var(--radius);
@@ -227,7 +336,9 @@ body {
   padding: 10px 12px;
   border-bottom: 1px solid var(--gray);
   font-size: 0.8rem;
+  transition: background 0.15s ease;
 }
+.match-row:hover { background: rgba(0,0,0,0.015); }
 .match-row:last-child { border-bottom: none; }
 .match-team {
   flex: 1;
@@ -236,22 +347,24 @@ body {
   gap: 6px;
 }
 .match-team.away { justify-content: flex-end; text-align: right; flex-direction: row-reverse; }
-.match-team .flag { font-size: 1.1rem; }
-.match-team .name { font-weight: 600; font-size: 0.78rem; }
+.match-team .flag { font-size: 1.2rem; }
+.match-team .name { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.78rem; }
 .match-vs {
   padding: 0 8px;
-  font-size: 0.7rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.75rem;
   color: var(--gray-mid);
-  font-weight: 600;
+  font-weight: 500;
   flex-shrink: 0;
 }
 .match-score {
-  background: var(--green-dark);
+  font-family: 'Oswald', sans-serif;
+  background: var(--navy);
   color: var(--white);
   padding: 3px 10px;
   border-radius: 4px;
   font-weight: 700;
-  font-size: 0.8rem;
+  font-size: 1.1rem;
   flex-shrink: 0;
   min-width: 50px;
   text-align: center;
@@ -262,14 +375,16 @@ body {
   margin-top: 2px;
   text-align: center;
   width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 .match-row-wrap { border-bottom: 1px solid var(--gray); }
 .match-row-wrap:last-child { border-bottom: none; }
 .match-row-wrap .match-row { border-bottom: none; }
 .challenge-badge {
   display: inline-block;
-  background: var(--gold-dim);
-  color: #b8960a;
+  background: rgba(0, 102, 143, 0.1);
+  color: var(--teal);
   font-size: 0.6rem;
   font-weight: 600;
   padding: 1px 6px;
@@ -293,22 +408,22 @@ body {
   min-width: 150px;
 }
 .bracket-round-title {
+  font-family: 'Oswald', sans-serif;
   text-align: center;
   font-size: 0.7rem;
   font-weight: 700;
-  color: var(--green-dark);
+  color: var(--navy);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
   padding-bottom: 6px;
-  border-bottom: 2px solid var(--gold);
+  border-bottom: 2px solid var(--red);
   margin-bottom: 4px;
 }
 .bracket-match {
-  background: var(--white);
+  background: var(--navy-deep);
   border-radius: 6px;
   box-shadow: var(--card-shadow);
   overflow: hidden;
-  border: 1px solid var(--gray);
 }
 .bracket-team {
   display: flex;
@@ -317,18 +432,19 @@ body {
   padding: 6px 8px;
   font-size: 0.7rem;
   font-weight: 500;
-  border-bottom: 1px solid var(--gray);
+  color: var(--white);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 .bracket-team:last-child { border-bottom: none; }
-.bracket-team.winner { background: var(--gold-dim); font-weight: 700; }
-.bracket-team.tbd { color: var(--gray-mid); font-style: italic; }
+.bracket-team.winner { border-left: 3px solid var(--red); font-weight: 700; }
+.bracket-team.tbd { color: rgba(255,255,255,0.4); font-style: italic; border: 1px dashed rgba(255,255,255,0.15); border-radius: 6px; }
 .bracket-team .flag { font-size: 0.9rem; }
-.bracket-team .score { margin-left: auto; font-weight: 700; font-size: 0.72rem; color: var(--green-dark); }
+.bracket-team .score { margin-left: auto; font-weight: 700; font-size: 0.72rem; color: var(--red-light); }
 .bracket-spacer { height: 20px; }
 
 /* Third place match */
 .third-place { margin-top: 20px; }
-.third-place .card-title { color: var(--gold); }
+.third-place .card-title { color: var(--teal); }
 
 /* Consolation section */
 .consolation-section { margin-top: 24px; }
@@ -353,31 +469,65 @@ body {
   color: var(--gray-dark);
 }
 .filter-pill.active {
-  background: var(--green-dark);
-  color: var(--gold);
-  border-color: var(--green-dark);
+  background: var(--navy);
+  color: var(--white);
+  border-color: var(--navy);
+}
+
+/* ===== GLANCE GRID ===== */
+.glance-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.glance-item {
+  text-align: center;
+  padding: 12px 8px;
+  background: var(--off-white);
+  border-radius: 8px;
+}
+.glance-item .glance-num {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--red);
+  line-height: 1;
+}
+.glance-item .glance-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--gray-mid);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
 }
 
 /* ===== FOOTER ===== */
 .footer {
+  background: var(--navy-deep);
   text-align: center;
   padding: 24px 16px;
-  font-size: 0.7rem;
-  color: var(--gray-mid);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.5);
 }
 
 /* ===== RESPONSIVE ===== */
 @media (min-width: 600px) {
   .tab-content { padding: 20px; }
   .tab-nav button { font-size: 0.8rem; padding: 12px 8px 10px; }
-  .header h1 { font-size: 1.5rem; }
+  .header h1 { font-size: 2.4rem; }
+  .header-logo { height: 225px; }
+  .club-name { font-size: 1.8rem; }
   .groups-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .groups-grid .card { margin-bottom: 0; }
+  .bracket { flex-direction: row; }
 }
 
 /* ===== UTILITY ===== */
 .text-center { text-align: center; }
-.text-gold { color: var(--gold); }
+.text-gold { color: var(--red); }
+a { color: var(--teal); }
 .mb-8 { margin-bottom: 8px; }
 .mt-12 { margin-top: 12px; }
 </style>
@@ -386,8 +536,10 @@ body {
 
 <!-- Header -->
 <header class="header">
-  <h1>BSC Mock World Cup 2026</h1>
-  <div class="subtitle">Belmont Soccer Club</div>
+  <img src="https://cdn2.sportngin.com/attachments/photo/bd06-216817597/BSC_TT_-_NBG_large.png" alt="Brookline Soccer Club" class="header-logo">
+  <div class="club-name">Brookline Soccer Club</div>
+  <h1>World Cup 2026</h1>
+  <div class="subtitle">April 20 &ndash; June 1</div>
   <div class="week-badge" id="weekBadge">Week 1 - Group Stage</div>
 </header>
 
@@ -416,7 +568,7 @@ body {
 <div id="tab-bracket" class="tab-content"></div>
 
 <!-- Footer -->
-<div class="footer">BSC Mock World Cup 2026 &middot; Belmont Soccer Club</div>
+<div class="footer">BSC World Cup 2026 &middot; Brookline Soccer Club</div>
 
 <script>
 // =============================================================================
@@ -453,7 +605,7 @@ const WEEK_LABELS = {
 const ANNOUNCEMENTS = [
   {
     date: "April 14, 2026",
-    text: "Welcome to the BSC Mock World Cup 2026! Opening ceremonies and Matchday 1 kick off on April 20. Check the Groups and Schedule tabs to see your team's draw. Good luck to all 33 teams!"
+    text: "Welcome to the BSC World Cup 2026! Opening ceremonies and Matchday 1 kick off on April 20. Check the Groups and Schedule tabs to see your team's draw. Good luck to all 33 teams!"
   },
   {
     date: "April 10, 2026",
@@ -464,97 +616,125 @@ const ANNOUNCEMENTS = [
 // ===== TEAMS =====
 // id, bscName, country, flag (emoji), group, grade, gender
 const TEAMS = [
-  // Group A (3 teams)
-  { id: 1,  bscName: "3rd Girls Team 1",  country: "Brazil",       flag: "\ud83c\udde7\ud83c\uddf7", group: "A", grade: "3rd", gender: "Girls" },
-  { id: 2,  bscName: "3rd Girls Team 2",  country: "Germany",      flag: "\ud83c\udde9\ud83c\uddea", group: "A", grade: "3rd", gender: "Girls" },
-  { id: 3,  bscName: "3rd Girls Team 3",  country: "Japan",        flag: "\ud83c\uddef\ud83c\uddf5", group: "A", grade: "3rd", gender: "Girls" },
+  // Group A (2 teams)
+  { id: 1,  bscName: "B4 Valencia",    country: "Mexico",         flag: "🇲🇽", group: "A", grade: "4th", gender: "Boys" },
+  { id: 2,  bscName: "G7 Ajax",        country: "Korea Republic", flag: "🇰🇷", group: "A", grade: "7th", gender: "Girls" },
 
-  // Group B (3 teams)
-  { id: 4,  bscName: "3rd Boys Team 1",   country: "Argentina",    flag: "\ud83c\udde6\ud83c\uddf7", group: "B", grade: "3rd", gender: "Boys" },
-  { id: 5,  bscName: "3rd Boys Team 2",   country: "France",       flag: "\ud83c\uddeb\ud83c\uddf7", group: "B", grade: "3rd", gender: "Boys" },
-  { id: 6,  bscName: "3rd Boys Team 3",   country: "England",      flag: "\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f", group: "B", grade: "3rd", gender: "Boys" },
+  // Group B (2 teams)
+  { id: 3,  bscName: "B6 Roma",        country: "Canada",         flag: "🇨🇦", group: "B", grade: "6th", gender: "Boys" },
+  { id: 4,  bscName: "G3 Spirit",      country: "Switzerland",    flag: "🇨🇭", group: "B", grade: "3rd", gender: "Girls" },
 
   // Group C (3 teams)
-  { id: 7,  bscName: "3rd Boys Team 4",   country: "Spain",        flag: "\ud83c\uddea\ud83c\uddf8", group: "C", grade: "3rd", gender: "Boys" },
-  { id: 8,  bscName: "4th Girls Team 1",  country: "Netherlands",  flag: "\ud83c\uddf3\ud83c\uddf1", group: "C", grade: "4th", gender: "Girls" },
-  { id: 9,  bscName: "4th Girls Team 2",  country: "Portugal",     flag: "\ud83c\uddf5\ud83c\uddf9", group: "C", grade: "4th", gender: "Girls" },
+  { id: 5,  bscName: "B8 Man City",    country: "Brazil",         flag: "🇧🇷", group: "C", grade: "8th", gender: "Boys" },
+  { id: 6,  bscName: "G4 Liverpool",   country: "Morocco",        flag: "🇲🇦", group: "C", grade: "4th", gender: "Girls" },
+  { id: 7,  bscName: "B5 Napoli",      country: "Scotland",       flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿", group: "C", grade: "5th", gender: "Boys" },
 
   // Group D (3 teams)
-  { id: 10, bscName: "4th Girls Team 3",  country: "Italy",        flag: "\ud83c\uddee\ud83c\uddf9", group: "D", grade: "4th", gender: "Girls" },
-  { id: 11, bscName: "4th Boys Team 1",   country: "Mexico",       flag: "\ud83c\uddf2\ud83c\uddfd", group: "D", grade: "4th", gender: "Boys" },
-  { id: 12, bscName: "4th Boys Team 2",   country: "South Korea",  flag: "\ud83c\uddf0\ud83c\uddf7", group: "D", grade: "4th", gender: "Boys" },
+  { id: 8,  bscName: "G6 Arsenal",     country: "USA",            flag: "🇺🇸", group: "D", grade: "6th", gender: "Girls" },
+  { id: 9,  bscName: "B3 Ipswich",     country: "Paraguay",       flag: "🇵🇾", group: "D", grade: "3rd", gender: "Boys" },
+  { id: 10, bscName: "G8 Pride",       country: "Australia",      flag: "🇦🇺", group: "D", grade: "8th", gender: "Girls" },
 
   // Group E (3 teams)
-  { id: 13, bscName: "4th Boys Team 3",   country: "Belgium",      flag: "\ud83c\udde7\ud83c\uddea", group: "E", grade: "4th", gender: "Boys" },
-  { id: 14, bscName: "4th Boys Team 4",   country: "Croatia",      flag: "\ud83c\udded\ud83c\uddf7", group: "E", grade: "4th", gender: "Boys" },
-  { id: 15, bscName: "5th Girls Team 1",  country: "USA",          flag: "\ud83c\uddfa\ud83c\uddf8", group: "E", grade: "5th", gender: "Girls" },
+  { id: 11, bscName: "B4 Santos",      country: "Côte D’Ivoire", flag: "🇨🇮", group: "E", grade: "4th", gender: "Boys" },
+  { id: 12, bscName: "G5 Angel City",  country: "Ecuador",        flag: "🇪🇨", group: "E", grade: "5th", gender: "Girls" },
+  { id: 13, bscName: "B7 Bayern",      country: "Germany",        flag: "🇩🇪", group: "E", grade: "7th", gender: "Boys" },
 
   // Group F (3 teams)
-  { id: 16, bscName: "5th Girls Team 2",  country: "Colombia",     flag: "\ud83c\udde8\ud83c\uddf4", group: "F", grade: "5th", gender: "Girls" },
-  { id: 17, bscName: "5th Boys Team 1",   country: "Uruguay",      flag: "\ud83c\uddfa\ud83c\uddfe", group: "F", grade: "5th", gender: "Boys" },
-  { id: 18, bscName: "5th Boys Team 2",   country: "Senegal",      flag: "\ud83c\uddf8\ud83c\uddf3", group: "F", grade: "5th", gender: "Boys" },
+  { id: 14, bscName: "G3 Legacy",      country: "Netherlands",    flag: "🇳🇱", group: "F", grade: "3rd", gender: "Girls" },
+  { id: 15, bscName: "B6 Porto",       country: "Japan",          flag: "🇯🇵", group: "F", grade: "6th", gender: "Boys" },
+  { id: 16, bscName: "G6 Real Madrid", country: "Tunisia",        flag: "🇹🇳", group: "F", grade: "6th", gender: "Girls" },
 
   // Group G (3 teams)
-  { id: 19, bscName: "5th Boys Team 3",   country: "Denmark",      flag: "\ud83c\udde9\ud83c\uddf0", group: "G", grade: "5th", gender: "Boys" },
-  { id: 20, bscName: "6th Girls Team 1",  country: "Australia",    flag: "\ud83c\udde6\ud83c\uddfa", group: "G", grade: "6th", gender: "Girls" },
-  { id: 21, bscName: "6th Girls Team 2",  country: "Switzerland",  flag: "\ud83c\udde8\ud83c\udded", group: "G", grade: "6th", gender: "Girls" },
+  { id: 17, bscName: "B5 Dortmund",    country: "Belgium",        flag: "🇧🇪", group: "G", grade: "5th", gender: "Boys" },
+  { id: 18, bscName: "G4 Spurs",       country: "Egypt",          flag: "🇪🇬", group: "G", grade: "4th", gender: "Girls" },
+  { id: 19, bscName: "B3 Como",        country: "IR Iran",        flag: "🇮🇷", group: "G", grade: "3rd", gender: "Boys" },
 
-  // Group H (3 teams)
-  { id: 22, bscName: "6th Girls Team 3",  country: "Ghana",        flag: "\ud83c\uddec\ud83c\udded", group: "H", grade: "6th", gender: "Girls" },
-  { id: 23, bscName: "6th Boys Team 1",   country: "Nigeria",      flag: "\ud83c\uddf3\ud83c\uddec", group: "H", grade: "6th", gender: "Boys" },
-  { id: 24, bscName: "6th Boys Team 2",   country: "Poland",       flag: "\ud83c\uddf5\ud83c\uddf1", group: "H", grade: "6th", gender: "Boys" },
+  // Group H (2 teams)
+  { id: 20, bscName: "G7 Chelsea",     country: "Spain",          flag: "🇪🇸", group: "H", grade: "7th", gender: "Girls" },
+  { id: 21, bscName: "B4 Inter",       country: "Uruguay",        flag: "🇺🇾", group: "H", grade: "4th", gender: "Boys" },
 
   // Group I (3 teams)
-  { id: 25, bscName: "6th Boys Team 3",   country: "Sweden",       flag: "\ud83c\uddf8\ud83c\uddea", group: "I", grade: "6th", gender: "Boys" },
-  { id: 26, bscName: "7th Girls Team 1",  country: "Chile",        flag: "\ud83c\udde8\ud83c\uddf1", group: "I", grade: "7th", gender: "Girls" },
-  { id: 27, bscName: "7th Girls Team 2",  country: "Cameroon",     flag: "\ud83c\udde8\ud83c\uddf2", group: "I", grade: "7th", gender: "Girls" },
+  { id: 22, bscName: "B3 Atalanta",    country: "France",         flag: "🇫🇷", group: "I", grade: "3rd", gender: "Boys" },
+  { id: 23, bscName: "G6 Barcelona",   country: "Senegal",        flag: "🇸🇳", group: "I", grade: "6th", gender: "Girls" },
+  { id: 24, bscName: "B8 Rangers",     country: "Norway",         flag: "🇳🇴", group: "I", grade: "8th", gender: "Boys" },
 
-  // Group J (2 teams)
-  { id: 28, bscName: "7th Boys Team 1",   country: "Morocco",      flag: "\ud83c\uddf2\ud83c\udde6", group: "J", grade: "7th", gender: "Boys" },
-  { id: 29, bscName: "7th Boys Team 2",   country: "Serbia",       flag: "\ud83c\uddf7\ud83c\uddf8", group: "J", grade: "7th", gender: "Boys" },
+  // Group J (3 teams)
+  { id: 25, bscName: "G5 Gotham",      country: "Argentina",      flag: "🇦🇷", group: "J", grade: "5th", gender: "Girls" },
+  { id: 26, bscName: "B5 Benfica",     country: "Algeria",        flag: "🇩🇿", group: "J", grade: "5th", gender: "Boys" },
+  { id: 27, bscName: "B3 Fiorentina",  country: "Austria",        flag: "🇦🇹", group: "J", grade: "3rd", gender: "Boys" },
 
-  // Group K (2 teams)
-  { id: 30, bscName: "8th Girls Team 1",  country: "Canada",       flag: "\ud83c\udde8\ud83c\udde6", group: "K", grade: "8th", gender: "Girls" },
-  { id: 31, bscName: "8th Girls Team 2",  country: "Costa Rica",   flag: "\ud83c\udde8\ud83c\uddf7", group: "K", grade: "8th", gender: "Girls" },
+  // Group K (3 teams)
+  { id: 28, bscName: "B4 Brentford",   country: "Uzbekistan",     flag: "🇺🇿", group: "K", grade: "4th", gender: "Boys" },
+  { id: 29, bscName: "G8 Courage",     country: "Colombia",       flag: "🇨🇴", group: "K", grade: "8th", gender: "Girls" },
+  { id: 30, bscName: "B6 Fulham",      country: "Portugal",       flag: "🇵🇹", group: "K", grade: "6th", gender: "Boys" },
 
-  // Group L (2 teams)
-  { id: 32, bscName: "8th Boys Team 1",   country: "Ecuador",      flag: "\ud83c\uddea\ud83c\udde8", group: "L", grade: "8th", gender: "Boys" },
-  { id: 33, bscName: "8th Boys Team 2",   country: "Wales",        flag: "\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc77\udb40\udc6c\udb40\udc73\udb40\udc7f", group: "L", grade: "8th", gender: "Boys" }
+  // Group L (3 teams)
+  { id: 31, bscName: "B7 Athletico",   country: "England",        flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", group: "L", grade: "7th", gender: "Boys" },
+  { id: 32, bscName: "G3 Dash",        country: "Croatia",        flag: "🇭🇷", group: "L", grade: "3rd", gender: "Girls" },
+  { id: 33, bscName: "G4 Reign",       country: "Panama",         flag: "🇵🇦", group: "L", grade: "4th", gender: "Girls" }
 ];
 
 // ===== GROUPS =====
 const GROUPS = {
-  A: [1, 2, 3],
-  B: [4, 5, 6],
-  C: [7, 8, 9],
-  D: [10, 11, 12],
-  E: [13, 14, 15],
-  F: [16, 17, 18],
-  G: [19, 20, 21],
-  H: [22, 23, 24],
-  I: [25, 26, 27],
-  J: [28, 29],
-  K: [30, 31],
-  L: [32, 33]
+  A: [1, 2],
+  B: [3, 4],
+  C: [5, 6, 7],
+  D: [8, 9, 10],
+  E: [11, 12, 13],
+  F: [14, 15, 16],
+  G: [17, 18, 19],
+  H: [20, 21],
+  I: [22, 23, 24],
+  J: [25, 26, 27],
+  K: [28, 29, 30],
+  L: [31, 32, 33]
 };
 
-// Challenge match opponents (not real BSC teams, just display names for
-// groups-of-2 challenge matches). These represent unassigned World Cup
-// countries used as practice opponents.
-const CHALLENGE_COUNTRIES = [
-  { country: "Peru",        flag: "\ud83c\uddf5\ud83c\uddea" },
-  { country: "Paraguay",    flag: "\ud83c\uddf5\ud83c\uddfe" },
-  { country: "Tunisia",     flag: "\ud83c\uddf9\ud83c\uddf3" },
-  { country: "Iran",        flag: "\ud83c\uddee\ud83c\uddf7" },
-  { country: "Saudi Arabia",flag: "\ud83c\uddf8\ud83c\udde6" },
-  { country: "Algeria",     flag: "\ud83c\udde9\ud83c\uddff" },
-  { country: "Egypt",       flag: "\ud83c\uddea\ud83c\uddec" },
-  { country: "Scotland",    flag: "\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc73\udb40\udc63\udb40\udc74\udb40\udc7f" },
-  { country: "Norway",      flag: "\ud83c\uddf3\ud83c\uddf4" },
-  { country: "Austria",     flag: "\ud83c\udde6\ud83c\uddf9" },
-  { country: "Czech Republic", flag: "\ud83c\udde8\ud83c\uddff" },
-  { country: "Turkey",      flag: "\ud83c\uddf9\ud83c\uddf7" }
-];
+// Non-BSC countries from each real World Cup group (the lower-ranked teams
+// that weren't assigned to BSC teams). Groups of 2 have 2 challenge teams;
+// groups of 3 have 1. Displayed on Groups page, and groups-of-2 teams
+// play challenge matches against their group's challenge opponents.
+const CHALLENGE_COUNTRIES = {
+  A: [
+    { country: "South Africa",     flag: "🇿🇦" },
+    { country: "Den/MKD/CZE/IRL",  flag: "🇩🇰" }
+  ],
+  B: [
+    { country: "Qatar",            flag: "🇶🇦" },
+    { country: "ITA/NIR/WAL/BIH",  flag: "🇮🇹" }
+  ],
+  C: [
+    { country: "Haiti",            flag: "🇭🇹" }
+  ],
+  D: [
+    { country: "TUR/ROU/SVK/KOS",  flag: "🇹🇷" }
+  ],
+  E: [
+    { country: "Curaçao",          flag: "🇨🇼" }
+  ],
+  F: [
+    { country: "UKR/SWE/POL/ALB",  flag: "🇺🇦" }
+  ],
+  G: [
+    { country: "New Zealand",      flag: "🇳🇿" }
+  ],
+  H: [
+    { country: "Cabo Verde",       flag: "🇨🇻" },
+    { country: "Saudi Arabia",     flag: "🇸🇦" }
+  ],
+  I: [
+    { country: "BOL/SUR/IRQ",      flag: "🇧🇴" }
+  ],
+  J: [
+    { country: "Jordan",           flag: "🇯🇴" }
+  ],
+  K: [
+    { country: "NCL/JAM/COD",      flag: "🇯🇲" }
+  ],
+  L: [
+    { country: "Ghana",            flag: "🇬🇭" }
+  ]
+};
 
 // ===== SCHEDULE =====
 // Each match: { home: teamId, away: teamId, group: "A", type: "group"|"challenge"|"r16"|"qf"|"sf"|"final"|"third"|"consolation" }
@@ -563,72 +743,67 @@ const CHALLENGE_COUNTRIES = [
 const SCHEDULE = {
   // ----- WEEK 1: Group Stage Matchday 1 -----
   1: [
-    // Groups of 3: first pair plays (team 1 vs team 2)
-    { home: 1,  away: 2,  group: "A", type: "group" },
-    { home: 4,  away: 5,  group: "B", type: "group" },
-    { home: 7,  away: 8,  group: "C", type: "group" },
-    { home: 10, away: 11, group: "D", type: "group" },
-    { home: 13, away: 14, group: "E", type: "group" },
-    { home: 16, away: 17, group: "F", type: "group" },
-    { home: 19, away: 20, group: "G", type: "group" },
-    { home: 22, away: 23, group: "H", type: "group" },
-    { home: 25, away: 26, group: "I", type: "group" },
+    // Groups of 3: first pair plays (pos1 vs pos2) — mirrors real MD1 matchups
+    { home: 5,  away: 6,  group: "C", type: "group" },  // Brazil vs Morocco
+    { home: 8,  away: 9,  group: "D", type: "group" },  // USA vs Paraguay
+    { home: 11, away: 12, group: "E", type: "group" },  // Côte D’Ivoire vs Ecuador
+    { home: 14, away: 15, group: "F", type: "group" },  // Netherlands vs Japan
+    { home: 17, away: 18, group: "G", type: "group" },  // Belgium vs Egypt
+    { home: 22, away: 23, group: "I", type: "group" },  // France vs Senegal
+    { home: 25, away: 26, group: "J", type: "group" },  // Argentina vs Algeria
+    { home: 28, away: 29, group: "K", type: "group" },  // Uzbekistan vs Colombia
+    { home: 31, away: 32, group: "L", type: "group" },  // England vs Croatia
     // Groups of 2: head-to-head
-    { home: 28, away: 29, group: "J", type: "group" },
-    { home: 30, away: 31, group: "K", type: "group" },
-    { home: 32, away: 33, group: "L", type: "group" }
+    { home: 1,  away: 2,  group: "A", type: "group" },  // Mexico vs Korea Republic
+    { home: 3,  away: 4,  group: "B", type: "group" },  // Canada vs Switzerland
+    { home: 20, away: 21, group: "H", type: "group" }   // Spain vs Uruguay
   ],
 
   // ----- WEEK 2: Group Stage Matchday 2 -----
   2: [
-    // Groups of 3: second pair (team 1 vs team 3)
-    { home: 1,  away: 3,  group: "A", type: "group" },
-    { home: 4,  away: 6,  group: "B", type: "group" },
-    { home: 7,  away: 9,  group: "C", type: "group" },
-    { home: 10, away: 12, group: "D", type: "group" },
-    { home: 13, away: 15, group: "E", type: "group" },
-    { home: 16, away: 18, group: "F", type: "group" },
-    { home: 19, away: 21, group: "G", type: "group" },
-    { home: 22, away: 24, group: "H", type: "group" },
-    { home: 25, away: 27, group: "I", type: "group" },
-    // Groups of 2: challenge matches
-    { home: 28, away: "challenge:0", group: "J", type: "challenge" },
-    { home: 29, away: "challenge:1", group: "J", type: "challenge" },
-    { home: 30, away: "challenge:2", group: "K", type: "challenge" },
-    { home: 31, away: "challenge:3", group: "K", type: "challenge" },
-    { home: 32, away: "challenge:4", group: "L", type: "challenge" },
-    { home: 33, away: "challenge:5", group: "L", type: "challenge" }
+    // Groups of 3: second pair (pos1 vs pos3)
+    { home: 5,  away: 7,  group: "C", type: "group" },  // Brazil vs Scotland
+    { home: 8,  away: 10, group: "D", type: "group" },  // USA vs Australia
+    { home: 11, away: 13, group: "E", type: "group" },  // Côte D’Ivoire vs Germany
+    { home: 14, away: 16, group: "F", type: "group" },  // Netherlands vs Tunisia
+    { home: 17, away: 19, group: "G", type: "group" },  // Belgium vs IR Iran
+    { home: 22, away: 24, group: "I", type: "group" },  // France vs Norway
+    { home: 25, away: 27, group: "J", type: "group" },  // Argentina vs Austria
+    { home: 28, away: 30, group: "K", type: "group" },  // Uzbekistan vs Portugal
+    { home: 31, away: 33, group: "L", type: "group" },  // England vs Panama
+    // Groups of 2: challenge matches (vs dropped countries from same WC group)
+    { home: 1,  away: "challenge:A:0", group: "A", type: "challenge" },  // Mexico vs South Africa
+    { home: 2,  away: "challenge:A:1", group: "A", type: "challenge" },  // Korea Republic vs Den/MKD/CZE/IRL
+    { home: 3,  away: "challenge:B:0", group: "B", type: "challenge" },  // Canada vs Qatar
+    { home: 4,  away: "challenge:B:1", group: "B", type: "challenge" },  // Switzerland vs ITA/NIR/WAL/BIH
+    { home: 20, away: "challenge:H:0", group: "H", type: "challenge" },  // Spain vs Cabo Verde
+    { home: 21, away: "challenge:H:1", group: "H", type: "challenge" }   // Uruguay vs Saudi Arabia
   ],
 
   // ----- WEEK 3: Group Stage Matchday 3 -----
   3: [
-    // Groups of 3: third pair (team 2 vs team 3)
-    { home: 2,  away: 3,  group: "A", type: "group" },
-    { home: 5,  away: 6,  group: "B", type: "group" },
-    { home: 8,  away: 9,  group: "C", type: "group" },
-    { home: 11, away: 12, group: "D", type: "group" },
-    { home: 14, away: 15, group: "E", type: "group" },
-    { home: 17, away: 18, group: "F", type: "group" },
-    { home: 20, away: 21, group: "G", type: "group" },
-    { home: 23, away: 24, group: "H", type: "group" },
-    { home: 26, away: 27, group: "I", type: "group" },
-    // Groups of 2: challenge matches
-    { home: 28, away: "challenge:6", group: "J", type: "challenge" },
-    { home: 29, away: "challenge:7", group: "J", type: "challenge" },
-    { home: 30, away: "challenge:8", group: "K", type: "challenge" },
-    { home: 31, away: "challenge:9", group: "K", type: "challenge" },
-    { home: 32, away: "challenge:10", group: "L", type: "challenge" },
-    { home: 33, away: "challenge:11", group: "L", type: "challenge" }
+    // Groups of 3: third pair (pos2 vs pos3)
+    { home: 6,  away: 7,  group: "C", type: "group" },  // Morocco vs Scotland
+    { home: 9,  away: 10, group: "D", type: "group" },  // Paraguay vs Australia
+    { home: 12, away: 13, group: "E", type: "group" },  // Ecuador vs Germany
+    { home: 15, away: 16, group: "F", type: "group" },  // Japan vs Tunisia
+    { home: 18, away: 19, group: "G", type: "group" },  // Egypt vs IR Iran
+    { home: 23, away: 24, group: "I", type: "group" },  // Senegal vs Norway
+    { home: 26, away: 27, group: "J", type: "group" },  // Algeria vs Austria
+    { home: 29, away: 30, group: "K", type: "group" },  // Colombia vs Portugal
+    { home: 32, away: 33, group: "L", type: "group" },  // Croatia vs Panama
+    // Groups of 2: challenge matches (swap opponents from week 2)
+    { home: 1,  away: "challenge:A:1", group: "A", type: "challenge" },  // Mexico vs Den/MKD/CZE/IRL
+    { home: 2,  away: "challenge:A:0", group: "A", type: "challenge" },  // Korea Republic vs South Africa
+    { home: 3,  away: "challenge:B:1", group: "B", type: "challenge" },  // Canada vs ITA/NIR/WAL/BIH
+    { home: 4,  away: "challenge:B:0", group: "B", type: "challenge" },  // Switzerland vs Qatar
+    { home: 20, away: "challenge:H:1", group: "H", type: "challenge" },  // Spain vs Saudi Arabia
+    { home: 21, away: "challenge:H:0", group: "H", type: "challenge" }   // Uruguay vs Cabo Verde
   ],
 
   // ----- WEEK 4: Round of 16 -----
   // Matchups determined after group stage. Placeholder structure:
-  // Typical seeding: 1A vs 2B, 1C vs 2D, etc. + best 3rd-place finishers
-  4: [
-    // R16 matches — filled after Week 3 results
-    // { home: null, away: null, matchId: "R16-1", type: "r16" },
-    // ... 8 matches
-  ],
+  4: [],
 
   // ----- WEEK 5: Quarterfinals -----
   5: [],
@@ -697,8 +872,10 @@ function getTeam(id) {
 }
 
 function getChallengeOpponent(ref) {
-  const idx = parseInt(ref.split(":")[1]);
-  return CHALLENGE_COUNTRIES[idx] || { country: "TBD", flag: "\u2753" };
+  const parts = ref.split(":");
+  const group = parts[1];
+  const idx = parseInt(parts[2]);
+  return (CHALLENGE_COUNTRIES[group] && CHALLENGE_COUNTRIES[group][idx]) || { country: "TBD", flag: "\u2753" };
 }
 
 function getMatchResult(week, matchIndex) {
@@ -798,27 +975,27 @@ function renderHome() {
   const diff = nextDate ? Math.ceil((nextDate - now) / (1000 * 60 * 60 * 24)) : 0;
 
   if (CURRENT_WEEK <= 7 && diff > 0) {
-    html += '<div class="card countdown-card">';
+    html += '<div class="card countdown-card card-reveal">';
     html += '<div class="label">Next Match Day</div>';
     html += '<div class="value">' + diff + ' day' + (diff !== 1 ? 's' : '') + '</div>';
     html += '<div class="sub">' + WEEK_LABELS[CURRENT_WEEK] + ' \u2014 ' + WEEK_DATES[CURRENT_WEEK] + '</div>';
     html += '</div>';
   } else if (CURRENT_WEEK <= 7) {
-    html += '<div class="card countdown-card">';
+    html += '<div class="card countdown-card card-reveal">';
     html += '<div class="label">Today</div>';
     html += '<div class="value">' + WEEK_LABELS[CURRENT_WEEK] + '</div>';
     html += '<div class="sub">' + WEEK_DATES[CURRENT_WEEK] + '</div>';
     html += '</div>';
   } else {
-    html += '<div class="card countdown-card">';
+    html += '<div class="card countdown-card card-reveal">';
     html += '<div class="label">Tournament Complete</div>';
-    html += '<div class="value">\ud83c\udfc6</div>';
+    html += '<div class="value" style="font-size:3rem;">CHAMPION</div>';
     html += '<div class="sub">Thanks for a great season!</div>';
     html += '</div>';
   }
 
   // Current week info
-  html += '<div class="card">';
+  html += '<div class="card card-reveal">';
   html += '<div class="card-title">Week ' + CURRENT_WEEK + ' \u2014 ' + (WEEK_LABELS[CURRENT_WEEK] || '') + '</div>';
   html += '<p style="font-size:0.82rem;line-height:1.5;color:var(--gray-mid);">';
   if (CURRENT_WEEK <= 3) {
@@ -834,26 +1011,30 @@ function renderHome() {
 
   // Announcements
   ANNOUNCEMENTS.forEach(a => {
-    html += '<div class="card announcement">';
+    html += '<div class="card announcement card-reveal">';
     html += '<div class="date">' + a.date + '</div>';
     html += '<p>' + a.text + '</p>';
     html += '</div>';
   });
 
-  // Quick look: how many teams
-  html += '<div class="card">';
+  // Tournament at a glance
+  html += '<div class="card card-reveal">';
   html += '<div class="card-title">Tournament at a Glance</div>';
-  html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:0.82rem;">';
-  html += '<div><strong>33</strong> Teams</div>';
-  html += '<div><strong>12</strong> Groups</div>';
-  html += '<div><strong>7</strong> Weeks</div>';
-  html += '<div><strong>16</strong> Knockout Spots</div>';
+  html += '<div class="glance-grid">';
+  html += '<div class="glance-item"><div class="glance-num">33</div><div class="glance-label">Teams</div></div>';
+  html += '<div class="glance-item"><div class="glance-num">12</div><div class="glance-label">Groups</div></div>';
+  html += '<div class="glance-item"><div class="glance-num">7</div><div class="glance-label">Weeks</div></div>';
+  html += '<div class="glance-item"><div class="glance-num">16</div><div class="glance-label">Knockout Spots</div></div>';
   html += '</div></div>';
 
   el.innerHTML = html;
 }
 
 // ===== RENDER: GROUPS =====
+function getGroupChallengeCountries(groupLetter) {
+  return CHALLENGE_COUNTRIES[groupLetter] || [];
+}
+
 function renderGroups() {
   const el = document.getElementById('tab-groups');
   let html = '<div class="groups-grid">';
@@ -862,18 +1043,27 @@ function renderGroups() {
     const teamIds = GROUPS[letter];
     const standings = calcStandings(teamIds);
     const hasResults = standings.some(s => s.mp > 0);
+    const challengeTeams = getGroupChallengeCountries(letter);
 
-    html += '<div class="card group-card">';
+    html += '<div class="card group-card card-reveal">';
     html += '<div class="group-header">Group ' + letter + '</div>';
 
     if (!hasResults) {
-      // Just show team list
+      // Show BSC team list
       teamIds.forEach(id => {
         const t = getTeam(id);
         html += '<div class="group-team">';
         html += '<span class="flag">' + t.flag + '</span>';
         html += '<span class="country">' + t.country + '</span>';
         html += '<span class="bsc-name">' + t.bscName + '</span>';
+        html += '</div>';
+      });
+      // Show challenge opponents (same layout, "Challenge" where BSC name would go)
+      challengeTeams.forEach(c => {
+        html += '<div class="group-team group-team-challenge">';
+        html += '<span class="flag">' + c.flag + '</span>';
+        html += '<span class="country">' + c.country + '</span>';
+        html += '<span class="bsc-name challenge-badge">Challenge</span>';
         html += '</div>';
       });
     } else {
@@ -909,7 +1099,7 @@ function renderStandings() {
   const hasResults = standings.some(s => s.mp > 0);
 
   let html = '';
-  html += '<div class="card">';
+  html += '<div class="card card-reveal">';
   html += '<div class="card-title">Overall Standings</div>';
 
   if (!hasResults) {
@@ -933,7 +1123,7 @@ function renderStandings() {
     });
     html += '</tbody></table></div>';
     html += '<div style="margin-top:8px;font-size:0.7rem;color:var(--gray-mid);display:flex;align-items:center;gap:6px;">';
-    html += '<span style="display:inline-block;width:12px;height:12px;background:var(--qualified-bg);border:1px solid var(--gold);border-radius:2px;"></span>';
+    html += '<span style="display:inline-block;width:12px;height:12px;background:var(--qualified-bg);border:1px solid #ed1c24;border-radius:2px;"></span>';
     html += 'Top 16 qualify for Knockout Round';
     html += '</div>';
   }
@@ -942,13 +1132,13 @@ function renderStandings() {
 
   // If no results, show all teams grouped by grade
   if (!hasResults) {
-    html += '<div class="card">';
+    html += '<div class="card card-reveal">';
     html += '<div class="card-title">All 33 Teams</div>';
     const grades = ["3rd", "4th", "5th", "6th", "7th", "8th"];
     grades.forEach(grade => {
       const gradeTeams = TEAMS.filter(t => t.grade === grade);
       html += '<div style="margin-bottom:12px;">';
-      html += '<div style="font-size:0.75rem;font-weight:700;color:var(--green-dark);margin-bottom:4px;">' + grade + ' Grade</div>';
+      html += '<div style="font-size:0.75rem;font-weight:700;color:var(--navy);margin-bottom:4px;">' + grade + ' Grade</div>';
       gradeTeams.forEach(t => {
         html += '<div class="group-team">';
         html += '<span class="flag">' + t.flag + '</span>';
@@ -1043,7 +1233,7 @@ function renderBracket() {
   const el = document.getElementById('tab-bracket');
   let html = '';
 
-  html += '<div class="card">';
+  html += '<div class="card card-reveal">';
   html += '<div class="card-title">Knockout Bracket</div>';
 
   if (CURRENT_WEEK < 4) {
@@ -1067,14 +1257,14 @@ function renderBracket() {
   html += '</div></div></div>';
 
   // Third place match
-  html += '<div class="card third-place">';
+  html += '<div class="card third-place card-reveal">';
   html += '<div class="card-title">Third Place Match</div>';
   html += renderBracketMatchCard(BRACKET.third);
   html += '</div>';
 
   // Consolation standings
   html += '<div class="consolation-section">';
-  html += '<div class="card">';
+  html += '<div class="card card-reveal">';
   html += '<div class="card-title">Consolation Standings</div>';
 
   if (CURRENT_WEEK < 4) {
@@ -1095,10 +1285,6 @@ function renderBracketRound(title, matches) {
 
   matches.forEach((m, i) => {
     html += renderBracketMatchCard(m);
-    // Add spacers for alignment in earlier rounds
-    if (title === 'Round of 16' && i < matches.length - 1 && i % 2 === 1) {
-      // no spacer needed between pairs
-    }
   });
 
   html += '</div>';

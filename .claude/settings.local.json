@@ -4,7 +4,10 @@
       "Bash(pip3 install:*)",
       "Bash(python3 create_7wk_pdf.py)",
       "Bash(python3 -c \":*)",
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "WebFetch(domain:www.brooklinesoccer.org)",
+      "Bash(pip install:*)",
+      "Bash(ls /Users/robschoen/Dropbox/CC/worldcup/rankings.*)"
     ]
   }
 }

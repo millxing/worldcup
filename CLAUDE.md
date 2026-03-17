@@ -1,4 +1,4 @@
-# BSC Mock World Cup
+# BSC World Cup 2026
 
 ## Project Overview
 
@@ -61,3 +61,36 @@ No backend. Results submitted via Google Form → Google Sheet → organizer rev
 - Tiebreak: total points → point differential → total points scored → admin tiebreak
 - Top 16 (or top 8 if 25 teams) advance to knockout bracket after group stage
 - Remaining teams enter consolation standings (table-based, not bracket)
+
+## Design & Branding
+
+### Color Palette
+| Color | Hex | Role |
+|-------|-----|------|
+| Dark Navy | `#34374C` | Header, nav, dark sections |
+| Deep Navy | `#2C2E3E` | Secondary dark, countdown bg |
+| Navy Light | `#3d4058` | Hover states, lighter dark |
+| Vivid Red | `#EE2B47` | Primary accent, buttons, badges |
+| Off-White | `#F6F6F6` | Page background |
+
+CSS variables use semantic names: `--navy`, `--navy-deep`, `--navy-light`, `--red`, `--red-light`, `--red-dim`, `--off-white`. Legacy aliases (`--green-dark`, `--gold`, etc.) are preserved for JS inline style compatibility.
+
+### Typography
+- **Display/Headlines**: Oswald (700, uppercase, tight letter-spacing) — all headings, card titles, group headers, bracket rounds, countdown, club name
+- **Body/Data**: Montserrat (400–800) — body text, tables, labels, nav tabs
+- Google Fonts import includes both: `Montserrat:wght@400;500;600;700;800;900` + `Oswald:wght@400;500;600;700`
+
+### Logo
+- BSC Town Travel crest: `https://cdn2.sportngin.com/attachments/photo/bd06-216817597/BSC_TT_-_NBG_large.png`
+- Transparent PNG, works on dark backgrounds
+- Height: 180px mobile, 225px desktop
+- Negative bottom margin (-30px) to close gap with "BROOKLINE SOCCER CLUB" text below
+
+### Visual Identity
+- **Aesthetic**: Sports broadcast editorial (think FIFA World Cup TV graphics)
+- Cards have 3px solid red left border
+- Group/week headers use full-width navy bars with Oswald uppercase text
+- Bracket matches use navy-deep background with white text
+- Countdown has subtle pulse animation
+- Tab content fades in on switch (fadeIn animation)
+- Footer: navy-deep background, Montserrat 0.65rem, white at 50% opacity
