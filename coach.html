@@ -647,8 +647,16 @@ body {
   text-align: center;
   padding: 24px 16px;
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.65rem;
-  color: rgba(255,255,255,0.5);
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.75);
+}
+.footer a {
+  color: rgba(255,255,255,0.75);
+  text-decoration: underline;
+}
+.footer a:hover {
+  color: rgba(255,255,255,1);
+  text-decoration: underline;
 }
 
 /* ===== RESPONSIVE ===== */
@@ -675,7 +683,7 @@ a { color: var(--teal); }
 
 <!-- Header -->
 <header class="header">
-  <img src="https://cdn2.sportngin.com/attachments/photo/bd06-216817597/BSC_TT_-_NBG_large.png" alt="Brookline Soccer Club" class="header-logo">
+  <a href="https://www.brooklinesoccer.org/" target="_blank"><img src="https://cdn2.sportngin.com/attachments/photo/bd06-216817597/BSC_TT_-_NBG_large.png" alt="Brookline Soccer Club" class="header-logo"></a>
   <div class="club-name">Brookline Soccer Club</div>
   <h1>World Cup 2026</h1>
   <div class="week-badge" id="weekBadge">Week 1 - Group Stage</div>
@@ -717,7 +725,7 @@ a { color: var(--teal); }
 <div id="tab-bracket" class="tab-content"></div>
 
 <!-- Footer -->
-<div class="footer">BSC World Cup 2026 &middot; Brookline Soccer Club &middot; Coach Edition</div>
+<div class="footer">BSC World Cup 2026 &middot; Brookline Soccer Club &middot; Coach Edition<br>Built by <a href="https://www.entangledparticles.xyz" target="_blank">Entangled Particles</a></div>
 
 <script>
 // =============================================================================
