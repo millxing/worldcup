@@ -8,6 +8,11 @@ A World Cup-themed league game for BSC soccer teams, running over 7 consecutive 
 
 - `BSC_Mock_World_Cup_Event_Plan_7wk.pdf` — Current event plan (7-week version)
 - `BSC_Mock_World_Cup_Event_Plan.pdf` — Original 8-week version (superseded)
+- `information.xlsx` — Has 4 sheets of data:
+  1. Actual Rankings — 48 World Cup countries with FIFA rankings
+  2. Actual Groups — The real 2026 World Cup group draw (Groups A–L, 4 teams each)
+  3. Actual Schedule — Full 104-game match schedule with dates, locations, and bracket
+  4. BSC Teams — The 33 BSC team names with gender and grade
 
 ## Team Counts
 
@@ -28,15 +33,38 @@ Full participation (3rd–8th): 33 teams. If 7th/8th opt out: 25 teams. Design t
 - **Week 1** (Apr 20): Opening launch + Group Stage Matchday 1
 - **Week 2** (Apr 27): Group Stage Matchday 2
 - **Week 3** (May 4): Group Stage Matchday 3 + final group rankings
-- **Week 4** (May 11): Round of 16; consolation begins
+- **Week 4** (May 11): Round of 16 + Scoring Title begins
 - **Week 5** (May 18): Quarterfinals
 - **Week 6** (May 25): Semifinals
-- **Week 7** (Jun 1): Final, third-place, consolation closeout, awards
+- **Week 7** (Jun 1): Final, third-place, Scoring Title awards, ceremony
 
 ## Group Structure
 
-- **33 teams**: 9 groups of 3 + 3 groups of 2 (12 groups)
-- **25 teams**: Likely 4 groups of 4 + 3 groups of 3 (7 groups). Top-8 bracket becomes an option (frees a week).
+- **33 teams**: 11 groups of 3 BSC teams + 1 challenge team each, plus Group G (challenge-only, 4 challenge teams)
+- Each group plays a full round-robin over 3 weeks (pos1 vs pos2, pos1 vs pos3, pos2 vs pos3)
+- Each BSC team plays 2 group matches + 1 challenge match = 3 matches total
+- All 33 BSC teams play every week (no byes)
+
+## Challenge Matches
+
+- Each group's 4th member is a non-BSC "challenge" country from the real World Cup
+- Challenge match results COUNT toward group standings
+- The challenge team's score = rounded average of all 33 BSC teams' goals scored that week
+- The organizer enters only the BSC team's score; the app computes the challenge team's score dynamically
+
+## Advancement
+
+- 11 group winners advance to R16 (if the challenge team tops a group, the runner-up advances instead)
+- 5 best remaining BSC teams also advance (by points, then goals scored tiebreaker)
+- Total: 16 teams in the knockout bracket
+
+## Scoring Title (Weeks 4-7)
+
+- All 33 teams get 1 score per week in weeks 4-7
+- Bracket teams: goals scored in their knockout match
+- Eliminated teams: goals scored in the weekly event/activity
+- Top 3 total goals = Scoring Title 1st/2nd/3rd
+- Replaces the old consolation format; keeps all teams engaged every week
 
 ## Digital Delivery
 
@@ -58,9 +86,9 @@ No backend. Results submitted via Google Form → Google Sheet → organizer rev
 ## Standings Rules
 
 - Win = 3 pts, Draw = 1 pt, Loss = 0 pts
-- Tiebreak: total points → point differential → total points scored → admin tiebreak
-- Top 16 (or top 8 if 25 teams) advance to knockout bracket after group stage
-- Remaining teams enter consolation standings (table-based, not bracket)
+- Tiebreak: total points → goals scored → goals allowed → admin tiebreak
+- Both group matches and challenge matches count toward standings
+- Top 16 advance to knockout bracket after group stage (see Advancement above)
 
 ## Design & Branding
 
