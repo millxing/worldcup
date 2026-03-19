@@ -1164,6 +1164,16 @@ function renderHome() {
   html += 'The top team in each group moves on to the Round of 16, plus the 5 best remaining teams.';
   html += '</p></div>';
 
+  // Challenge Teams
+  html += '<div class="card card-reveal">';
+  html += '<div class="card-title">Challenge Teams</div>';
+  html += '<p style="font-size:0.85rem;line-height:1.6;color:var(--gray-dark);">';
+  html += 'Each group includes one <strong>challenge team</strong> — a real World Cup country that is not represented by a BSC team. ';
+  html += 'Every BSC team will play one challenge match during the group stage. ';
+  html += 'Challenge teams <strong>cannot advance</strong> to the knockout round and do not participate in the Scoring Title. ';
+  html += 'Group G is made up entirely of challenge teams and will not appear in the standings.';
+  html += '</p></div>';
+
   // The Knockout Bracket
   html += '<div class="card card-reveal">';
   html += '<div class="card-title">The Knockout Bracket (Weeks 4\u20137)</div>';
@@ -1220,7 +1230,7 @@ function renderGroups() {
     const isChallOnly = !teamIds; // Group G has no BSC teams
 
     html += '<div class="card group-card card-reveal">';
-    html += '<div class="group-header">Group ' + letter + (isChallOnly ? ' <span style="font-size:0.6em;opacity:0.7;">(Challenge)</span>' : '') + '</div>';
+    html += '<div class="group-header">Group ' + letter + (isChallOnly ? ' <span style="font-size:0.7em;color:#fff;font-family:Montserrat,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">— Challenge Group Only</span>' : '') + '</div>';
 
     if (isChallOnly) {
       // Challenge-only group: show all challenge countries
