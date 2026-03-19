@@ -112,19 +112,6 @@ body {
   letter-spacing: 0.5px;
 }
 
-/* ===== COACH BANNER ===== */
-.coach-banner {
-  background: linear-gradient(135deg, #c41e38, var(--red));
-  color: var(--white);
-  text-align: center;
-  padding: 8px 16px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-}
-
 /* ===== TAB NAV ===== */
 .tab-nav {
   display: flex;
@@ -140,14 +127,14 @@ body {
   border: none;
   color: rgba(255,255,255,0.5);
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   font-weight: 600;
-  padding: 10px 2px 8px;
+  padding: 10px 4px 8px;
   cursor: pointer;
-  transition: color 0.2s, border-bottom 0.2s, background 0.2s;
+  transition: color 0.2s, border-bottom 0.2s;
   border-bottom: 3px solid transparent;
   text-transform: uppercase;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.5px;
 }
 .tab-nav button.active {
   color: var(--white);
@@ -155,10 +142,47 @@ body {
   border-bottom-color: var(--red);
 }
 .tab-nav button:hover { color: var(--white); }
-.tab-nav button[data-tab="coach"].active {
+
+/* Mobile dropdown nav */
+.tab-nav-mobile {
+  display: none;
+  background: var(--navy);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 8px 12px;
+}
+.tab-nav-mobile select {
+  width: 100%;
+  background: var(--navy-light);
   color: var(--white);
-  background: var(--red);
-  border-bottom-color: var(--red);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 10px 14px;
+  border: 2px solid var(--red);
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23EE2B47' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  cursor: pointer;
+}
+@media (max-width: 480px) {
+  .tab-nav { display: none; }
+  .tab-nav-mobile { display: block; }
+  /* Schedule: hide BSC labels on mobile to save space */
+  .match-row .bsc-label { display: none; }
+  /* Hide inline group labels on mobile — group context is in the week header */
+  .match-row-wrap.inline-label .match-label { display: none; }
+  .match-row-wrap.inline-label { display: block; }
+  /* Smaller challenge badge on mobile */
+  .match-team .challenge-badge { font-size: 0.5rem; padding: 1px 4px; }
+  /* Tighter match row padding on mobile */
+  .match-row { padding: 10px 8px; }
 }
 
 /* ===== TAB CONTENT ===== */
@@ -166,16 +190,28 @@ body {
 .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
+/* ===== STAGGERED CARD REVEAL ===== */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.card-reveal {
+  opacity: 0;
+  animation: slideUp 0.4s ease forwards;
+}
+.card-reveal:nth-child(1) { animation-delay: 0.05s; }
+.card-reveal:nth-child(2) { animation-delay: 0.1s; }
+.card-reveal:nth-child(3) { animation-delay: 0.15s; }
+.card-reveal:nth-child(4) { animation-delay: 0.2s; }
+.card-reveal:nth-child(5) { animation-delay: 0.25s; }
+.card-reveal:nth-child(6) { animation-delay: 0.3s; }
+.card-reveal:nth-child(7) { animation-delay: 0.35s; }
+.card-reveal:nth-child(8) { animation-delay: 0.4s; }
+
 /* ===== PULSE ANIMATION ===== */
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.02); }
-}
-
-/* ===== SLIDE UP ANIMATION ===== */
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ===== CARDS ===== */
@@ -186,12 +222,7 @@ body {
   padding: 16px;
   margin-bottom: 12px;
   border-left: 3px solid var(--red);
-  animation: slideUp 0.4s ease both;
 }
-.card:nth-child(2) { animation-delay: 0.05s; }
-.card:nth-child(3) { animation-delay: 0.1s; }
-.card:nth-child(4) { animation-delay: 0.15s; }
-.card:nth-child(5) { animation-delay: 0.2s; }
 .card-title {
   font-family: 'Montserrat', sans-serif;
   font-size: 0.85rem;
@@ -384,7 +415,10 @@ body {
   align-items: center;
   gap: 6px;
 }
-.match-team.home { width: 38%; flex-shrink: 0; }
+.match-team.home { width: 38%; flex-shrink: 0; justify-content: flex-end; text-align: right; }
+.match-team.home .flag { order: 2; }
+.match-team.home .name { order: 1; }
+.match-team.home .bsc-label { order: 0; }
 .match-team.away { flex: 1; }
 .match-team .flag { font-size: 1.2rem; }
 .match-team .name { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.78rem; }
@@ -392,7 +426,7 @@ body {
   padding: 0 10px;
   font-family: 'Montserrat', sans-serif;
   font-size: 0.75rem;
-  color: var(--red);
+  color: var(--gray-mid);
   font-weight: 500;
   flex-shrink: 0;
 }
@@ -650,6 +684,34 @@ body {
   margin-right: 4px;
 }
 
+/* ===== GLANCE GRID ===== */
+.glance-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.glance-item {
+  text-align: center;
+  padding: 12px 8px;
+  background: var(--off-white);
+  border-radius: 8px;
+}
+.glance-item .glance-num {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--red);
+  line-height: 1;
+}
+.glance-item .glance-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--gray-mid);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
+
 /* ===== FOOTER ===== */
 .footer {
   background: var(--navy-deep);
@@ -671,7 +733,7 @@ body {
 /* ===== RESPONSIVE ===== */
 @media (min-width: 600px) {
   .tab-content { padding: 20px; }
-  .tab-nav button { font-size: 0.76rem; padding: 12px 8px 10px; }
+  .tab-nav button { font-size: 0.8rem; padding: 12px 8px 10px; }
   .header h1 { font-size: 1.6rem; }
   .header-logo { height: 135px; margin-top: -22px; margin-bottom: -23px; }
   .header-row { gap: 20px; }
@@ -703,18 +765,26 @@ a { color: var(--teal); }
   </div>
 </header>
 
-<!-- Coach Banner -->
-<div class="coach-banner">Coach View</div>
-
 <!-- Tab Navigation -->
 <nav class="tab-nav">
-  <button class="active" data-tab="coach" onclick="switchTab('coach')">Coach</button>
-  <button data-tab="home" onclick="switchTab('home')">Home</button>
-  <button data-tab="groups" onclick="switchTab('groups')">Groups</button>
-  <button data-tab="teams" onclick="switchTab('teams')">Teams</button>
-  <button data-tab="standings" onclick="switchTab('standings')">Standings</button>
-  <button data-tab="schedule" onclick="switchTab('schedule')">Schedule</button>
-  <button data-tab="bracket" onclick="switchTab('bracket')">Bracket</button>
+  <button class="active" onclick="switchTab('coach')">Coach</button>
+  <button onclick="switchTab('home')">Home</button>
+  <button onclick="switchTab('groups')">Groups</button>
+  <button onclick="switchTab('teams')">Teams</button>
+  <button onclick="switchTab('standings')">Standings</button>
+  <button onclick="switchTab('schedule')">Schedule</button>
+  <button onclick="switchTab('bracket')">Bracket</button>
+</nav>
+<nav class="tab-nav-mobile">
+  <select onchange="switchTab(this.value)">
+    <option value="coach">Coach</option>
+    <option value="home">Home</option>
+    <option value="groups">Groups</option>
+    <option value="teams">Teams</option>
+    <option value="standings">Standings</option>
+    <option value="schedule">Schedule</option>
+    <option value="bracket">Bracket</option>
+  </select>
 </nav>
 <div class="week-badge" id="weekBadge">Week 1 &mdash; Group Stage</div>
 
@@ -740,7 +810,7 @@ a { color: var(--teal); }
 <div id="tab-bracket" class="tab-content"></div>
 
 <!-- Footer -->
-<div class="footer">BSC World Cup 2026 &middot; Brookline Soccer Club &middot; Coach Edition<br>Built by <a href="https://www.entangledparticles.xyz" target="_blank">Entangled Particles</a></div>
+<div class="footer">BSC World Cup 2026 &middot; Brookline Soccer Club<br>Built by <a href="https://www.entangledparticles.xyz" target="_blank">Entangled Particles</a></div>
 
 <script>
 // =============================================================================
@@ -1251,16 +1321,19 @@ function switchTab(tabName) {
   document.querySelectorAll('.tab-nav button').forEach(btn => btn.classList.remove('active'));
   document.getElementById('tab-' + tabName).classList.add('active');
   document.querySelectorAll('.tab-nav button').forEach(btn => {
-    if (btn.getAttribute('data-tab') === tabName) btn.classList.add('active');
+    if (btn.textContent.toLowerCase().replace(/\s/g, '') === tabName.replace(/\s/g, '')) btn.classList.add('active');
   });
+  // Sync mobile dropdown
+  var mobileSelect = document.querySelector('.tab-nav-mobile select');
+  if (mobileSelect) mobileSelect.value = tabName;
   // Re-render dynamic content
   if (tabName === 'coach') renderCoach();
-  if (tabName === 'home') renderHome();
   if (tabName === 'groups') renderGroups();
   if (tabName === 'teams') renderTeams();
   if (tabName === 'standings') renderStandings();
   if (tabName === 'schedule') renderSchedule();
   if (tabName === 'bracket') renderBracket();
+  if (tabName === 'home') renderHome();
 }
 
 // =============================================================================
@@ -1380,7 +1453,7 @@ function renderHome() {
   const el = document.getElementById('tab-home');
   let html = '';
 
-  // Countdown / Status
+  // Countdown
   const weekDates = {
     1: new Date(2026, 3, 20), 2: new Date(2026, 3, 27), 3: new Date(2026, 4, 4),
     4: new Date(2026, 4, 11), 5: new Date(2026, 4, 18), 6: new Date(2026, 4, 25),
@@ -1391,19 +1464,19 @@ function renderHome() {
   const diff = nextDate ? Math.ceil((nextDate - now) / (1000 * 60 * 60 * 24)) : 0;
 
   if (CURRENT_WEEK <= 7 && diff > 0) {
-    html += '<div class="card countdown-card">';
+    html += '<div class="card countdown-card card-reveal">';
     html += '<div class="label">Next Match Day</div>';
     html += '<div class="value">' + diff + ' day' + (diff !== 1 ? 's' : '') + '</div>';
     html += '<div class="sub">' + WEEK_LABELS[CURRENT_WEEK] + ' \u2014 ' + WEEK_DATES[CURRENT_WEEK] + '</div>';
     html += '</div>';
   } else if (CURRENT_WEEK <= 7) {
-    html += '<div class="card countdown-card">';
+    html += '<div class="card countdown-card card-reveal">';
     html += '<div class="label">Today</div>';
     html += '<div class="value">' + WEEK_LABELS[CURRENT_WEEK] + '</div>';
     html += '<div class="sub">' + WEEK_DATES[CURRENT_WEEK] + '</div>';
     html += '</div>';
   } else {
-    html += '<div class="card countdown-card">';
+    html += '<div class="card countdown-card card-reveal">';
     html += '<div class="label">Tournament Complete</div>';
     html += '<div class="value">\ud83c\udfc6</div>';
     html += '<div class="sub">Thanks for a great season!</div>';
@@ -1411,65 +1484,70 @@ function renderHome() {
   }
 
   // How It Works
-  html += '<div class="card">';
+  html += '<div class="card card-reveal">';
   html += '<div class="card-title">How It Works</div>';
   html += '<p style="font-size:0.85rem;line-height:1.6;color:var(--gray-dark);">';
   html += 'Every BSC team represents a real World Cup country. Each week at practice, your team will compete in a fun soccer event and try to score as many goals as possible.';
   html += '</p></div>';
 
   // The Group Stage
-  html += '<div class="card">';
+  html += '<div class="card card-reveal">';
   html += '<div class="card-title">The Group Stage (Weeks 1\u20133)</div>';
   html += '<p style="font-size:0.85rem;line-height:1.6;color:var(--gray-dark);">';
   html += 'Your team is in a group with 3 other teams. Over 3 weeks, you play each of them once. ';
   html += 'A win earns <strong>3 points</strong>, a draw earns <strong>1 point</strong>, and a loss earns <strong>0 points</strong>. ';
-  html += 'The top team in each group moves on to the Round of 16, plus the 5 best remaining teams.';
+  html += 'The top team in each group moves on to the Round of 16, plus the 5 best remaining teams. ';
+  html += 'If teams are tied on points, the first tiebreaker is <strong>total goals scored</strong>, then <strong>goals allowed</strong>, then a <strong>random outcome</strong>.';
   html += '</p></div>';
 
   // Challenge Teams
-  html += '<div class="card">';
+  html += '<div class="card card-reveal">';
   html += '<div class="card-title">Challenge Teams</div>';
   html += '<p style="font-size:0.85rem;line-height:1.6;color:var(--gray-dark);">';
   html += 'Each group includes one <strong>challenge team</strong> — a real World Cup country that is not represented by a BSC team. ';
   html += 'Every BSC team will play one challenge match during the group stage. ';
+  html += 'Each challenge team\u2019s score is the <strong>rounded average</strong> of all BSC team scores submitted that week. ';
+  html += 'For example, if 33 BSC teams score an average of 3.3 goals, every challenge team scores 3 goals in their match that week. ';
   html += 'Challenge teams <strong>cannot advance</strong> to the knockout round and do not participate in the Scoring Title. ';
   html += 'Group G is made up entirely of challenge teams and will not appear in the standings.';
   html += '</p></div>';
 
   // The Knockout Bracket
-  html += '<div class="card">';
+  html += '<div class="card card-reveal">';
   html += '<div class="card-title">The Knockout Bracket (Weeks 4\u20137)</div>';
   html += '<p style="font-size:0.85rem;line-height:1.6;color:var(--gray-dark);">';
   html += '16 teams enter the bracket. If you win, you advance. If you lose, you\u2019re eliminated. ';
   html += 'It goes from the Round of 16 \u2192 Quarterfinals \u2192 Semifinals \u2192 Final. ';
+  html += 'If goals scored in a match are equal, the match is decided by a <strong>shootout</strong> (random outcome). ';
   html += 'The last team standing is the <strong>BSC World Cup Champion</strong>!';
   html += '</p></div>';
 
   // The Scoring Title
-  html += '<div class="card">';
+  html += '<div class="card card-reveal">';
   html += '<div class="card-title">The Scoring Title (Weeks 4\u20137)</div>';
   html += '<p style="font-size:0.85rem;line-height:1.6;color:var(--gray-dark);">';
   html += 'Even if your team gets eliminated from the bracket, you\u2019re not done! ';
   html += 'Every team keeps competing in the weekly events during Weeks 4\u20137. ';
   html += 'Your goals add up, and the teams with the most total goals earn <strong>1st, 2nd, and 3rd place</strong> in the Scoring Title. ';
+  html += 'If teams are tied on total goals, the first tiebreaker is <strong>goals scored in the group stage</strong>. If still tied, it\u2019s decided by a <strong>random outcome</strong>. ';
   html += 'So no matter what happens in the bracket, keep scoring!';
   html += '</p></div>';
 
   // Weekly Events
-  html += '<div class="card">';
+  html += '<div class="card card-reveal">';
   html += '<div class="card-title">Weekly Events</div>';
   html += '<p style="font-size:0.85rem;line-height:1.6;color:var(--gray-dark);">';
   html += 'Each week there will be a new soccer event at practice. Your coach will have all the details. Give it your best effort and have fun!';
   html += '</p></div>';
 
   // At a glance
-  html += '<div class="card">';
+  html += '<div class="card card-reveal">';
   html += '<div class="card-title">At a Glance</div>';
-  html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:0.82rem;">';
-  html += '<div><strong>33</strong> Teams</div>';
-  html += '<div><strong>12</strong> Groups</div>';
-  html += '<div><strong>7</strong> Weeks</div>';
-  html += '<div><strong>16</strong> Knockout Spots</div>';
+  html += '<div class="glance-grid">';
+  html += '<div class="glance-item"><div class="glance-num">33</div><div class="glance-label">Teams</div></div>';
+  html += '<div class="glance-item"><div class="glance-num">12</div><div class="glance-label">Groups</div></div>';
+  html += '<div class="glance-item"><div class="glance-num">7</div><div class="glance-label">Weeks</div></div>';
+  html += '<div class="glance-item"><div class="glance-num">16</div><div class="glance-label">Knockout Spots</div></div>';
   html += '</div></div>';
 
   el.innerHTML = html;
@@ -1491,7 +1569,7 @@ function renderGroups() {
     const challengeTeams = getGroupChallengeCountries(letter);
     const isChallOnly = !teamIds; // Group G has no BSC teams
 
-    html += '<div class="card group-card">';
+    html += '<div class="card group-card card-reveal">';
     html += '<div class="group-header">Group ' + letter + (isChallOnly ? ' <span style="font-size:0.7em;color:#fff;font-family:Montserrat,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">— Challenge Group Only</span>' : '') + '</div>';
 
     if (isChallOnly) {
@@ -1562,7 +1640,7 @@ function renderTeams() {
     return gradeOrder[a.grade] - gradeOrder[b.grade];
   });
 
-  html += '<div class="card">';
+  html += '<div class="card card-reveal">';
   html += '<div class="card-title">All 33 Teams</div>';
   html += '<div class="standings-table-wrap">';
   html += '<table class="standings-table">';
@@ -1597,7 +1675,7 @@ function renderStandings() {
   });
 
   // ===== GROUP STANDINGS =====
-  html += '<div class="card">';
+  html += '<div class="card card-reveal">';
   html += '<div class="card-title">Group Standings</div>';
 
   allGroupLetters.forEach(letter => {
@@ -1657,7 +1735,7 @@ function renderStandings() {
   html += '</div>';
 
   // ===== SCORING TITLE =====
-  html += '<div class="card">';
+  html += '<div class="card card-reveal">';
   html += '<div class="card-title">Scoring Title</div>';
   html += '<p style="font-size:0.78rem;color:var(--gray-mid);margin-bottom:12px;">Only goals scored in Weeks 4\u20137 count toward the Scoring Title.</p>';
 
@@ -1783,7 +1861,7 @@ function renderBracket() {
   const el = document.getElementById('tab-bracket');
   let html = '';
 
-  html += '<div class="card">';
+  html += '<div class="card card-reveal">';
   html += '<div class="card-title">Knockout Bracket</div>';
 
   if (CURRENT_WEEK < 4) {
@@ -1807,13 +1885,13 @@ function renderBracket() {
   html += '</div></div></div>';
 
   // Third place match
-  html += '<div class="card third-place">';
+  html += '<div class="card third-place card-reveal">';
   html += '<div class="card-title">Third Place Match</div>';
   html += renderBracketMatchCard(BRACKET.third);
   html += '</div>';
 
   // Scoring Title leaderboard (weeks 4-7)
-  html += '<div class="card">';
+  html += '<div class="card card-reveal">';
   html += '<div class="card-title">Scoring Title</div>';
 
   if (CURRENT_WEEK < 4) {

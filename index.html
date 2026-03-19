@@ -1206,6 +1206,12 @@ function renderHome() {
     html += '<div class="value">' + WEEK_LABELS[CURRENT_WEEK] + '</div>';
     html += '<div class="sub">' + WEEK_DATES[CURRENT_WEEK] + '</div>';
     html += '</div>';
+  } else {
+    html += '<div class="card countdown-card card-reveal">';
+    html += '<div class="label">Tournament Complete</div>';
+    html += '<div class="value">\ud83c\udfc6</div>';
+    html += '<div class="sub">Thanks for a great season!</div>';
+    html += '</div>';
   }
 
   // How It Works
@@ -1221,7 +1227,8 @@ function renderHome() {
   html += '<p style="font-size:0.85rem;line-height:1.6;color:var(--gray-dark);">';
   html += 'Your team is in a group with 3 other teams. Over 3 weeks, you play each of them once. ';
   html += 'A win earns <strong>3 points</strong>, a draw earns <strong>1 point</strong>, and a loss earns <strong>0 points</strong>. ';
-  html += 'The top team in each group moves on to the Round of 16, plus the 5 best remaining teams.';
+  html += 'The top team in each group moves on to the Round of 16, plus the 5 best remaining teams. ';
+  html += 'If teams are tied on points, the first tiebreaker is <strong>total goals scored</strong>, then <strong>goals allowed</strong>, then a <strong>random outcome</strong>.';
   html += '</p></div>';
 
   // Challenge Teams
@@ -1230,6 +1237,8 @@ function renderHome() {
   html += '<p style="font-size:0.85rem;line-height:1.6;color:var(--gray-dark);">';
   html += 'Each group includes one <strong>challenge team</strong> — a real World Cup country that is not represented by a BSC team. ';
   html += 'Every BSC team will play one challenge match during the group stage. ';
+  html += 'Each challenge team\u2019s score is the <strong>rounded average</strong> of all BSC team scores submitted that week. ';
+  html += 'For example, if 33 BSC teams score an average of 3.3 goals, every challenge team scores 3 goals in their match that week. ';
   html += 'Challenge teams <strong>cannot advance</strong> to the knockout round and do not participate in the Scoring Title. ';
   html += 'Group G is made up entirely of challenge teams and will not appear in the standings.';
   html += '</p></div>';
@@ -1240,6 +1249,7 @@ function renderHome() {
   html += '<p style="font-size:0.85rem;line-height:1.6;color:var(--gray-dark);">';
   html += '16 teams enter the bracket. If you win, you advance. If you lose, you\u2019re eliminated. ';
   html += 'It goes from the Round of 16 \u2192 Quarterfinals \u2192 Semifinals \u2192 Final. ';
+  html += 'If goals scored in a match are equal, the match is decided by a <strong>shootout</strong> (random outcome). ';
   html += 'The last team standing is the <strong>BSC World Cup Champion</strong>!';
   html += '</p></div>';
 
@@ -1250,6 +1260,7 @@ function renderHome() {
   html += 'Even if your team gets eliminated from the bracket, you\u2019re not done! ';
   html += 'Every team keeps competing in the weekly events during Weeks 4\u20137. ';
   html += 'Your goals add up, and the teams with the most total goals earn <strong>1st, 2nd, and 3rd place</strong> in the Scoring Title. ';
+  html += 'If teams are tied on total goals, the first tiebreaker is <strong>goals scored in the group stage</strong>. If still tied, it\u2019s decided by a <strong>random outcome</strong>. ';
   html += 'So no matter what happens in the bracket, keep scoring!';
   html += '</p></div>';
 
