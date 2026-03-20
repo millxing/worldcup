@@ -7,7 +7,15 @@
       "mcp__Claude_Preview__preview_start",
       "WebFetch(domain:www.brooklinesoccer.org)",
       "Bash(pip install:*)",
-      "Bash(ls /Users/robschoen/Dropbox/CC/worldcup/rankings.*)"
+      "Bash(ls /Users/robschoen/Dropbox/CC/worldcup/rankings.*)",
+      "WebFetch(domain:docs.google.com)",
+      "Bash(python3:*)",
+      "Bash(ls -lah /Users/robschoen/Dropbox/CC/worldcup/*.html)",
+      "Bash(grep -E \"\\\\.\\(html|pdf|md|json|xlsx|csv\\)$\")",
+      "Bash(grep -l \"admin\\\\|simulation\\\\|admin\\\\|submit\\\\|form\\\\|google\" /Users/robschoen/Dropbox/CC/worldcup/*.html)",
+      "Bash(curl -s https://docs.google.com/forms/d/1dxSSHlZxPnDi8OxHf1SVlXvnDNMZ4fH0G4mMLmB-Luc/viewform)",
+      "Bash(curl -sL https://docs.google.com/forms/d/1dxSSHlZxPnDi8OxHf1SVlXvnDNMZ4fH0G4mMLmB-Luc/viewform)",
+      "Bash(grep -oE '\\\\[\\([0-9]{9,10}\\),')"
     ]
   }
 }

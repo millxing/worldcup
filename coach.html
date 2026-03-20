@@ -56,7 +56,7 @@ body {
     ),
     linear-gradient(135deg, var(--navy-deep) 0%, var(--navy) 100%);
   color: var(--white);
-  padding: 18px 16px 10px;
+  padding: 18px 0 10px;
   text-align: center;
   position: relative;
 }
@@ -64,34 +64,30 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 6px;
 }
 .header-logo {
-  height: 105px;
+  height: 150px;
   width: auto;
   flex-shrink: 0;
-  margin-top: -17px;
-  margin-bottom: -18px;
+  margin-top: -24px;
+  margin-bottom: -26px;
 }
 .header-text {
-  text-align: center;
-}
-.club-name {
   font-family: 'Montserrat', sans-serif;
-  font-size: 1.3rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: #ffffff;
-  letter-spacing: 3px;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  line-height: 1.2;
+  line-height: 1.15;
+  flex: 1;
 }
-.header h1 {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.3rem;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  line-height: 1.2;
+.header-text-left {
+  text-align: center;
+}
+.header-text-right {
+  text-align: center;
 }
 .header .subtitle {
   font-size: 0.75rem;
@@ -394,6 +390,10 @@ body {
 }
 .week-header.current { background: var(--red); border-left: none; }
 .week-header .week-date { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; color: rgba(255,255,255,0.8); font-weight: 500; text-transform: none; letter-spacing: 0; }
+@media (max-width: 480px) {
+  .week-header { font-size: 0.58rem; letter-spacing: 0.3px; padding: 8px 8px; }
+  .week-header .week-date { font-size: 0.55rem; }
+}
 .match-list {
   background: var(--white);
   border-radius: 0 0 var(--radius) var(--radius);
@@ -734,10 +734,12 @@ body {
 @media (min-width: 600px) {
   .tab-content { padding: 20px; }
   .tab-nav button { font-size: 0.8rem; padding: 12px 8px 10px; }
-  .header h1 { font-size: 1.6rem; }
-  .header-logo { height: 135px; margin-top: -22px; margin-bottom: -23px; }
-  .header-row { gap: 20px; }
-  .club-name { font-size: 1.6rem; }
+  .header { padding: 30px 20px 18px; }
+  .header-text { font-size: 1.75rem; letter-spacing: 3px; }
+  .header-text-left { padding-left: 10%; }
+  .header-text-right { padding-right: 10%; }
+  .header-logo { height: 200px; margin-top: -30px; margin-bottom: -35px; }
+  .header-row { gap: 16px; }
   .groups-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .groups-grid .card { margin-bottom: 0; }
   .bracket { flex-direction: row; }
@@ -756,12 +758,9 @@ a { color: var(--teal); }
 <!-- Header -->
 <header class="header">
   <div class="header-row">
+    <div class="header-text header-text-left">Brookline<br>Soccer<br>Club</div>
     <a href="https://www.brooklinesoccer.org/" target="_blank"><img src="https://cdn2.sportngin.com/attachments/photo/bd06-216817597/BSC_TT_-_NBG_large.png" alt="Brookline Soccer Club" class="header-logo"></a>
-    <div class="header-text">
-      <div class="club-name">Brookline Soccer Club</div>
-      <h1>World Cup 2026</h1>
-    </div>
-    <a href="https://www.brooklinesoccer.org/" target="_blank"><img src="https://cdn2.sportngin.com/attachments/photo/bd06-216817597/BSC_TT_-_NBG_large.png" alt="Brookline Soccer Club" class="header-logo"></a>
+    <div class="header-text header-text-right">World<br>Cup 2026</div>
   </div>
 </header>
 
