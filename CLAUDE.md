@@ -2,78 +2,72 @@
 
 ## Project Overview
 
-A World Cup-themed league game for BSC soccer teams, running over 7 consecutive Mondays (April 20 – June 1, 2026). Teams are assigned World Cup countries and progress through group stages and knockout rounds.
+A World Cup-themed league game for BSC soccer teams, running over 6 consecutive Mondays (April 27 – June 1, 2026). Teams are assigned World Cup countries and progress through group stages and knockout rounds.
 
 ## Key Documents
 
-- `BSC_Mock_World_Cup_Event_Plan_7wk.pdf` — Current event plan (7-week version)
+- `BSC_Mock_World_Cup_Event_Plan_7wk.pdf` — Original 7-week event plan (superseded; current format is 6 weeks / 13 teams)
 - `BSC_Mock_World_Cup_Event_Plan.pdf` — Original 8-week version (superseded)
-- `information.xlsx` — Has 4 sheets of data:
-  1. Actual Rankings — 48 World Cup countries with FIFA rankings
-  2. Actual Groups — The real 2026 World Cup group draw (Groups A–L, 4 teams each)
-  3. Actual Schedule — Full 104-game match schedule with dates, locations, and bracket
-  4. BSC Teams — The 33 BSC team names with gender and grade
+- `information.xlsx` — Reference data: real 2026 World Cup rankings, groups, schedule, plus the original 33-team BSC roster
+- `scoresheet.xlsx` — Weekly score input from coaches. One tab per week (e.g. `week 1`). Column A = BSC team name, Column B = `Goals` (final integer per team, 0–5+). Cathleen fills this each Saturday after the 6 PM deadline; the app data is updated from it.
 
-## Team Counts
+## Teams (13 BSC teams)
 
-| Grade | Girls | Boys | Total |
-|-------|-------|------|-------|
-| 3rd   | 3     | 4    | 7     |
-| 4th   | 3     | 4    | 7     |
-| 5th   | 2     | 3    | 5     |
-| 6th   | 3     | 3    | 6     |
-| 7th   | 2     | 2    | 4     |
-| 8th   | 2     | 2    | 4     |
-| **Total** | **15** | **18** | **33** |
+After 7th/8th-grade opt-outs and the late G3 Dash withdrawal, the field is **13 BSC teams**. Roster lives in the `TEAMS` array of `index.html`, `newcoach.html`, and `admin.html` — all three files must stay in sync.
 
-Full participation (3rd–8th): 33 teams. If 7th/8th opt out: 25 teams. Design the apps to handle either scenario.
+## Tournament Structure (6-week plan)
 
-## Tournament Structure (7-week plan)
-
-- **Week 1** (Apr 20): Opening launch + Group Stage Matchday 1
-- **Week 2** (Apr 27): Group Stage Matchday 2
-- **Week 3** (May 4): Group Stage Matchday 3 + final group rankings
-- **Week 4** (May 11): Round of 16 + Scoring Title begins
-- **Week 5** (May 18): Quarterfinals
-- **Week 6** (May 25): Semifinals
-- **Week 7** (Jun 1): Final, third-place, Scoring Title awards, ceremony
+- **Week 1** (Apr 27): Opening launch + Group Stage Matchday 1
+- **Week 2** (May 4): Group Stage Matchday 2
+- **Week 3** (May 11): Group Stage Matchday 3 + final group rankings
+- **Week 4** (May 18): Quarterfinals + Scoring Title begins
+- **Week 5** (May 25): Semifinals
+- **Week 6** (Jun 1): Final, third-place, Scoring Title awards, ceremony
 
 ## Group Structure
 
-- **33 teams**: 11 groups of 3 BSC teams + 1 challenge team each, plus Group G (challenge-only, 4 challenge teams)
-- Each group plays a full round-robin over 3 weeks (pos1 vs pos2, pos1 vs pos3, pos2 vs pos3)
-- Each BSC team plays 2 group matches + 1 challenge match = 3 matches total
-- All 33 BSC teams play every week (no byes)
+- **4 groups**:
+  - Groups A, B, C: 3 BSC teams + 1 challenge team each (USA, Mexico, Senegal respectively)
+  - Group D: 4 BSC teams, no challenge team
+- Round-robin per group of 4 over 3 weeks: Wk1 = 1v2 + 3v4, Wk2 = 1v3 + 2v4, Wk3 = 1v4 + 2v3 (positions 1–4; for A/B/C, position 4 = challenge)
+- Each BSC team plays 3 matches in the group stage (no byes)
 
 ## Challenge Matches
 
-- Each group's 4th member is a non-BSC "challenge" country from the real World Cup
+- Groups A/B/C each have one fixed challenge country (USA, Mexico, Senegal). Group D has none.
 - Challenge match results COUNT toward group standings
-- The challenge team's score = rounded average of all 33 BSC teams' goals scored that week
-- The organizer enters only the BSC team's score; the app computes the challenge team's score dynamically
+- The challenge team's score each week = rounded average of all 13 BSC teams' goals scored that week
+- The organizer enters only each BSC team's final goal total; the app computes the challenge team's score dynamically
 
 ## Advancement
 
-- 11 group winners advance to R16 (if the challenge team tops a group, the runner-up advances instead)
-- 5 best remaining BSC teams also advance (by points, then goals scored tiebreaker)
-- Total: 16 teams in the knockout bracket
+- **Top 2 BSC teams from each group** advance to the Quarterfinals → 8 teams total
+- No wildcards / best-runner-up pool
+- Bracket: QF → SF → Final + Third Place
 
-## Scoring Title (Weeks 4-7)
+## Scoring Title (Weeks 4–6)
 
-- All 33 teams get 1 score per week in weeks 4-7
+- All 13 BSC teams get 1 score per week in weeks 4–6
 - Bracket teams: goals scored in their knockout match
 - Eliminated teams: goals scored in the weekly event/activity
 - Top 3 total goals = Scoring Title 1st/2nd/3rd
-- Replaces the old consolation format; keeps all teams engaged every week
+- Keeps all teams engaged every week, even after elimination
+
+## Weekly Activity Format
+
+Activities are run at practice and converted to goals. Cathleen does any pre-aggregation math herself (e.g. comparing two teams' jumping-jack counts to award the head-to-head +1 goal) and enters one consolidated final-goals number per team in `scoresheet.xlsx`. The app/data layer never sees the raw activity components.
 
 ## Digital Delivery
 
-Two single-file, mobile-first web apps hosted on GitHub Pages:
+Two single-file, mobile-first web apps hosted on GitHub Pages, plus a local-only admin tool:
 
 - `index.html` — **Player app** (public): standings, schedule, bracket, results
-- `newcoach.html` — **Coach app** (process-restricted): includes weekly instructions and submission contact info
+- `newcoach.html` — **Coach app** (URL not publicly shared): weekly instructions and submission contact info. Renamed from `coach.html` after the original URL leaked.
+- `admin.html` — **Admin app** (local-only): simulates seasons, processes results, exports data to update the player app
 
-No backend. Results submitted by coaches via email/text to the organizer → organizer manually updates app data → republish.
+No backend. Workflow: coaches email/text raw answers to Cathleen → Cathleen records final per-team goals in `scoresheet.xlsx` → that data is read into the player app's `RESULTS` object → republish to GitHub Pages.
+
+**Submission contact:** Cathleen Aron — `Cathleen.Aron@gmail.com` / 917-816-2593. Saturday 6 PM deadline.
 
 ## Technical Constraints
 
@@ -88,7 +82,7 @@ No backend. Results submitted by coaches via email/text to the organizer → org
 - Win = 3 pts, Draw = 1 pt, Loss = 0 pts
 - Tiebreak: total points → goals scored → goals allowed → admin tiebreak
 - Both group matches and challenge matches count toward standings
-- Top 16 advance to knockout bracket after group stage (see Advancement above)
+- Top 2 BSC teams per group (8 teams total) advance to the Quarterfinals (see Advancement above)
 
 ## Design & Branding
 
