@@ -988,7 +988,7 @@ const SCORING_TITLE = {
 // =============================================================================
 // ===== COACH-ONLY: WEEKLY INSTRUCTIONS =======================================
 // =============================================================================
-// Update this section each week before sharing coach.html with coaches.
+// Update this section each week before sharing newcoach.html with coaches.
 // Only include CURRENT WEEK details. Remove previous week's content.
 // =============================================================================
 
@@ -998,13 +998,12 @@ const COACH_WEEK_INSTRUCTIONS = {
   instructions: "[ ORGANIZER: Replace this placeholder with the current week's activity instructions before publishing. Include field assignments, warm-up activities, game format details, and any special notes for coaches. ]",
   reminders: [
     "Please try to complete your team's activity during the first practice of the week.",
-    "Submit your team's goals scored before noon each Saturday.",
+    "Submit your team's goals scored before 6:00 PM each Saturday.",
     "If a score is not submitted, the team gets the average of the submitted scores that week.",
     "The team standings will be calculated and posted over the weekend.",
     "The website will be updated weekly. Refresh the browser to reload."
   ],
-  deadline: "Saturday at 12:00 PM",
-  googleFormUrl: "#google-form-link" // Replace with actual Google Form URL
+  deadline: "Saturday at 6:00 PM"
 };
 
 // =============================================================================
@@ -1215,10 +1214,15 @@ function renderCoach() {
   const ci = COACH_WEEK_INSTRUCTIONS;
   let html = '';
 
-  // Google Form button — disabled until form is created
-  html += '<span class="form-button" style="opacity:0.5;pointer-events:none;cursor:default;">';
-  html += 'Submit Results via Google Form (Coming Soon)';
-  html += '</span>';
+  // Submit results — email or text
+  html += '<div class="card coach-card" style="margin-bottom:12px;">';
+  html += '<div class="card-title">Submit Results</div>';
+  html += '<p style="font-size:0.85rem;line-height:1.5;margin:0 0 8px 0;">Email or text your team’s goals scored to <strong>Cathleen Aron</strong>:</p>';
+  html += '<ul style="list-style:disc;padding-left:20px;margin:0;">';
+  html += '<li style="font-size:0.85rem;padding:3px 0;line-height:1.4;">Email: <a href="mailto:Cathleen.Aron@gmail.com">Cathleen.Aron@gmail.com</a></li>';
+  html += '<li style="font-size:0.85rem;padding:3px 0;line-height:1.4;">Text: <a href="sms:+19178162593">917-816-2593</a></li>';
+  html += '</ul>';
+  html += '</div>';
 
   // Deadline reminder
   html += '<div class="deadline-bar">';
@@ -1240,7 +1244,7 @@ function renderCoach() {
     html += '<li style="font-size:0.82rem;padding:4px 0 4px 6px;line-height:1.4;">' + r + '</li>';
   });
   html += '<li style="font-size:0.82rem;padding:4px 0 4px 6px;line-height:1.4;">If there are any questions or ambiguities contact the organizers.</li>';
-  html += '<li style="font-size:0.82rem;padding:4px 0 4px 6px;line-height:1.4;">Organizer Contact: Cathleen Schoen, 917-816-2593, cathleen.schoen@yahoo.com</li>';
+  html += '<li style="font-size:0.82rem;padding:4px 0 4px 6px;line-height:1.4;">Organizer Contact: Cathleen Aron, 917-816-2593, Cathleen.Aron@gmail.com</li>';
   html += '<li style="font-size:0.82rem;padding:4px 0 4px 6px;line-height:1.4;">Backup Contact: Rob Schoen, 617-447-8496, robschoen.robschoen@gmail.com</li>';
   html += '<li style="font-size:0.82rem;padding:4px 0 4px 6px;line-height:1.4;">Do NOT share the link to the Coach website. It is only for coaches.</li>';
   html += '</ul>';

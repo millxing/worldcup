@@ -71,9 +71,9 @@ Full participation (3rd–8th): 33 teams. If 7th/8th opt out: 25 teams. Design t
 Two single-file, mobile-first web apps hosted on GitHub Pages:
 
 - `index.html` — **Player app** (public): standings, schedule, bracket, results
-- `coach.html` — **Coach app** (process-restricted): includes weekly instructions, Google Form link
+- `newcoach.html` — **Coach app** (process-restricted): includes weekly instructions and submission contact info
 
-No backend. Results submitted via Google Form → Google Sheet → organizer reviews → manually updates app data → republish.
+No backend. Results submitted by coaches via email/text to the organizer → organizer manually updates app data → republish.
 
 ## Technical Constraints
 

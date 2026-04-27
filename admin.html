@@ -1361,7 +1361,7 @@ function renderAdmin() {
   // --- Export Data ---
   html += '<div class="card card-reveal">';
   html += '<div class="card-title">Export Data</div>';
-  html += '<p style="font-size:0.78rem;color:var(--gray-mid);margin-bottom:10px;">Copy processed data to update index.html and coach.html.</p>';
+  html += '<p style="font-size:0.78rem;color:var(--gray-mid);margin-bottom:10px;">Copy processed data to update index.html and newcoach.html.</p>';
   var hasData = Object.keys(RESULTS).length > 0;
   html += '<div>';
   html += '<button class="admin-btn" ' + (hasData ? '' : 'disabled') + ' onclick="copyToClipboard(exportJS())">Copy JS Data</button>';
