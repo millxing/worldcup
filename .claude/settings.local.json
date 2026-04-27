@@ -16,7 +16,11 @@
       "Bash(curl -s https://docs.google.com/forms/d/1dxSSHlZxPnDi8OxHf1SVlXvnDNMZ4fH0G4mMLmB-Luc/viewform)",
       "Bash(curl -sL https://docs.google.com/forms/d/1dxSSHlZxPnDi8OxHf1SVlXvnDNMZ4fH0G4mMLmB-Luc/viewform)",
       "Bash(grep -oE '\\\\[\\([0-9]{9,10}\\),')",
-      "Bash(grep -n \"33\\\\|Week 7\\\\|week 7\\\\|R16\\\\|r16\\\\|Round of 16\\\\|wildCard\\\\|11 group\\\\|12 group\\\\|16 teams\\\\|5 best\\\\| 7 \\\\| 7$\" /Users/robschoen/Dropbox/CC/worldcup/index.html /Users/robschoen/Dropbox/CC/worldcup/admin.html /Users/robschoen/Dropbox/CC/worldcup/coach.html)"
+      "Bash(grep -n \"33\\\\|Week 7\\\\|week 7\\\\|R16\\\\|r16\\\\|Round of 16\\\\|wildCard\\\\|11 group\\\\|12 group\\\\|16 teams\\\\|5 best\\\\| 7 \\\\| 7$\" /Users/robschoen/Dropbox/CC/worldcup/index.html /Users/robschoen/Dropbox/CC/worldcup/admin.html /Users/robschoen/Dropbox/CC/worldcup/coach.html)",
+      "Bash(git add *)",
+      "Bash(git push *)",
+      "Bash(git restore *)",
+      "Bash(rm -f '/Users/robschoen/Dropbox/CC/worldcup/~$scoresheet.xlsx')"
     ]
   }
 }
