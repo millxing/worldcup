@@ -67,7 +67,7 @@ Two single-file, mobile-first web apps hosted on GitHub Pages, plus a local-only
 
 No backend. Workflow: coaches email/text raw answers to Cathleen → Cathleen records final per-team goals in `scoresheet.xlsx` → that data is read into the player app's `RESULTS` object → republish to GitHub Pages.
 
-**Submission contact:** Cathleen Aron — `Cathleen.Aron@gmail.com` / 917-816-2593. Saturday 6 PM deadline.
+**Submission contact:** Cathleen Schoen — `cathleen.schoen@yahoo.com` / 917-816-2593. Saturday 6 PM deadline.
 
 ## Technical Constraints
 
