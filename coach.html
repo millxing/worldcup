@@ -815,250 +815,138 @@ a { color: var(--teal); }
 // =============================================================================
 // ===== WEEKLY UPDATE SECTION =================================================
 // =============================================================================
-// Update currentWeek each Monday (1-7). Update RESULTS and BRACKET as season
+// Update currentWeek each Monday (1-6). Update RESULTS and BRACKET as season
 // progresses. Update ANNOUNCEMENTS with current news.
 // =============================================================================
 
-const CURRENT_WEEK = 1; // 1=Apr 20, 2=Apr 27, 3=May 4, 4=May 11, 5=May 18, 6=May 25, 7=Jun 1
+const CURRENT_WEEK = 1; // 1=Apr 27, 2=May 4, 3=May 11, 4=May 18, 5=May 25, 6=Jun 1
 
 const WEEK_DATES = {
-  1: "April 20",
-  2: "April 27",
-  3: "May 4",
-  4: "May 11",
-  5: "May 18",
-  6: "May 25",
-  7: "June 1"
+  1: "April 27",
+  2: "May 4",
+  3: "May 11",
+  4: "May 18",
+  5: "May 25",
+  6: "June 1"
 };
 
 const WEEK_LABELS = {
   1: "Group Stage - Matchday 1",
   2: "Group Stage - Matchday 2",
   3: "Group Stage - Matchday 3",
-  4: "Round of 16",
-  5: "Quarterfinals",
-  6: "Semifinals",
-  7: "Final & Third Place"
+  4: "Quarterfinals",
+  5: "Semifinals",
+  6: "Final & Third Place"
 };
 
 // ===== ANNOUNCEMENTS =====
 // Add/remove announcements each week. Most recent first.
 const ANNOUNCEMENTS = [
   {
-    date: "April 14, 2026",
-    text: "Welcome to the BSC World Cup 2026! Opening ceremonies and Matchday 1 kick off on April 20. Check the Groups and Schedule tabs to see your team's draw. Good luck to all 33 teams!"
+    date: "April 21, 2026",
+    text: "Welcome to the BSC World Cup 2026! Opening ceremonies and Matchday 1 kick off on April 27. Check the Groups and Schedule tabs to see your team's draw. Good luck to all 13 teams!"
   },
   {
-    date: "April 10, 2026",
-    text: "The group draw is complete! 33 BSC teams have been assigned to 12 groups. Check out which World Cup country your team represents."
+    date: "April 17, 2026",
+    text: "The group draw is complete! 13 BSC teams have been assigned to 4 groups. Check out which World Cup country your team represents."
   }
 ];
 
 // ===== TEAMS =====
 // id, bscName, country, flag (emoji), group, grade, gender
 const TEAMS = [
-  // Group A (3 BSC teams + 1 challenge)
-  { id: 1,  bscName: "B4 Valencia",    country: "Mexico",          flag: "🇲🇽", group: "A", grade: "4th", gender: "Boys" },
-  { id: 2,  bscName: "G7 Ajax",        country: "Korea Republic",  flag: "🇰🇷", group: "A", grade: "7th", gender: "Girls" },
-  { id: 3,  bscName: "B6 Roma",        country: "South Africa",    flag: "🇿🇦", group: "A", grade: "6th", gender: "Boys" },
+  // Group A (3 BSC + 1 challenge: USA)
+  { id: 1,  bscName: "G5 Angel City",  country: "France",   flag: "🇫🇷", group: "A", grade: "5th", gender: "Girls" },
+  { id: 2,  bscName: "B3 Ipswich",     country: "Morocco",  flag: "🇲🇦", group: "A", grade: "3rd", gender: "Boys" },
+  { id: 3,  bscName: "G4 Reign",       country: "Belgium",  flag: "🇧🇪", group: "A", grade: "4th", gender: "Girls" },
 
-  // Group B (3 BSC teams + 1 challenge)
-  { id: 4,  bscName: "B8 Man City",    country: "Canada",          flag: "🇨🇦", group: "B", grade: "8th", gender: "Boys" },
-  { id: 5,  bscName: "G3 Spirit",      country: "Switzerland",     flag: "🇨🇭", group: "B", grade: "3rd", gender: "Girls" },
-  { id: 6,  bscName: "G4 Liverpool",   country: "Qatar",           flag: "🇶🇦", group: "B", grade: "4th", gender: "Girls" },
+  // Group B (3 BSC + 1 challenge: Mexico)
+  { id: 4,  bscName: "G6 Arsenal",     country: "Spain",        flag: "🇪🇸", group: "B", grade: "6th", gender: "Girls" },
+  { id: 5,  bscName: "G7 Ajax",        country: "Netherlands",  flag: "🇳🇱", group: "B", grade: "7th", gender: "Girls" },
+  { id: 6,  bscName: "B5 Dortmund",    country: "Germany",      flag: "🇩🇪", group: "B", grade: "5th", gender: "Boys" },
 
-  // Group C (3 BSC teams + 1 challenge)
-  { id: 7,  bscName: "G6 Arsenal",     country: "Brazil",          flag: "🇧🇷", group: "C", grade: "6th", gender: "Girls" },
-  { id: 8,  bscName: "B3 Ipswich",     country: "Morocco",         flag: "🇲🇦", group: "C", grade: "3rd", gender: "Boys" },
-  { id: 9,  bscName: "B5 Napoli",      country: "Scotland",        flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿", group: "C", grade: "5th", gender: "Boys" },
+  // Group C (3 BSC + 1 challenge: Senegal)
+  { id: 7,  bscName: "G7 Chelsea",     country: "Argentina",  flag: "🇦🇷", group: "C", grade: "7th", gender: "Girls" },
+  { id: 8,  bscName: "G8 Pride",       country: "Brazil",     flag: "🇧🇷", group: "C", grade: "8th", gender: "Girls" },
+  { id: 9,  bscName: "B3 Atalanta",    country: "Croatia",    flag: "🇭🇷", group: "C", grade: "3rd", gender: "Boys" },
 
-  // Group D (3 BSC teams + 1 challenge)
-  { id: 10, bscName: "B4 Santos",      country: "USA",             flag: "🇺🇸", group: "D", grade: "4th", gender: "Boys" },
-  { id: 11, bscName: "G5 Angel City",  country: "Paraguay",        flag: "🇵🇾", group: "D", grade: "5th", gender: "Girls" },
-  { id: 12, bscName: "G8 Pride",       country: "Australia",       flag: "🇦🇺", group: "D", grade: "8th", gender: "Girls" },
-
-  // Group E (3 BSC teams + 1 challenge)
-  { id: 13, bscName: "G3 Legacy",      country: "Côte D’Ivoire",  flag: "🇨🇮", group: "E", grade: "3rd", gender: "Girls" },
-  { id: 14, bscName: "B6 Porto",       country: "Ecuador",         flag: "🇪🇨", group: "E", grade: "6th", gender: "Boys" },
-  { id: 15, bscName: "B7 Bayern",      country: "Germany",         flag: "🇩🇪", group: "E", grade: "7th", gender: "Boys" },
-
-  // Group F (3 BSC teams + 1 challenge)
-  { id: 16, bscName: "B5 Dortmund",    country: "Netherlands",     flag: "🇳🇱", group: "F", grade: "5th", gender: "Boys" },
-  { id: 17, bscName: "G4 Spurs",       country: "Japan",           flag: "🇯🇵", group: "F", grade: "4th", gender: "Girls" },
-  { id: 18, bscName: "G6 Real Madrid", country: "Tunisia",         flag: "🇹🇳", group: "F", grade: "6th", gender: "Girls" },
-
-  // Group G — Challenge-only group (no BSC teams; mirrors real WC Group G)
-
-  // Group H (3 BSC teams + 1 challenge)
-  { id: 19, bscName: "B3 Atalanta",    country: "Spain",           flag: "🇪🇸", group: "H", grade: "3rd", gender: "Boys" },
-  { id: 20, bscName: "G6 Barcelona",   country: "Uruguay",         flag: "🇺🇾", group: "H", grade: "6th", gender: "Girls" },
-  { id: 21, bscName: "B8 Rangers",     country: "Cabo Verde",      flag: "🇨🇻", group: "H", grade: "8th", gender: "Boys" },
-
-  // Group I (3 BSC teams + 1 challenge)
-  { id: 22, bscName: "G5 Gotham",      country: "France",          flag: "🇫🇷", group: "I", grade: "5th", gender: "Girls" },
-  { id: 23, bscName: "B5 Benfica",     country: "Senegal",         flag: "🇸🇳", group: "I", grade: "5th", gender: "Boys" },
-  { id: 24, bscName: "B3 Fiorentina",  country: "Norway",          flag: "🇳🇴", group: "I", grade: "3rd", gender: "Boys" },
-
-  // Group J (3 BSC teams + 1 challenge)
-  { id: 25, bscName: "B4 Brentford",   country: "Argentina",       flag: "🇦🇷", group: "J", grade: "4th", gender: "Boys" },
-  { id: 26, bscName: "G8 Courage",     country: "Algeria",         flag: "🇩🇿", group: "J", grade: "8th", gender: "Girls" },
-  { id: 27, bscName: "B6 Fulham",      country: "Austria",         flag: "🇦🇹", group: "J", grade: "6th", gender: "Boys" },
-
-  // Group K (3 BSC teams + 1 challenge)
-  { id: 28, bscName: "B7 Athletico",   country: "Uzbekistan",      flag: "🇺🇿", group: "K", grade: "7th", gender: "Boys" },
-  { id: 29, bscName: "G3 Dash",        country: "Colombia",        flag: "🇨🇴", group: "K", grade: "3rd", gender: "Girls" },
-  { id: 30, bscName: "G4 Reign",       country: "Portugal",        flag: "🇵🇹", group: "K", grade: "4th", gender: "Girls" },
-
-  // Group L (3 BSC teams + 1 challenge)
-  { id: 31, bscName: "G7 Chelsea",     country: "England",         flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", group: "L", grade: "7th", gender: "Girls" },
-  { id: 32, bscName: "B4 Inter",       country: "Croatia",         flag: "🇭🇷", group: "L", grade: "4th", gender: "Boys" },
-  { id: 33, bscName: "B3 Como",        country: "Panama",          flag: "🇵🇦", group: "L", grade: "3rd", gender: "Boys" }
+  // Group D (4 BSC, no challenge)
+  { id: 10, bscName: "B4 Brentford",   country: "England",   flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", group: "D", grade: "4th", gender: "Boys" },
+  { id: 11, bscName: "B5 Benfica",     country: "Portugal",  flag: "🇵🇹", group: "D", grade: "5th", gender: "Boys" },
+  { id: 12, bscName: "B5 Napoli",      country: "Italy",     flag: "🇮🇹", group: "D", grade: "5th", gender: "Boys" },
+  { id: 13, bscName: "G8 Courage",     country: "Colombia",  flag: "🇨🇴", group: "D", grade: "8th", gender: "Girls" }
 ];
 
 // ===== GROUPS =====
-// 11 groups of 3 BSC teams each. Group G is challenge-only (no BSC teams).
+// 4 groups. A/B/C have 3 BSC + 1 challenge. D has 4 BSC, no challenge.
 const GROUPS = {
   A: [1, 2, 3],
   B: [4, 5, 6],
   C: [7, 8, 9],
-  D: [10, 11, 12],
-  E: [13, 14, 15],
-  F: [16, 17, 18],
-  // G: challenge-only group — no BSC teams
-  H: [19, 20, 21],
-  I: [22, 23, 24],
-  J: [25, 26, 27],
-  K: [28, 29, 30],
-  L: [31, 32, 33]
+  D: [10, 11, 12, 13]
 };
 
-// Each real group has 1 challenge team (the 4th member of the group).
-// Group G has 4 challenge teams (challenge-only group, mirrors real WC Group G).
+// Groups A/B/C each have 1 challenge team. Group D has none.
 // Challenge match results COUNT toward standings. The challenge team's score
-// each week is the rounded average of all 33 BSC teams' goals scored that week.
+// each week is the rounded average of all 13 BSC teams' goals scored that week.
 const CHALLENGE_COUNTRIES = {
-  A: [{ country: "Den/MKD/CZE/IRL",  flag: "🇩🇰" }],
-  B: [{ country: "ITA/NIR/WAL/BIH",  flag: "🇮🇹" }],
-  C: [{ country: "Haiti",            flag: "🇭🇹" }],
-  D: [{ country: "TUR/ROU/SVK/KOS",  flag: "🇹🇷" }],
-  E: [{ country: "Curaçao",          flag: "🇨🇼" }],
-  F: [{ country: "UKR/SWE/POL/ALB",  flag: "🇺🇦" }],
-  G: [
-    { country: "Belgium",      flag: "🇧🇪" },
-    { country: "Egypt",        flag: "🇪🇬" },
-    { country: "IR Iran",      flag: "🇮🇷" },
-    { country: "New Zealand",  flag: "🇳🇿" }
-  ],
-  H: [{ country: "Saudi Arabia",     flag: "🇸🇦" }],
-  I: [{ country: "BOL/SUR/IRQ",      flag: "🇧🇴" }],
-  J: [{ country: "Jordan",           flag: "🇯🇴" }],
-  K: [{ country: "NCL/JAM/COD",      flag: "🇯🇲" }],
-  L: [{ country: "Ghana",            flag: "🇬🇭" }]
+  A: [{ country: "USA",     flag: "🇺🇸" }],
+  B: [{ country: "Mexico",  flag: "🇲🇽" }],
+  C: [{ country: "Senegal", flag: "🇸🇳" }]
 };
 
 // ===== SCHEDULE =====
-// Each match: { home: teamId, away: teamId|"challenge:GROUP:0", group: "X", type: "group"|"challenge"|"r16"|"qf"|"sf"|"final"|"third" }
-// Challenge matches: away is "challenge:GROUP:0". Challenge team score = rounded avg of all 33 BSC goals that week.
-// Round-robin per group of 4 (3 BSC + 1 challenge) over 3 weeks:
-//   Week 1: pos1 vs pos2 (group), pos3 vs challenge (challenge)
-//   Week 2: pos1 vs pos3 (group), pos2 vs challenge (challenge)
-//   Week 3: pos1 vs challenge (challenge), pos2 vs pos3 (group)
+// Each match: { home: teamId, away: teamId|"challenge:GROUP:0", group: "X", type: "group"|"challenge"|"qf"|"sf"|"final"|"third" }
+// Challenge matches: away is "challenge:GROUP:0". Challenge team score = rounded avg of all 13 BSC goals that week.
+// Round-robin per group of 4 over 3 weeks (positions 1,2,3,4; for A/B/C pos 4 = challenge):
+//   Week 1: 1v2, 3v4
+//   Week 2: 1v3, 2v4
+//   Week 3: 1v4, 2v3
 const SCHEDULE = {
   // ----- WEEK 1: Group Stage Matchday 1 -----
   1: [
-    // Group matches (pos1 vs pos2)
-    { home: 1,  away: 2,  group: "A", type: "group" },   // Mexico vs Korea Republic
-    { home: 4,  away: 5,  group: "B", type: "group" },   // Canada vs Switzerland
-    { home: 7,  away: 8,  group: "C", type: "group" },   // Brazil vs Morocco
-    { home: 10, away: 11, group: "D", type: "group" },   // USA vs Paraguay
-    { home: 13, away: 14, group: "E", type: "group" },   // Côte D’Ivoire vs Ecuador
-    { home: 16, away: 17, group: "F", type: "group" },   // Netherlands vs Japan
-    { home: 19, away: 20, group: "H", type: "group" },   // Spain vs Uruguay
-    { home: 22, away: 23, group: "I", type: "group" },   // France vs Senegal
-    { home: 25, away: 26, group: "J", type: "group" },   // Argentina vs Algeria
-    { home: 28, away: 29, group: "K", type: "group" },   // Uzbekistan vs Colombia
-    { home: 31, away: 32, group: "L", type: "group" },   // England vs Croatia
-    // Challenge matches (pos3 vs challenge)
-    { home: 3,  away: "challenge:A:0", group: "A", type: "challenge" },   // South Africa vs Den/MKD/CZE/IRL
-    { home: 6,  away: "challenge:B:0", group: "B", type: "challenge" },   // Qatar vs ITA/NIR/WAL/BIH
-    { home: 9,  away: "challenge:C:0", group: "C", type: "challenge" },   // Scotland vs Haiti
-    { home: 12, away: "challenge:D:0", group: "D", type: "challenge" },   // Australia vs TUR/ROU/SVK/KOS
-    { home: 15, away: "challenge:E:0", group: "E", type: "challenge" },   // Germany vs Curaçao
-    { home: 18, away: "challenge:F:0", group: "F", type: "challenge" },   // Tunisia vs UKR/SWE/POL/ALB
-    { home: 21, away: "challenge:H:0", group: "H", type: "challenge" },   // Cabo Verde vs Saudi Arabia
-    { home: 24, away: "challenge:I:0", group: "I", type: "challenge" },   // Norway vs BOL/SUR/IRQ
-    { home: 27, away: "challenge:J:0", group: "J", type: "challenge" },   // Austria vs Jordan
-    { home: 30, away: "challenge:K:0", group: "K", type: "challenge" },   // Portugal vs NCL/JAM/COD
-    { home: 33, away: "challenge:L:0", group: "L", type: "challenge" }    // Panama vs Ghana
+    { home: 1,  away: 2,  group: "A", type: "group" },                  // France vs Morocco
+    { home: 3,  away: "challenge:A:0", group: "A", type: "challenge" }, // Belgium vs USA
+    { home: 4,  away: 5,  group: "B", type: "group" },                  // Spain vs Netherlands
+    { home: 6,  away: "challenge:B:0", group: "B", type: "challenge" }, // Germany vs Mexico
+    { home: 7,  away: 8,  group: "C", type: "group" },                  // Argentina vs Brazil
+    { home: 9,  away: "challenge:C:0", group: "C", type: "challenge" }, // Croatia vs Senegal
+    { home: 10, away: 11, group: "D", type: "group" },                  // England vs Portugal
+    { home: 12, away: 13, group: "D", type: "group" }                   // Italy vs Colombia
   ],
 
   // ----- WEEK 2: Group Stage Matchday 2 -----
   2: [
-    // Group matches (pos1 vs pos3)
-    { home: 1,  away: 3,  group: "A", type: "group" },   // Mexico vs South Africa
-    { home: 4,  away: 6,  group: "B", type: "group" },   // Canada vs Qatar
-    { home: 7,  away: 9,  group: "C", type: "group" },   // Brazil vs Scotland
-    { home: 10, away: 12, group: "D", type: "group" },   // USA vs Australia
-    { home: 13, away: 15, group: "E", type: "group" },   // Côte D’Ivoire vs Germany
-    { home: 16, away: 18, group: "F", type: "group" },   // Netherlands vs Tunisia
-    { home: 19, away: 21, group: "H", type: "group" },   // Spain vs Cabo Verde
-    { home: 22, away: 24, group: "I", type: "group" },   // France vs Norway
-    { home: 25, away: 27, group: "J", type: "group" },   // Argentina vs Austria
-    { home: 28, away: 30, group: "K", type: "group" },   // Uzbekistan vs Portugal
-    { home: 31, away: 33, group: "L", type: "group" },   // England vs Panama
-    // Challenge matches (pos2 vs challenge)
-    { home: 2,  away: "challenge:A:0", group: "A", type: "challenge" },   // Korea Republic vs Den/MKD/CZE/IRL
-    { home: 5,  away: "challenge:B:0", group: "B", type: "challenge" },   // Switzerland vs ITA/NIR/WAL/BIH
-    { home: 8,  away: "challenge:C:0", group: "C", type: "challenge" },   // Morocco vs Haiti
-    { home: 11, away: "challenge:D:0", group: "D", type: "challenge" },   // Paraguay vs TUR/ROU/SVK/KOS
-    { home: 14, away: "challenge:E:0", group: "E", type: "challenge" },   // Ecuador vs Curaçao
-    { home: 17, away: "challenge:F:0", group: "F", type: "challenge" },   // Japan vs UKR/SWE/POL/ALB
-    { home: 20, away: "challenge:H:0", group: "H", type: "challenge" },   // Uruguay vs Saudi Arabia
-    { home: 23, away: "challenge:I:0", group: "I", type: "challenge" },   // Senegal vs BOL/SUR/IRQ
-    { home: 26, away: "challenge:J:0", group: "J", type: "challenge" },   // Algeria vs Jordan
-    { home: 29, away: "challenge:K:0", group: "K", type: "challenge" },   // Colombia vs NCL/JAM/COD
-    { home: 32, away: "challenge:L:0", group: "L", type: "challenge" }    // Croatia vs Ghana
+    { home: 1,  away: 3,  group: "A", type: "group" },                  // France vs Belgium
+    { home: 2,  away: "challenge:A:0", group: "A", type: "challenge" }, // Morocco vs USA
+    { home: 4,  away: 6,  group: "B", type: "group" },                  // Spain vs Germany
+    { home: 5,  away: "challenge:B:0", group: "B", type: "challenge" }, // Netherlands vs Mexico
+    { home: 7,  away: 9,  group: "C", type: "group" },                  // Argentina vs Croatia
+    { home: 8,  away: "challenge:C:0", group: "C", type: "challenge" }, // Brazil vs Senegal
+    { home: 10, away: 12, group: "D", type: "group" },                  // England vs Italy
+    { home: 11, away: 13, group: "D", type: "group" }                   // Portugal vs Colombia
   ],
 
   // ----- WEEK 3: Group Stage Matchday 3 -----
   3: [
-    // Group matches (pos2 vs pos3)
-    { home: 2,  away: 3,  group: "A", type: "group" },   // Korea Republic vs South Africa
-    { home: 5,  away: 6,  group: "B", type: "group" },   // Switzerland vs Qatar
-    { home: 8,  away: 9,  group: "C", type: "group" },   // Morocco vs Scotland
-    { home: 11, away: 12, group: "D", type: "group" },   // Paraguay vs Australia
-    { home: 14, away: 15, group: "E", type: "group" },   // Ecuador vs Germany
-    { home: 17, away: 18, group: "F", type: "group" },   // Japan vs Tunisia
-    { home: 20, away: 21, group: "H", type: "group" },   // Uruguay vs Cabo Verde
-    { home: 23, away: 24, group: "I", type: "group" },   // Senegal vs Norway
-    { home: 26, away: 27, group: "J", type: "group" },   // Algeria vs Austria
-    { home: 29, away: 30, group: "K", type: "group" },   // Colombia vs Portugal
-    { home: 32, away: 33, group: "L", type: "group" },   // Croatia vs Panama
-    // Challenge matches (pos1 vs challenge)
-    { home: 1,  away: "challenge:A:0", group: "A", type: "challenge" },   // Mexico vs Den/MKD/CZE/IRL
-    { home: 4,  away: "challenge:B:0", group: "B", type: "challenge" },   // Canada vs ITA/NIR/WAL/BIH
-    { home: 7,  away: "challenge:C:0", group: "C", type: "challenge" },   // Brazil vs Haiti
-    { home: 10, away: "challenge:D:0", group: "D", type: "challenge" },   // USA vs TUR/ROU/SVK/KOS
-    { home: 13, away: "challenge:E:0", group: "E", type: "challenge" },   // Côte D’Ivoire vs Curaçao
-    { home: 16, away: "challenge:F:0", group: "F", type: "challenge" },   // Netherlands vs UKR/SWE/POL/ALB
-    { home: 19, away: "challenge:H:0", group: "H", type: "challenge" },   // Spain vs Saudi Arabia
-    { home: 22, away: "challenge:I:0", group: "I", type: "challenge" },   // France vs BOL/SUR/IRQ
-    { home: 25, away: "challenge:J:0", group: "J", type: "challenge" },   // Argentina vs Jordan
-    { home: 28, away: "challenge:K:0", group: "K", type: "challenge" },   // Uzbekistan vs NCL/JAM/COD
-    { home: 31, away: "challenge:L:0", group: "L", type: "challenge" }    // England vs Ghana
+    { home: 2,  away: 3,  group: "A", type: "group" },                  // Morocco vs Belgium
+    { home: 1,  away: "challenge:A:0", group: "A", type: "challenge" }, // France vs USA
+    { home: 5,  away: 6,  group: "B", type: "group" },                  // Netherlands vs Germany
+    { home: 4,  away: "challenge:B:0", group: "B", type: "challenge" }, // Spain vs Mexico
+    { home: 8,  away: 9,  group: "C", type: "group" },                  // Brazil vs Croatia
+    { home: 7,  away: "challenge:C:0", group: "C", type: "challenge" }, // Argentina vs Senegal
+    { home: 10, away: 13, group: "D", type: "group" },                  // England vs Colombia
+    { home: 11, away: 12, group: "D", type: "group" }                   // Portugal vs Italy
   ],
 
-  // ----- WEEK 4: Round of 16 -----
+  // ----- WEEK 4: Quarterfinals -----
   4: [],
 
-  // ----- WEEK 5: Quarterfinals -----
+  // ----- WEEK 5: Semifinals -----
   5: [],
 
-  // ----- WEEK 6: Semifinals -----
-  6: [],
-
-  // ----- WEEK 7: Final + Third Place -----
-  7: []
+  // ----- WEEK 6: Final + Third Place -----
+  6: []
 };
 
 // ===== RESULTS =====
@@ -1071,24 +959,14 @@ const RESULTS = {
 
 // ===== BRACKET =====
 // Knockout bracket data — filled after Week 3.
-// 11 group winners + 5 best remaining = 16 teams. Organizer seeds matchups.
+// Top 2 BSC teams from each of 4 groups = 8 teams. Organizer seeds matchups.
 // Each slot: { teamId: null, score: null } or { teamId: 4, score: 2 }
 const BRACKET = {
-  r16: [
-    { match: 1, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "Match 1" },
-    { match: 2, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "Match 2" },
-    { match: 3, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "Match 3" },
-    { match: 4, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "Match 4" },
-    { match: 5, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "Match 5" },
-    { match: 6, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "Match 6" },
-    { match: 7, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "Match 7" },
-    { match: 8, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "Match 8" }
-  ],
   qf: [
-    { match: 1, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "W-R16.1 vs W-R16.2" },
-    { match: 2, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "W-R16.3 vs W-R16.4" },
-    { match: 3, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "W-R16.5 vs W-R16.6" },
-    { match: 4, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "W-R16.7 vs W-R16.8" }
+    { match: 1, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "QF1" },
+    { match: 2, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "QF2" },
+    { match: 3, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "QF3" },
+    { match: 4, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "QF4" }
   ],
   sf: [
     { match: 1, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "W-QF.1 vs W-QF.2" },
@@ -1099,12 +977,12 @@ const BRACKET = {
 };
 
 // ===== SCORING TITLE =====
-// Goals scored by each team per week in weeks 4-7.
+// Goals scored by each team per week in weeks 4-6.
 // Bracket teams: goals from their knockout match. Non-bracket teams: goals from weekly event.
 // One entry per team per week. Organizer fills in after each week.
 const SCORING_TITLE = {
   // 4: { 1: 3, 2: 0, 3: 5, ... },  // teamId: goals scored
-  // 5: {}, 6: {}, 7: {}
+  // 5: {}, 6: {}
 };
 
 // =============================================================================
@@ -1156,7 +1034,7 @@ function getMatchResult(week, matchIndex) {
 }
 
 // ===== CHALLENGE SCORE COMPUTATION =====
-// Returns the rounded average of all 33 BSC teams' goals scored that week.
+// Returns the rounded average of all 13 BSC teams' goals scored that week.
 // Used as the challenge team's score in challenge matches.
 function computeChallengeScore(week) {
   const matches = SCHEDULE[week] || [];
@@ -1184,7 +1062,7 @@ function computeChallengeScore(week) {
 
 // ===== STANDINGS CALCULATION =====
 // Challenge matches now COUNT toward standings. The challenge team's score
-// is the rounded average of all 33 BSC teams' goals that week.
+// is the rounded average of all 13 BSC teams' goals that week.
 function calcStandings(teamIds, weekFilter) {
   const stats = {};
   teamIds.forEach(id => {
@@ -1270,36 +1148,30 @@ function calcOverallStandings() {
 }
 
 // ===== ADVANCEMENT =====
-// 11 group winners + 5 best remaining = 16 teams for R16.
-// If challenge team tops a group, the runner-up (next BSC team) advances instead.
+// Top 2 BSC teams from each of 4 groups = 8 teams for QF.
 function calcAdvancement() {
   const groupLetters = Object.keys(GROUPS);
-  const winners = [];
-  const remaining = [];
+  const advancing = [];
 
   groupLetters.forEach(letter => {
     const teamIds = GROUPS[letter];
     const standings = calcStandings(teamIds);
     if (standings.length > 0 && standings[0].mp > 0) {
-      winners.push(standings[0].teamId);
-      remaining.push(...standings.slice(1).map(s => s.teamId));
+      if (standings[0]) advancing.push(standings[0].teamId);
+      if (standings[1]) advancing.push(standings[1].teamId);
     }
   });
 
-  // Sort remaining by pts desc, gf desc, ga asc
-  const remainingStandings = calcStandings(remaining);
-  const wildCards = remainingStandings.slice(0, 5).map(s => s.teamId);
-
-  return { winners, wildCards, r16: [...winners, ...wildCards] };
+  return { advancing, qf: advancing };
 }
 
 // ===== SCORING TITLE CALCULATION =====
-// Sums goals from SCORING_TITLE for weeks 4-7.
+// Sums goals from SCORING_TITLE for weeks 4-6.
 function calcScoringTitle() {
   const totals = {};
   TEAMS.forEach(t => { totals[t.id] = 0; });
 
-  [4, 5, 6, 7].forEach(week => {
+  [4, 5, 6].forEach(week => {
     const weekData = SCORING_TITLE[week];
     if (!weekData) return;
     Object.keys(weekData).forEach(id => {
@@ -1454,21 +1326,20 @@ function renderHome() {
 
   // Countdown
   const weekDates = {
-    1: new Date(2026, 3, 20), 2: new Date(2026, 3, 27), 3: new Date(2026, 4, 4),
-    4: new Date(2026, 4, 11), 5: new Date(2026, 4, 18), 6: new Date(2026, 4, 25),
-    7: new Date(2026, 5, 1)
+    1: new Date(2026, 3, 27), 2: new Date(2026, 4, 4),  3: new Date(2026, 4, 11),
+    4: new Date(2026, 4, 18), 5: new Date(2026, 4, 25), 6: new Date(2026, 5, 1)
   };
   const now = new Date();
   const nextDate = weekDates[CURRENT_WEEK];
   const diff = nextDate ? Math.ceil((nextDate - now) / (1000 * 60 * 60 * 24)) : 0;
 
-  if (CURRENT_WEEK <= 7 && diff > 0) {
+  if (CURRENT_WEEK <= 6 && diff > 0) {
     html += '<div class="card countdown-card card-reveal">';
     html += '<div class="label">Next Match Day</div>';
     html += '<div class="value">' + diff + ' day' + (diff !== 1 ? 's' : '') + '</div>';
     html += '<div class="sub">' + WEEK_LABELS[CURRENT_WEEK] + ' \u2014 ' + WEEK_DATES[CURRENT_WEEK] + '</div>';
     html += '</div>';
-  } else if (CURRENT_WEEK <= 7) {
+  } else if (CURRENT_WEEK <= 6) {
     html += '<div class="card countdown-card card-reveal">';
     html += '<div class="label">Today</div>';
     html += '<div class="value">' + WEEK_LABELS[CURRENT_WEEK] + '</div>';
@@ -1495,7 +1366,7 @@ function renderHome() {
   html += '<p style="font-size:0.85rem;line-height:1.6;color:var(--gray-dark);">';
   html += 'Your team is in a group with 3 other teams. Over 3 weeks, you play each of them once. ';
   html += 'A win earns <strong>3 points</strong>, a draw earns <strong>1 point</strong>, and a loss earns <strong>0 points</strong>. ';
-  html += 'The top team in each group moves on to the Round of 16, plus the 5 best remaining teams. ';
+  html += 'The <strong>top 2 teams</strong> in each group advance to the Quarterfinals (8 teams total). ';
   html += 'If teams are tied on points, the first tiebreaker is <strong>total goals scored</strong>, then <strong>goals allowed</strong>, then a <strong>random outcome</strong>.';
   html += '</p></div>';
 
@@ -1503,30 +1374,29 @@ function renderHome() {
   html += '<div class="card card-reveal">';
   html += '<div class="card-title">Challenge Teams</div>';
   html += '<p style="font-size:0.85rem;line-height:1.6;color:var(--gray-dark);">';
-  html += 'Each group includes one <strong>challenge team</strong> — a real World Cup country that is not represented by a BSC team. ';
-  html += 'Every BSC team will play one challenge match during the group stage. ';
+  html += 'Groups A, B, and C each include one <strong>challenge team</strong> — a real World Cup country that is not represented by a BSC team. ';
+  html += 'BSC teams in those groups play one challenge match during the group stage (Group D has no challenge team). ';
   html += 'Each challenge team\u2019s score is the <strong>rounded average</strong> of all BSC team scores submitted that week. ';
-  html += 'For example, if 33 BSC teams score an average of 3.3 goals, every challenge team scores 3 goals in their match that week. ';
-  html += 'Challenge teams <strong>cannot advance</strong> to the knockout round and do not participate in the Scoring Title. ';
-  html += 'Group G is made up entirely of challenge teams and will not appear in the standings.';
+  html += 'For example, if the 13 BSC teams score an average of 3.3 goals, every challenge team scores 3 goals in their match that week. ';
+  html += 'Challenge teams <strong>cannot advance</strong> to the knockout round and do not participate in the Scoring Title.';
   html += '</p></div>';
 
   // The Knockout Bracket
   html += '<div class="card card-reveal">';
-  html += '<div class="card-title">The Knockout Bracket (Weeks 4\u20137)</div>';
+  html += '<div class="card-title">The Knockout Bracket (Weeks 4\u20136)</div>';
   html += '<p style="font-size:0.85rem;line-height:1.6;color:var(--gray-dark);">';
-  html += '16 teams enter the bracket. If you win, you advance. If you lose, you\u2019re eliminated. ';
-  html += 'It goes from the Round of 16 \u2192 Quarterfinals \u2192 Semifinals \u2192 Final. ';
+  html += '8 teams enter the bracket. If you win, you advance. If you lose, you\u2019re eliminated. ';
+  html += 'It goes from the Quarterfinals \u2192 Semifinals \u2192 Final. ';
   html += 'If goals scored in a match are equal, the match is decided by a <strong>shootout</strong> (random outcome). ';
   html += 'The last team standing is the <strong>BSC World Cup Champion</strong>!';
   html += '</p></div>';
 
   // The Scoring Title
   html += '<div class="card card-reveal">';
-  html += '<div class="card-title">The Scoring Title (Weeks 4\u20137)</div>';
+  html += '<div class="card-title">The Scoring Title (Weeks 4\u20136)</div>';
   html += '<p style="font-size:0.85rem;line-height:1.6;color:var(--gray-dark);">';
   html += 'Even if your team gets eliminated from the bracket, you\u2019re not done! ';
-  html += 'Every team keeps competing in the weekly events during Weeks 4\u20137. ';
+  html += 'Every team keeps competing in the weekly events during Weeks 4\u20136. ';
   html += 'Your goals add up, and the teams with the most total goals earn <strong>1st, 2nd, and 3rd place</strong> in the Scoring Title. ';
   html += 'If teams are tied on total goals, the first tiebreaker is <strong>goals scored in the group stage</strong>. If still tied, it\u2019s decided by a <strong>random outcome</strong>. ';
   html += 'So no matter what happens in the bracket, keep scoring!';
@@ -1543,10 +1413,10 @@ function renderHome() {
   html += '<div class="card card-reveal">';
   html += '<div class="card-title">At a Glance</div>';
   html += '<div class="glance-grid">';
-  html += '<div class="glance-item"><div class="glance-num">33</div><div class="glance-label">Teams</div></div>';
-  html += '<div class="glance-item"><div class="glance-num">12</div><div class="glance-label">Groups</div></div>';
-  html += '<div class="glance-item"><div class="glance-num">7</div><div class="glance-label">Weeks</div></div>';
-  html += '<div class="glance-item"><div class="glance-num">16</div><div class="glance-label">Knockout Spots</div></div>';
+  html += '<div class="glance-item"><div class="glance-num">13</div><div class="glance-label">Teams</div></div>';
+  html += '<div class="glance-item"><div class="glance-num">4</div><div class="glance-label">Groups</div></div>';
+  html += '<div class="glance-item"><div class="glance-num">6</div><div class="glance-label">Weeks</div></div>';
+  html += '<div class="glance-item"><div class="glance-num">8</div><div class="glance-label">Knockout Spots</div></div>';
   html += '</div></div>';
 
   el.innerHTML = html;
@@ -1561,12 +1431,12 @@ function renderGroups() {
   const el = document.getElementById('tab-groups');
   let html = '<div class="groups-grid">';
 
-  // Render all 12 groups (A-L), including challenge-only Group G
-  var allGroupLetters = ['A','B','C','D','E','F','G','H','I','J','K','L'];
+  // Render all 4 groups (A-D)
+  var allGroupLetters = ['A','B','C','D'];
   allGroupLetters.forEach(letter => {
     const teamIds = GROUPS[letter];
     const challengeTeams = getGroupChallengeCountries(letter);
-    const isChallOnly = !teamIds; // Group G has no BSC teams
+    const isChallOnly = false; // No challenge-only groups
 
     html += '<div class="card group-card card-reveal">';
     html += '<div class="group-header">Group ' + letter + (isChallOnly ? ' <span style="font-size:0.7em;color:#fff;font-family:Montserrat,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">— Challenge Group Only</span>' : '') + '</div>';
@@ -1640,7 +1510,7 @@ function renderTeams() {
   });
 
   html += '<div class="card card-reveal">';
-  html += '<div class="card-title">All 33 Teams</div>';
+  html += '<div class="card-title">All 13 Teams</div>';
   html += '<div class="standings-table-wrap">';
   html += '<table class="standings-table">';
   html += '<colgroup><col style="width:28%"><col style="width:14%"><col style="width:14%"><col style="width:32%"><col style="width:12%"></colgroup>';
@@ -1667,7 +1537,7 @@ function renderStandings() {
 
   // Check if any group-stage results exist
   var anyResults = false;
-  var allGroupLetters = ['A','B','C','D','E','F','H','I','J','K','L'];
+  var allGroupLetters = ['A','B','C','D'];
   allGroupLetters.forEach(letter => {
     const standings = calcStandings(GROUPS[letter]);
     if (standings.some(s => s.mp > 0)) anyResults = true;
@@ -1770,7 +1640,7 @@ function renderSchedule() {
   const el = document.getElementById('tab-schedule');
   let html = '';
 
-  for (let week = 1; week <= 7; week++) {
+  for (let week = 1; week <= 6; week++) {
     const matches = SCHEDULE[week] || [];
     const isCurrent = week === CURRENT_WEEK;
     const weekLabel = WEEK_LABELS[week] || 'Week ' + week;
@@ -1864,13 +1734,10 @@ function renderBracket() {
   html += '<div class="card-title">Knockout Bracket</div>';
 
   if (CURRENT_WEEK < 4) {
-    html += '<p style="font-size:0.82rem;color:var(--gray-mid);text-align:center;padding:12px 0;">The knockout bracket will be determined after the group stage concludes (Week 3). 11 group winners + 5 best remaining teams advance to the Round of 16.</p>';
+    html += '<p style="font-size:0.82rem;color:var(--gray-mid);text-align:center;padding:12px 0;">The knockout bracket will be determined after the group stage concludes (Week 3). The top 2 teams from each of the 4 groups (8 teams total) advance to the Quarterfinals.</p>';
   }
 
   html += '<div class="bracket-container"><div class="bracket">';
-
-  // Round of 16
-  html += renderBracketRound('Round of 16', BRACKET.r16);
 
   // Quarterfinals
   html += renderBracketRound('Quarterfinals', BRACKET.qf);
@@ -1894,7 +1761,7 @@ function renderBracket() {
   html += '<div class="card-title">Scoring Title</div>';
 
   if (CURRENT_WEEK < 4) {
-    html += '<p style="font-size:0.82rem;color:var(--gray-mid);text-align:center;padding:12px 0;">The Scoring Title race begins in Week 4. All 33 teams compete for the most total goals scored across Weeks 4\u20137.</p>';
+    html += '<p style="font-size:0.82rem;color:var(--gray-mid);text-align:center;padding:12px 0;">The Scoring Title race begins in Week 4. All 13 teams compete for the most total goals scored across Weeks 4\u20136.</p>';
   } else {
     const scoringData = calcScoringTitle();
     const hasScores = scoringData.some(s => s.goals > 0);
@@ -1972,13 +1839,11 @@ function updateWeekBadge() {
   if (CURRENT_WEEK <= 3) {
     badge.textContent = 'Week ' + CURRENT_WEEK + ' \u2014 Group Stage';
   } else if (CURRENT_WEEK === 4) {
-    badge.textContent = 'Week 4 \u2014 Round of 16';
+    badge.textContent = 'Week 4 \u2014 Quarterfinals';
   } else if (CURRENT_WEEK === 5) {
-    badge.textContent = 'Week 5 \u2014 Quarterfinals';
-  } else if (CURRENT_WEEK === 6) {
-    badge.textContent = 'Week 6 \u2014 Semifinals';
+    badge.textContent = 'Week 5 \u2014 Semifinals';
   } else {
-    badge.textContent = 'Week 7 \u2014 Finals';
+    badge.textContent = 'Week 6 \u2014 Finals';
   }
 }
 

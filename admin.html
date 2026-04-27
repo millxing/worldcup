@@ -425,177 +425,92 @@ a { color: var(--teal); }
 let CURRENT_WEEK = 1;
 
 const WEEK_DATES = {
-  1: "April 20", 2: "April 27", 3: "May 4",
-  4: "May 11", 5: "May 18", 6: "May 25", 7: "June 1"
+  1: "April 27", 2: "May 4", 3: "May 11",
+  4: "May 18", 5: "May 25", 6: "June 1"
 };
 
 const WEEK_LABELS = {
   1: "Group Stage - Matchday 1", 2: "Group Stage - Matchday 2",
-  3: "Group Stage - Matchday 3", 4: "Round of 16",
-  5: "Quarterfinals", 6: "Semifinals", 7: "Final & Third Place"
+  3: "Group Stage - Matchday 3", 4: "Quarterfinals",
+  5: "Semifinals", 6: "Final & Third Place"
 };
 
 const ANNOUNCEMENTS = [
-  { date: "April 14, 2026", text: "Welcome to the BSC World Cup 2026! Opening ceremonies and Matchday 1 kick off on April 20." },
-  { date: "April 10, 2026", text: "The group draw is complete! 33 BSC teams have been assigned to 12 groups." }
+  { date: "April 21, 2026", text: "Welcome to the BSC World Cup 2026! Opening ceremonies and Matchday 1 kick off on April 27." },
+  { date: "April 17, 2026", text: "The group draw is complete! 13 BSC teams have been assigned to 4 groups." }
 ];
 
 const TEAMS = [
-  { id: 1,  bscName: "B4 Valencia",    country: "Mexico",          flag: "\u{1F1F2}\u{1F1FD}", group: "A", grade: "4th", gender: "Boys" },
-  { id: 2,  bscName: "G7 Ajax",        country: "Korea Republic",  flag: "\u{1F1F0}\u{1F1F7}", group: "A", grade: "7th", gender: "Girls" },
-  { id: 3,  bscName: "B6 Roma",        country: "South Africa",    flag: "\u{1F1FF}\u{1F1E6}", group: "A", grade: "6th", gender: "Boys" },
-  { id: 4,  bscName: "B8 Man City",    country: "Canada",          flag: "\u{1F1E8}\u{1F1E6}", group: "B", grade: "8th", gender: "Boys" },
-  { id: 5,  bscName: "G3 Spirit",      country: "Switzerland",     flag: "\u{1F1E8}\u{1F1ED}", group: "B", grade: "3rd", gender: "Girls" },
-  { id: 6,  bscName: "G4 Liverpool",   country: "Qatar",           flag: "\u{1F1F6}\u{1F1E6}", group: "B", grade: "4th", gender: "Girls" },
-  { id: 7,  bscName: "G6 Arsenal",     country: "Brazil",          flag: "\u{1F1E7}\u{1F1F7}", group: "C", grade: "6th", gender: "Girls" },
-  { id: 8,  bscName: "B3 Ipswich",     country: "Morocco",         flag: "\u{1F1F2}\u{1F1E6}", group: "C", grade: "3rd", gender: "Boys" },
-  { id: 9,  bscName: "B5 Napoli",      country: "Scotland",        flag: "\u{1F3F4}\u{E0067}\u{E0062}\u{E0073}\u{E0063}\u{E0074}\u{E007F}", group: "C", grade: "5th", gender: "Boys" },
-  { id: 10, bscName: "B4 Santos",      country: "USA",             flag: "\u{1F1FA}\u{1F1F8}", group: "D", grade: "4th", gender: "Boys" },
-  { id: 11, bscName: "G5 Angel City",  country: "Paraguay",        flag: "\u{1F1F5}\u{1F1FE}", group: "D", grade: "5th", gender: "Girls" },
-  { id: 12, bscName: "G8 Pride",       country: "Australia",       flag: "\u{1F1E6}\u{1F1FA}", group: "D", grade: "8th", gender: "Girls" },
-  { id: 13, bscName: "G3 Legacy",      country: "C\u00f4te D\u2019Ivoire", flag: "\u{1F1E8}\u{1F1EE}", group: "E", grade: "3rd", gender: "Girls" },
-  { id: 14, bscName: "B6 Porto",       country: "Ecuador",         flag: "\u{1F1EA}\u{1F1E8}", group: "E", grade: "6th", gender: "Boys" },
-  { id: 15, bscName: "B7 Bayern",      country: "Germany",         flag: "\u{1F1E9}\u{1F1EA}", group: "E", grade: "7th", gender: "Boys" },
-  { id: 16, bscName: "B5 Dortmund",    country: "Netherlands",     flag: "\u{1F1F3}\u{1F1F1}", group: "F", grade: "5th", gender: "Boys" },
-  { id: 17, bscName: "G4 Spurs",       country: "Japan",           flag: "\u{1F1EF}\u{1F1F5}", group: "F", grade: "4th", gender: "Girls" },
-  { id: 18, bscName: "G6 Real Madrid", country: "Tunisia",         flag: "\u{1F1F9}\u{1F1F3}", group: "F", grade: "6th", gender: "Girls" },
-  { id: 19, bscName: "B3 Atalanta",    country: "Spain",           flag: "\u{1F1EA}\u{1F1F8}", group: "H", grade: "3rd", gender: "Boys" },
-  { id: 20, bscName: "G6 Barcelona",   country: "Uruguay",         flag: "\u{1F1FA}\u{1F1FE}", group: "H", grade: "6th", gender: "Girls" },
-  { id: 21, bscName: "B8 Rangers",     country: "Cabo Verde",      flag: "\u{1F1E8}\u{1F1FB}", group: "H", grade: "8th", gender: "Boys" },
-  { id: 22, bscName: "G5 Gotham",      country: "France",          flag: "\u{1F1EB}\u{1F1F7}", group: "I", grade: "5th", gender: "Girls" },
-  { id: 23, bscName: "B5 Benfica",     country: "Senegal",         flag: "\u{1F1F8}\u{1F1F3}", group: "I", grade: "5th", gender: "Boys" },
-  { id: 24, bscName: "B3 Fiorentina",  country: "Norway",          flag: "\u{1F1F3}\u{1F1F4}", group: "I", grade: "3rd", gender: "Boys" },
-  { id: 25, bscName: "B4 Brentford",   country: "Argentina",       flag: "\u{1F1E6}\u{1F1F7}", group: "J", grade: "4th", gender: "Boys" },
-  { id: 26, bscName: "G8 Courage",     country: "Algeria",         flag: "\u{1F1E9}\u{1F1FF}", group: "J", grade: "8th", gender: "Girls" },
-  { id: 27, bscName: "B6 Fulham",      country: "Austria",         flag: "\u{1F1E6}\u{1F1F9}", group: "J", grade: "6th", gender: "Boys" },
-  { id: 28, bscName: "B7 Athletico",   country: "Uzbekistan",      flag: "\u{1F1FA}\u{1F1FF}", group: "K", grade: "7th", gender: "Boys" },
-  { id: 29, bscName: "G3 Dash",        country: "Colombia",        flag: "\u{1F1E8}\u{1F1F4}", group: "K", grade: "3rd", gender: "Girls" },
-  { id: 30, bscName: "G4 Reign",       country: "Portugal",        flag: "\u{1F1F5}\u{1F1F9}", group: "K", grade: "4th", gender: "Girls" },
-  { id: 31, bscName: "G7 Chelsea",     country: "England",         flag: "\u{1F3F4}\u{E0067}\u{E0062}\u{E0065}\u{E006E}\u{E0067}\u{E007F}", group: "L", grade: "7th", gender: "Girls" },
-  { id: 32, bscName: "B4 Inter",       country: "Croatia",         flag: "\u{1F1ED}\u{1F1F7}", group: "L", grade: "4th", gender: "Boys" },
-  { id: 33, bscName: "B3 Como",        country: "Panama",          flag: "\u{1F1F5}\u{1F1E6}", group: "L", grade: "3rd", gender: "Boys" }
+  { id: 1,  bscName: "G5 Angel City",  country: "France",       flag: "\u{1F1EB}\u{1F1F7}", group: "A", grade: "5th", gender: "Girls" },
+  { id: 2,  bscName: "B3 Ipswich",     country: "Morocco",      flag: "\u{1F1F2}\u{1F1E6}", group: "A", grade: "3rd", gender: "Boys" },
+  { id: 3,  bscName: "G4 Reign",       country: "Belgium",      flag: "\u{1F1E7}\u{1F1EA}", group: "A", grade: "4th", gender: "Girls" },
+  { id: 4,  bscName: "G6 Arsenal",     country: "Spain",        flag: "\u{1F1EA}\u{1F1F8}", group: "B", grade: "6th", gender: "Girls" },
+  { id: 5,  bscName: "G7 Ajax",        country: "Netherlands",  flag: "\u{1F1F3}\u{1F1F1}", group: "B", grade: "7th", gender: "Girls" },
+  { id: 6,  bscName: "B5 Dortmund",    country: "Germany",      flag: "\u{1F1E9}\u{1F1EA}", group: "B", grade: "5th", gender: "Boys" },
+  { id: 7,  bscName: "G7 Chelsea",     country: "Argentina",    flag: "\u{1F1E6}\u{1F1F7}", group: "C", grade: "7th", gender: "Girls" },
+  { id: 8,  bscName: "G8 Pride",       country: "Brazil",       flag: "\u{1F1E7}\u{1F1F7}", group: "C", grade: "8th", gender: "Girls" },
+  { id: 9,  bscName: "B3 Atalanta",    country: "Croatia",      flag: "\u{1F1ED}\u{1F1F7}", group: "C", grade: "3rd", gender: "Boys" },
+  { id: 10, bscName: "B4 Brentford",   country: "England",      flag: "\u{1F3F4}\u{E0067}\u{E0062}\u{E0065}\u{E006E}\u{E0067}\u{E007F}", group: "D", grade: "4th", gender: "Boys" },
+  { id: 11, bscName: "B5 Benfica",     country: "Portugal",     flag: "\u{1F1F5}\u{1F1F9}", group: "D", grade: "5th", gender: "Boys" },
+  { id: 12, bscName: "B5 Napoli",      country: "Italy",        flag: "\u{1F1EE}\u{1F1F9}", group: "D", grade: "5th", gender: "Boys" },
+  { id: 13, bscName: "G8 Courage",     country: "Colombia",     flag: "\u{1F1E8}\u{1F1F4}", group: "D", grade: "8th", gender: "Girls" }
 ];
 
 const GROUPS = {
-  A: [1, 2, 3], B: [4, 5, 6], C: [7, 8, 9], D: [10, 11, 12],
-  E: [13, 14, 15], F: [16, 17, 18], H: [19, 20, 21], I: [22, 23, 24],
-  J: [25, 26, 27], K: [28, 29, 30], L: [31, 32, 33]
+  A: [1, 2, 3],
+  B: [4, 5, 6],
+  C: [7, 8, 9],
+  D: [10, 11, 12, 13]
 };
 
 const CHALLENGE_COUNTRIES = {
-  A: [{ country: "Den/MKD/CZE/IRL",  flag: "\u{1F1E9}\u{1F1F0}" }],
-  B: [{ country: "ITA/NIR/WAL/BIH",  flag: "\u{1F1EE}\u{1F1F9}" }],
-  C: [{ country: "Haiti",            flag: "\u{1F1ED}\u{1F1F9}" }],
-  D: [{ country: "TUR/ROU/SVK/KOS",  flag: "\u{1F1F9}\u{1F1F7}" }],
-  E: [{ country: "Cura\u00e7ao",     flag: "\u{1F1E8}\u{1F1FC}" }],
-  F: [{ country: "UKR/SWE/POL/ALB",  flag: "\u{1F1FA}\u{1F1E6}" }],
-  G: [
-    { country: "Belgium",     flag: "\u{1F1E7}\u{1F1EA}" },
-    { country: "Egypt",       flag: "\u{1F1EA}\u{1F1EC}" },
-    { country: "IR Iran",     flag: "\u{1F1EE}\u{1F1F7}" },
-    { country: "New Zealand", flag: "\u{1F1F3}\u{1F1FF}" }
-  ],
-  H: [{ country: "Saudi Arabia",    flag: "\u{1F1F8}\u{1F1E6}" }],
-  I: [{ country: "BOL/SUR/IRQ",     flag: "\u{1F1E7}\u{1F1F4}" }],
-  J: [{ country: "Jordan",          flag: "\u{1F1EF}\u{1F1F4}" }],
-  K: [{ country: "NCL/JAM/COD",     flag: "\u{1F1EF}\u{1F1F2}" }],
-  L: [{ country: "Ghana",           flag: "\u{1F1EC}\u{1F1ED}" }]
+  A: [{ country: "USA",     flag: "\u{1F1FA}\u{1F1F8}" }],
+  B: [{ country: "Mexico",  flag: "\u{1F1F2}\u{1F1FD}" }],
+  C: [{ country: "Senegal", flag: "\u{1F1F8}\u{1F1F3}" }]
 };
 
 let SCHEDULE = {
   1: [
     { home: 1,  away: 2,  group: "A", type: "group" },
-    { home: 4,  away: 5,  group: "B", type: "group" },
-    { home: 7,  away: 8,  group: "C", type: "group" },
-    { home: 10, away: 11, group: "D", type: "group" },
-    { home: 13, away: 14, group: "E", type: "group" },
-    { home: 16, away: 17, group: "F", type: "group" },
-    { home: 19, away: 20, group: "H", type: "group" },
-    { home: 22, away: 23, group: "I", type: "group" },
-    { home: 25, away: 26, group: "J", type: "group" },
-    { home: 28, away: 29, group: "K", type: "group" },
-    { home: 31, away: 32, group: "L", type: "group" },
     { home: 3,  away: "challenge:A:0", group: "A", type: "challenge" },
+    { home: 4,  away: 5,  group: "B", type: "group" },
     { home: 6,  away: "challenge:B:0", group: "B", type: "challenge" },
+    { home: 7,  away: 8,  group: "C", type: "group" },
     { home: 9,  away: "challenge:C:0", group: "C", type: "challenge" },
-    { home: 12, away: "challenge:D:0", group: "D", type: "challenge" },
-    { home: 15, away: "challenge:E:0", group: "E", type: "challenge" },
-    { home: 18, away: "challenge:F:0", group: "F", type: "challenge" },
-    { home: 21, away: "challenge:H:0", group: "H", type: "challenge" },
-    { home: 24, away: "challenge:I:0", group: "I", type: "challenge" },
-    { home: 27, away: "challenge:J:0", group: "J", type: "challenge" },
-    { home: 30, away: "challenge:K:0", group: "K", type: "challenge" },
-    { home: 33, away: "challenge:L:0", group: "L", type: "challenge" }
+    { home: 10, away: 11, group: "D", type: "group" },
+    { home: 12, away: 13, group: "D", type: "group" }
   ],
   2: [
     { home: 1,  away: 3,  group: "A", type: "group" },
-    { home: 4,  away: 6,  group: "B", type: "group" },
-    { home: 7,  away: 9,  group: "C", type: "group" },
-    { home: 10, away: 12, group: "D", type: "group" },
-    { home: 13, away: 15, group: "E", type: "group" },
-    { home: 16, away: 18, group: "F", type: "group" },
-    { home: 19, away: 21, group: "H", type: "group" },
-    { home: 22, away: 24, group: "I", type: "group" },
-    { home: 25, away: 27, group: "J", type: "group" },
-    { home: 28, away: 30, group: "K", type: "group" },
-    { home: 31, away: 33, group: "L", type: "group" },
     { home: 2,  away: "challenge:A:0", group: "A", type: "challenge" },
+    { home: 4,  away: 6,  group: "B", type: "group" },
     { home: 5,  away: "challenge:B:0", group: "B", type: "challenge" },
+    { home: 7,  away: 9,  group: "C", type: "group" },
     { home: 8,  away: "challenge:C:0", group: "C", type: "challenge" },
-    { home: 11, away: "challenge:D:0", group: "D", type: "challenge" },
-    { home: 14, away: "challenge:E:0", group: "E", type: "challenge" },
-    { home: 17, away: "challenge:F:0", group: "F", type: "challenge" },
-    { home: 20, away: "challenge:H:0", group: "H", type: "challenge" },
-    { home: 23, away: "challenge:I:0", group: "I", type: "challenge" },
-    { home: 26, away: "challenge:J:0", group: "J", type: "challenge" },
-    { home: 29, away: "challenge:K:0", group: "K", type: "challenge" },
-    { home: 32, away: "challenge:L:0", group: "L", type: "challenge" }
+    { home: 10, away: 12, group: "D", type: "group" },
+    { home: 11, away: 13, group: "D", type: "group" }
   ],
   3: [
     { home: 2,  away: 3,  group: "A", type: "group" },
-    { home: 5,  away: 6,  group: "B", type: "group" },
-    { home: 8,  away: 9,  group: "C", type: "group" },
-    { home: 11, away: 12, group: "D", type: "group" },
-    { home: 14, away: 15, group: "E", type: "group" },
-    { home: 17, away: 18, group: "F", type: "group" },
-    { home: 20, away: 21, group: "H", type: "group" },
-    { home: 23, away: 24, group: "I", type: "group" },
-    { home: 26, away: 27, group: "J", type: "group" },
-    { home: 29, away: 30, group: "K", type: "group" },
-    { home: 32, away: 33, group: "L", type: "group" },
     { home: 1,  away: "challenge:A:0", group: "A", type: "challenge" },
+    { home: 5,  away: 6,  group: "B", type: "group" },
     { home: 4,  away: "challenge:B:0", group: "B", type: "challenge" },
+    { home: 8,  away: 9,  group: "C", type: "group" },
     { home: 7,  away: "challenge:C:0", group: "C", type: "challenge" },
-    { home: 10, away: "challenge:D:0", group: "D", type: "challenge" },
-    { home: 13, away: "challenge:E:0", group: "E", type: "challenge" },
-    { home: 16, away: "challenge:F:0", group: "F", type: "challenge" },
-    { home: 19, away: "challenge:H:0", group: "H", type: "challenge" },
-    { home: 22, away: "challenge:I:0", group: "I", type: "challenge" },
-    { home: 25, away: "challenge:J:0", group: "J", type: "challenge" },
-    { home: 28, away: "challenge:K:0", group: "K", type: "challenge" },
-    { home: 31, away: "challenge:L:0", group: "L", type: "challenge" }
+    { home: 10, away: 13, group: "D", type: "group" },
+    { home: 11, away: 12, group: "D", type: "group" }
   ],
-  4: [], 5: [], 6: [], 7: []
+  4: [], 5: [], 6: []
 };
 
 let RESULTS = {};
 
 let BRACKET = {
-  r16: [
-    { match: 1, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "Match 1" },
-    { match: 2, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "Match 2" },
-    { match: 3, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "Match 3" },
-    { match: 4, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "Match 4" },
-    { match: 5, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "Match 5" },
-    { match: 6, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "Match 6" },
-    { match: 7, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "Match 7" },
-    { match: 8, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "Match 8" }
-  ],
   qf: [
-    { match: 1, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "W-R16.1 vs W-R16.2" },
-    { match: 2, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "W-R16.3 vs W-R16.4" },
-    { match: 3, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "W-R16.5 vs W-R16.6" },
-    { match: 4, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "W-R16.7 vs W-R16.8" }
+    { match: 1, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "QF1" },
+    { match: 2, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "QF2" },
+    { match: 3, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "QF3" },
+    { match: 4, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "QF4" }
   ],
   sf: [
     { match: 1, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "W-QF.1 vs W-QF.2" },
@@ -640,17 +555,15 @@ const FORM_WEEK_VALUES = {
   1: "Week 1: Matchday 1",
   2: "Week 2: Matchday 2",
   3: "Week 3: Matchday 3",
-  4: "Week 4: Round of 16",
-  5: "Week 5: Quarterfinals",
-  6: "Week 6: Semifinals",
-  7: "Week 7: Final & Third Place"
+  4: "Week 4: Quarterfinals",
+  5: "Week 5: Semifinals",
+  6: "Week 6: Final & Third Place"
 };
-// For scoring title submissions (non-bracket teams in weeks 4-7)
+// For scoring title submissions (non-bracket teams in weeks 4-6)
 const FORM_WEEK_SCORING = {
   4: "Week 4: Scoring Title",
   5: "Week 5: Scoring Title",
-  6: "Week 6: Scoring Title",
-  7: "Week 7: Scoring Title"
+  6: "Week 6: Scoring Title"
 };
 // =============================================================================
 async function submitTeamToForm(bscName, weekLabel, goals) {
@@ -697,7 +610,7 @@ async function submitTeamToForm(bscName, weekLabel, goals) {
 }
 
 async function submitWeekToForm(weekNum) {
-  logMsg("Submitting week " + weekNum + " to Google Form (33 teams)...", "log-info");
+  logMsg("Submitting week " + weekNum + " to Google Form (" + TEAMS.length + " teams)...", "log-info");
   let success = 0, fail = 0;
 
   // Collect each team's goals and week label for this week from RESULTS
@@ -739,7 +652,7 @@ async function submitWeekToForm(weekNum) {
     await new Promise(r => setTimeout(r, 100));
   }
 
-  logMsg("Week " + weekNum + " submitted to Google Form: " + success + " ok, " + fail + " failed", success === 33 ? "log-ok" : "log-warn");
+  logMsg("Week " + weekNum + " submitted to Google Form: " + success + " ok, " + fail + " failed", success === TEAMS.length ? "log-ok" : "log-warn");
 }
 
 // =============================================================================
@@ -830,25 +743,22 @@ function calcOverallStandings() {
 
 function calcAdvancement() {
   const groupLetters = Object.keys(GROUPS);
-  const winners = [];
-  const remaining = [];
+  const advancing = [];
   groupLetters.forEach(letter => {
     const teamIds = GROUPS[letter];
     const standings = calcStandings(teamIds);
     if (standings.length > 0 && standings[0].mp > 0) {
-      winners.push(standings[0].teamId);
-      remaining.push(...standings.slice(1).map(s => s.teamId));
+      if (standings[0]) advancing.push(standings[0].teamId);
+      if (standings[1]) advancing.push(standings[1].teamId);
     }
   });
-  const remainingStandings = calcStandings(remaining);
-  const wildCards = remainingStandings.slice(0, 5).map(s => s.teamId);
-  return { winners, wildCards, r16: [...winners, ...wildCards] };
+  return { advancing, qf: advancing };
 }
 
 function calcScoringTitle() {
   const totals = {};
   TEAMS.forEach(t => { totals[t.id] = 0; });
-  [4, 5, 6, 7].forEach(week => {
+  [4, 5, 6].forEach(week => {
     const weekData = SCORING_TITLE[week];
     if (!weekData) return;
     Object.keys(weekData).forEach(id => {
@@ -890,32 +800,32 @@ function simulateGroupWeek(weekNum) {
 
 function seedBracket() {
   const adv = calcAdvancement();
-  const r16Teams = adv.r16;
-  if (r16Teams.length < 16) {
-    logMsg("Only " + r16Teams.length + " teams qualified — need 16. Cannot seed bracket.", "log-err");
+  const qfTeams = adv.qf;
+  if (qfTeams.length < 8) {
+    logMsg("Only " + qfTeams.length + " teams qualified — need 8. Cannot seed bracket.", "log-err");
     return false;
   }
   // Sort by group-stage performance for seeding
-  const standings = calcStandings(r16Teams);
+  const standings = calcStandings(qfTeams);
   const seeded = standings.map(s => s.teamId);
 
-  // Pair 1v16, 2v15, etc.
-  for (let i = 0; i < 8; i++) {
+  // Pair 1v8, 2v7, 3v6, 4v5
+  for (let i = 0; i < 4; i++) {
     const homeId = seeded[i];
-    const awayId = seeded[15 - i];
-    BRACKET.r16[i].home.teamId = homeId;
-    BRACKET.r16[i].away.teamId = awayId;
+    const awayId = seeded[7 - i];
+    BRACKET.qf[i].home.teamId = homeId;
+    BRACKET.qf[i].away.teamId = awayId;
     const ht = getTeam(homeId);
     const at = getTeam(awayId);
-    BRACKET.r16[i].label = (ht ? ht.country : "TBD") + " vs " + (at ? at.country : "TBD");
+    BRACKET.qf[i].label = (ht ? ht.country : "TBD") + " vs " + (at ? at.country : "TBD");
   }
 
-  // Generate schedule for week 4
-  SCHEDULE[4] = BRACKET.r16.map((m, i) => ({
-    home: m.home.teamId, away: m.away.teamId, type: "r16", label: "R16 Match " + (i + 1)
+  // Generate schedule for week 4 (QF)
+  SCHEDULE[4] = BRACKET.qf.map((m, i) => ({
+    home: m.home.teamId, away: m.away.teamId, type: "qf", label: "QF Match " + (i + 1)
   }));
 
-  logMsg("Bracket seeded: " + adv.winners.length + " group winners + " + adv.wildCards.length + " wildcards", "log-ok");
+  logMsg("Bracket seeded: 8 teams (top 2 from each of 4 groups)", "log-ok");
   const teamNames = seeded.map(id => { const t = getTeam(id); return t ? t.country : id; });
   logMsg("Seeding order: " + teamNames.join(", "), "log-info");
   return true;
@@ -932,24 +842,6 @@ function simulateKnockoutMatch(homeId, awayId) {
 
 function simulateKnockoutWeek(weekNum) {
   if (weekNum === 4) {
-    // R16
-    BRACKET.r16.forEach((m, i) => {
-      const res = simulateKnockoutMatch(m.home.teamId, m.away.teamId);
-      RESULTS[weekNum + "-" + i] = res;
-      m.home.score = res.homeScore;
-      m.away.score = res.awayScore;
-      const winnerId = res.homeScore > res.awayScore ? m.home.teamId : m.away.teamId;
-      // Advance to QF
-      const qfIdx = Math.floor(i / 2);
-      if (i % 2 === 0) BRACKET.qf[qfIdx].home.teamId = winnerId;
-      else BRACKET.qf[qfIdx].away.teamId = winnerId;
-    });
-    // Generate QF schedule
-    SCHEDULE[5] = BRACKET.qf.map((m, i) => ({
-      home: m.home.teamId, away: m.away.teamId, type: "qf", label: "QF Match " + (i + 1)
-    }));
-    logMsg("Round of 16 complete. 8 winners advance to Quarterfinals.", "log-ok");
-  } else if (weekNum === 5) {
     // QF
     BRACKET.qf.forEach((m, i) => {
       const res = simulateKnockoutMatch(m.home.teamId, m.away.teamId);
@@ -961,11 +853,11 @@ function simulateKnockoutWeek(weekNum) {
       if (i % 2 === 0) BRACKET.sf[sfIdx].home.teamId = winnerId;
       else BRACKET.sf[sfIdx].away.teamId = winnerId;
     });
-    SCHEDULE[6] = BRACKET.sf.map((m, i) => ({
+    SCHEDULE[5] = BRACKET.sf.map((m, i) => ({
       home: m.home.teamId, away: m.away.teamId, type: "sf", label: "SF Match " + (i + 1)
     }));
     logMsg("Quarterfinals complete. 4 winners advance to Semifinals.", "log-ok");
-  } else if (weekNum === 6) {
+  } else if (weekNum === 5) {
     // SF
     BRACKET.sf.forEach((m, i) => {
       const res = simulateKnockoutMatch(m.home.teamId, m.away.teamId);
@@ -977,20 +869,20 @@ function simulateKnockoutWeek(weekNum) {
       if (i === 0) { BRACKET.final.home.teamId = winnerId; BRACKET.third.home.teamId = loserId; }
       else { BRACKET.final.away.teamId = winnerId; BRACKET.third.away.teamId = loserId; }
     });
-    SCHEDULE[7] = [
+    SCHEDULE[6] = [
       { home: BRACKET.third.home.teamId, away: BRACKET.third.away.teamId, type: "third", label: "Third Place Match" },
       { home: BRACKET.final.home.teamId, away: BRACKET.final.away.teamId, type: "final", label: "Final" }
     ];
     logMsg("Semifinals complete. Final and Third Place matchups set.", "log-ok");
-  } else if (weekNum === 7) {
+  } else if (weekNum === 6) {
     // Third place
     var res3 = simulateKnockoutMatch(BRACKET.third.home.teamId, BRACKET.third.away.teamId);
-    RESULTS["7-0"] = res3;
+    RESULTS["6-0"] = res3;
     BRACKET.third.home.score = res3.homeScore;
     BRACKET.third.away.score = res3.awayScore;
     // Final
     var resF = simulateKnockoutMatch(BRACKET.final.home.teamId, BRACKET.final.away.teamId);
-    RESULTS["7-1"] = resF;
+    RESULTS["6-1"] = resF;
     BRACKET.final.home.score = resF.homeScore;
     BRACKET.final.away.score = resF.awayScore;
     var champId = resF.homeScore > resF.awayScore ? BRACKET.final.home.teamId : BRACKET.final.away.teamId;
@@ -1025,11 +917,11 @@ function simulateScoringTitle(weekNum) {
       SCORING_TITLE[weekNum][t.id] = generateScore();
     }
   });
-  logMsg("Scoring Title week " + weekNum + " populated for all 33 teams.", "log-info");
+  logMsg("Scoring Title week " + weekNum + " populated for all " + TEAMS.length + " teams.", "log-info");
 }
 
 async function simulateWeek(weekNum) {
-  if (weekNum < 1 || weekNum > 7) return;
+  if (weekNum < 1 || weekNum > 6) return;
   if (weekNum <= 3) {
     simulateGroupWeek(weekNum);
     if (weekNum === 3) {
@@ -1040,7 +932,7 @@ async function simulateWeek(weekNum) {
     simulateScoringTitle(weekNum);
   }
   simWeeksCompleted = weekNum;
-  CURRENT_WEEK = Math.min(weekNum + 1, 7);
+  CURRENT_WEEK = Math.min(weekNum + 1, 6);
   updateWeekBadge();
 
   // Submit to Google Form if enabled
@@ -1053,7 +945,7 @@ async function simulateWeek(weekNum) {
 
 async function simulateFullSeason() {
   resetAll();
-  for (let w = 1; w <= 7; w++) {
+  for (let w = 1; w <= 6; w++) {
     await simulateWeek(w);
   }
   logMsg("Full season simulation complete!", "log-ok");
@@ -1062,14 +954,13 @@ async function simulateFullSeason() {
 function resetAll() {
   RESULTS = {};
   BRACKET = {
-    r16: Array.from({length: 8}, (_, i) => ({ match: i+1, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "Match " + (i+1) })),
-    qf: Array.from({length: 4}, (_, i) => ({ match: i+1, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "W-R16." + (i*2+1) + " vs W-R16." + (i*2+2) })),
+    qf: Array.from({length: 4}, (_, i) => ({ match: i+1, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "QF" + (i+1) })),
     sf: Array.from({length: 2}, (_, i) => ({ match: i+1, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "W-QF." + (i*2+1) + " vs W-QF." + (i*2+2) })),
     third: { home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "3rd Place Match" },
     final: { home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "Final" }
   };
   SCORING_TITLE = {};
-  SCHEDULE[4] = []; SCHEDULE[5] = []; SCHEDULE[6] = []; SCHEDULE[7] = [];
+  SCHEDULE[4] = []; SCHEDULE[5] = []; SCHEDULE[6] = [];
   CURRENT_WEEK = 1;
   simWeeksCompleted = 0;
   adminLog = [];
@@ -1169,7 +1060,7 @@ async function fetchSheetData() {
       const goals = parseInt(goalsStr);
 
       if (!team) { warnings++; if (teamName) logMsg("Row " + (i+2) + ": Unknown team \"" + teamName + "\"", "log-warn"); return; }
-      if (isNaN(week) || week < 1 || week > 7) { warnings++; logMsg("Row " + (i+2) + ": Invalid week \"" + weekStr + "\"", "log-warn"); return; }
+      if (isNaN(week) || week < 1 || week > 6) { warnings++; logMsg("Row " + (i+2) + ": Invalid week \"" + weekStr + "\"", "log-warn"); return; }
       if (isNaN(goals) || goals < 0) { warnings++; logMsg("Row " + (i+2) + ": Invalid goals \"" + goalsStr + "\" for " + team.bscName, "log-warn"); return; }
 
       submissions.push({ teamId: team.id, bscName: team.bscName, week, goals });
@@ -1218,7 +1109,7 @@ function processWeekFromSheet(weekNum) {
   });
 
   const cs = computeChallengeScore(weekNum);
-  logMsg("Week " + weekNum + " processed from sheet: " + weekSubs.length + "/33 submissions, " + missing + " filled with avg (" + avgGoals + "), challenge score = " + cs, missing > 0 ? "log-warn" : "log-ok");
+  logMsg("Week " + weekNum + " processed from sheet: " + weekSubs.length + "/" + TEAMS.length + " submissions, " + missing + " filled with avg (" + avgGoals + "), challenge score = " + cs, missing > 0 ? "log-warn" : "log-ok");
 }
 
 function processAllFromSheet() {
@@ -1239,14 +1130,13 @@ function processAllFromSheet() {
       }
     } else {
       // For knockout weeks, we need bracket to be seeded
-      if (BRACKET.r16[0].home.teamId === null && w === 4) {
-        // Seed bracket from group stage if not done
+      if (BRACKET.qf[0].home.teamId === null && w === 4) {
         if (!seedBracket()) return;
       }
       processKnockoutFromSheet(w);
     }
     simWeeksCompleted = w;
-    CURRENT_WEEK = Math.min(w + 1, 7);
+    CURRENT_WEEK = Math.min(w + 1, 6);
   });
   updateWeekBadge();
   logMsg("All available weeks processed from sheet.", "log-ok");
@@ -1262,24 +1152,6 @@ function processKnockoutFromSheet(weekNum) {
   const avgGoals = submittedGoals.length > 0 ? Math.round(submittedGoals.reduce((a, b) => a + b, 0) / submittedGoals.length) : 0;
 
   if (weekNum === 4) {
-    BRACKET.r16.forEach((m, i) => {
-      const hs = subMap[m.home.teamId] !== undefined ? subMap[m.home.teamId] : avgGoals;
-      const as = subMap[m.away.teamId] !== undefined ? subMap[m.away.teamId] : avgGoals;
-      let homeScore = hs, awayScore = as;
-      if (homeScore === awayScore) { if (Math.random() < 0.5) homeScore++; else awayScore++; }
-      RESULTS[weekNum + "-" + i] = { homeScore, awayScore };
-      m.home.score = homeScore;
-      m.away.score = awayScore;
-      const winnerId = homeScore > awayScore ? m.home.teamId : m.away.teamId;
-      const qfIdx = Math.floor(i / 2);
-      if (i % 2 === 0) BRACKET.qf[qfIdx].home.teamId = winnerId;
-      else BRACKET.qf[qfIdx].away.teamId = winnerId;
-    });
-    SCHEDULE[5] = BRACKET.qf.map((m, i) => ({
-      home: m.home.teamId, away: m.away.teamId, type: "qf", label: "QF Match " + (i + 1)
-    }));
-    logMsg("R16 processed from sheet.", "log-ok");
-  } else if (weekNum === 5) {
     BRACKET.qf.forEach((m, i) => {
       const hs = subMap[m.home.teamId] !== undefined ? subMap[m.home.teamId] : avgGoals;
       const as = subMap[m.away.teamId] !== undefined ? subMap[m.away.teamId] : avgGoals;
@@ -1293,11 +1165,11 @@ function processKnockoutFromSheet(weekNum) {
       if (i % 2 === 0) BRACKET.sf[sfIdx].home.teamId = winnerId;
       else BRACKET.sf[sfIdx].away.teamId = winnerId;
     });
-    SCHEDULE[6] = BRACKET.sf.map((m, i) => ({
+    SCHEDULE[5] = BRACKET.sf.map((m, i) => ({
       home: m.home.teamId, away: m.away.teamId, type: "sf", label: "SF Match " + (i + 1)
     }));
     logMsg("Quarterfinals processed from sheet.", "log-ok");
-  } else if (weekNum === 6) {
+  } else if (weekNum === 5) {
     BRACKET.sf.forEach((m, i) => {
       const hs = subMap[m.home.teamId] !== undefined ? subMap[m.home.teamId] : avgGoals;
       const as = subMap[m.away.teamId] !== undefined ? subMap[m.away.teamId] : avgGoals;
@@ -1311,25 +1183,25 @@ function processKnockoutFromSheet(weekNum) {
       if (i === 0) { BRACKET.final.home.teamId = winnerId; BRACKET.third.home.teamId = loserId; }
       else { BRACKET.final.away.teamId = winnerId; BRACKET.third.away.teamId = loserId; }
     });
-    SCHEDULE[7] = [
+    SCHEDULE[6] = [
       { home: BRACKET.third.home.teamId, away: BRACKET.third.away.teamId, type: "third", label: "Third Place Match" },
       { home: BRACKET.final.home.teamId, away: BRACKET.final.away.teamId, type: "final", label: "Final" }
     ];
     logMsg("Semifinals processed from sheet.", "log-ok");
-  } else if (weekNum === 7) {
+  } else if (weekNum === 6) {
     // Third place
     const h3 = subMap[BRACKET.third.home.teamId] !== undefined ? subMap[BRACKET.third.home.teamId] : avgGoals;
     const a3 = subMap[BRACKET.third.away.teamId] !== undefined ? subMap[BRACKET.third.away.teamId] : avgGoals;
     let hs3 = h3, as3 = a3;
     if (hs3 === as3) { if (Math.random() < 0.5) hs3++; else as3++; }
-    RESULTS["7-0"] = { homeScore: hs3, awayScore: as3 };
+    RESULTS["6-0"] = { homeScore: hs3, awayScore: as3 };
     BRACKET.third.home.score = hs3; BRACKET.third.away.score = as3;
     // Final
     const hf = subMap[BRACKET.final.home.teamId] !== undefined ? subMap[BRACKET.final.home.teamId] : avgGoals;
     const af = subMap[BRACKET.final.away.teamId] !== undefined ? subMap[BRACKET.final.away.teamId] : avgGoals;
     let hsf = hf, asf = af;
     if (hsf === asf) { if (Math.random() < 0.5) hsf++; else asf++; }
-    RESULTS["7-1"] = { homeScore: hsf, awayScore: asf };
+    RESULTS["6-1"] = { homeScore: hsf, awayScore: asf };
     BRACKET.final.home.score = hsf; BRACKET.final.away.score = asf;
     var champId = hsf > asf ? BRACKET.final.home.teamId : BRACKET.final.away.teamId;
     var champ = getTeam(champId);
@@ -1368,7 +1240,7 @@ function exportJS() {
   // Include knockout schedule
   if (SCHEDULE[4].length > 0) {
     js += '// Knockout schedules (replace empty arrays in SCHEDULE)\n';
-    for (let w = 4; w <= 7; w++) {
+    for (let w = 4; w <= 6; w++) {
       if (SCHEDULE[w].length > 0) {
         js += '// SCHEDULE[' + w + ']:\n';
         js += JSON.stringify(SCHEDULE[w], null, 2) + '\n\n';
@@ -1380,7 +1252,7 @@ function exportJS() {
 
 function exportCSV() {
   let csv = 'BSC Team,Week,Goals Scored,Match Type,Opponent\n';
-  for (let week = 1; week <= 7; week++) {
+  for (let week = 1; week <= 6; week++) {
     const matches = SCHEDULE[week] || [];
     matches.forEach((match, idx) => {
       const result = getMatchResult(week, idx);
@@ -1461,7 +1333,7 @@ function renderAdmin() {
   html += '</div>';
 
   // Week status rows
-  for (let w = 1; w <= 7; w++) {
+  for (let w = 1; w <= 6; w++) {
     const done = simWeeksCompleted >= w;
     const isNext = simWeeksCompleted === w - 1;
     html += '<div class="admin-week-row">';
@@ -1478,7 +1350,7 @@ function renderAdmin() {
 
   html += '<div style="margin-top:12px;">';
   var nextW = simWeeksCompleted + 1;
-  if (nextW <= 7) {
+  if (nextW <= 6) {
     html += '<button class="admin-btn" onclick="simulateWeek(' + nextW + ').then(() => renderAdmin())">Simulate Week ' + nextW + '</button>';
   }
   html += '<button class="admin-btn" onclick="simulateFullSeason().then(() => renderAdmin())">Simulate Full Season</button>';
@@ -1530,19 +1402,19 @@ function renderAdmin() {
 function renderHome() {
   const el = document.getElementById('tab-home');
   let html = '';
-  const weekDates = { 1: new Date(2026,3,20), 2: new Date(2026,3,27), 3: new Date(2026,4,4), 4: new Date(2026,4,11), 5: new Date(2026,4,18), 6: new Date(2026,4,25), 7: new Date(2026,5,1) };
+  const weekDates = { 1: new Date(2026,3,27), 2: new Date(2026,4,4), 3: new Date(2026,4,11), 4: new Date(2026,4,18), 5: new Date(2026,4,25), 6: new Date(2026,5,1) };
   const now = new Date();
   const nextDate = weekDates[CURRENT_WEEK];
   const diff = nextDate ? Math.ceil((nextDate - now) / (1000*60*60*24)) : 0;
-  if (CURRENT_WEEK <= 7 && diff > 0) {
+  if (CURRENT_WEEK <= 6 && diff > 0) {
     html += '<div class="card countdown-card card-reveal"><div class="label">Next Match Day</div><div class="value">' + diff + ' day' + (diff !== 1 ? 's' : '') + '</div><div class="sub">' + WEEK_LABELS[CURRENT_WEEK] + ' \u2014 ' + WEEK_DATES[CURRENT_WEEK] + '</div></div>';
-  } else if (CURRENT_WEEK <= 7) {
+  } else if (CURRENT_WEEK <= 6) {
     html += '<div class="card countdown-card card-reveal"><div class="label">Today</div><div class="value">' + WEEK_LABELS[CURRENT_WEEK] + '</div><div class="sub">' + WEEK_DATES[CURRENT_WEEK] + '</div></div>';
   } else {
     html += '<div class="card countdown-card card-reveal"><div class="label">Tournament Complete</div><div class="value">\ud83c\udfc6</div><div class="sub">Thanks for a great season!</div></div>';
   }
   html += '<div class="card card-reveal"><div class="card-title">How It Works</div><p style="font-size:0.85rem;line-height:1.6;">Every BSC team represents a real World Cup country. Each week at practice, your team competes in a fun soccer event and tries to score as many goals as possible.</p></div>';
-  html += '<div class="card card-reveal"><div class="card-title">At a Glance</div><div class="glance-grid"><div class="glance-item"><div class="glance-num">33</div><div class="glance-label">Teams</div></div><div class="glance-item"><div class="glance-num">12</div><div class="glance-label">Groups</div></div><div class="glance-item"><div class="glance-num">7</div><div class="glance-label">Weeks</div></div><div class="glance-item"><div class="glance-num">16</div><div class="glance-label">Knockout Spots</div></div></div></div>';
+  html += '<div class="card card-reveal"><div class="card-title">At a Glance</div><div class="glance-grid"><div class="glance-item"><div class="glance-num">13</div><div class="glance-label">Teams</div></div><div class="glance-item"><div class="glance-num">4</div><div class="glance-label">Groups</div></div><div class="glance-item"><div class="glance-num">6</div><div class="glance-label">Weeks</div></div><div class="glance-item"><div class="glance-num">8</div><div class="glance-label">Knockout Spots</div></div></div></div>';
   el.innerHTML = html;
 }
 
@@ -1551,10 +1423,10 @@ function getGroupChallengeCountries(gl) { return CHALLENGE_COUNTRIES[gl] || []; 
 function renderGroups() {
   const el = document.getElementById('tab-groups');
   let html = '<div class="groups-grid">';
-  ['A','B','C','D','E','F','G','H','I','J','K','L'].forEach(letter => {
+  ['A','B','C','D'].forEach(letter => {
     const teamIds = GROUPS[letter];
     const challengeTeams = getGroupChallengeCountries(letter);
-    const isChallOnly = !teamIds;
+    const isChallOnly = false;
     html += '<div class="card group-card card-reveal">';
     html += '<div class="group-header">Group ' + letter + (isChallOnly ? ' <span style="font-size:0.7em;color:#fff;font-family:Montserrat,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">\u2014 Challenge Group Only</span>' : '') + '</div>';
     if (isChallOnly) {
@@ -1581,7 +1453,7 @@ function renderTeams() {
   const el = document.getElementById('tab-teams');
   const gradeOrder = { '3rd': 3, '4th': 4, '5th': 5, '6th': 6, '7th': 7, '8th': 8 };
   const sorted = [...TEAMS].sort((a, b) => { if (a.gender !== b.gender) return a.gender === 'Girls' ? -1 : 1; return gradeOrder[a.grade] - gradeOrder[b.grade]; });
-  let html = '<div class="card card-reveal"><div class="card-title">All 33 Teams</div><div class="standings-table-wrap"><table class="standings-table"><colgroup><col style="width:28%"><col style="width:14%"><col style="width:14%"><col style="width:32%"><col style="width:12%"></colgroup>';
+  let html = '<div class="card card-reveal"><div class="card-title">All 13 Teams</div><div class="standings-table-wrap"><table class="standings-table"><colgroup><col style="width:28%"><col style="width:14%"><col style="width:14%"><col style="width:32%"><col style="width:12%"></colgroup>';
   html += '<thead><tr><th style="text-align:left;">BSC Team</th><th>Gender</th><th>Grade</th><th style="text-align:left;">Country</th><th>Group</th></tr></thead><tbody>';
   sorted.forEach(t => { html += '<tr><td style="text-align:left;font-weight:600;">' + t.bscName + '</td><td>' + t.gender + '</td><td>' + t.grade + '</td><td style="text-align:left;"><div class="team-cell"><span class="flag">' + t.flag + '</span> ' + t.country + '</div></td><td>' + t.group + '</td></tr>'; });
   html += '</tbody></table></div></div>';
@@ -1591,7 +1463,7 @@ function renderTeams() {
 function renderStandings() {
   const el = document.getElementById('tab-standings');
   let html = '';
-  var allGroupLetters = ['A','B','C','D','E','F','H','I','J','K','L'];
+  var allGroupLetters = ['A','B','C','D'];
   html += '<div class="card card-reveal"><div class="card-title">Group Standings</div>';
   allGroupLetters.forEach(letter => {
     const teamIds = GROUPS[letter];
@@ -1627,7 +1499,7 @@ function renderStandings() {
 
   // Scoring Title
   html += '<div class="card card-reveal"><div class="card-title">Scoring Title</div>';
-  html += '<p style="font-size:0.78rem;color:var(--gray-mid);margin-bottom:12px;">Only goals scored in Weeks 4\u20137 count.</p>';
+  html += '<p style="font-size:0.78rem;color:var(--gray-mid);margin-bottom:12px;">Only goals scored in Weeks 4\u20136 count.</p>';
   var scoringData = calcScoringTitle();
   html += '<div class="standings-table-wrap"><table class="standings-table scoring-table"><colgroup><col class="col-rank"><col class="col-country"><col class="col-bsc"><col class="col-goals"></colgroup>';
   html += '<thead><tr><th>#</th><th>Country</th><th>BSC Team</th><th>Goals</th></tr></thead><tbody>';
@@ -1646,7 +1518,7 @@ function renderStandings() {
 function renderSchedule() {
   const el = document.getElementById('tab-schedule');
   let html = '';
-  for (let week = 1; week <= 7; week++) {
+  for (let week = 1; week <= 6; week++) {
     const matches = SCHEDULE[week] || [];
     const isCurrent = week === CURRENT_WEEK;
     html += '<div class="week-section"><div class="week-header ' + (isCurrent ? 'current' : '') + '"><span>Week ' + week + ' \u2014 ' + (WEEK_LABELS[week] || '') + '</span><span class="week-date">' + (WEEK_DATES[week] || '') + '</span></div>';
@@ -1695,11 +1567,10 @@ function renderSchedule() {
 function renderBracket() {
   const el = document.getElementById('tab-bracket');
   let html = '<div class="card card-reveal"><div class="card-title">Knockout Bracket</div>';
-  if (CURRENT_WEEK < 4 && BRACKET.r16[0].home.teamId === null) {
+  if (CURRENT_WEEK < 4 && BRACKET.qf[0].home.teamId === null) {
     html += '<p style="font-size:0.82rem;color:var(--gray-mid);text-align:center;padding:12px 0;">The knockout bracket will be determined after the group stage.</p>';
   }
   html += '<div class="bracket-container"><div class="bracket">';
-  html += renderBracketRound('Round of 16', BRACKET.r16);
   html += renderBracketRound('Quarterfinals', BRACKET.qf);
   html += renderBracketRound('Semifinals', BRACKET.sf);
   html += renderBracketRound('Final', [BRACKET.final]);
@@ -1778,10 +1649,9 @@ function switchTab(tabName) {
 function updateWeekBadge() {
   const badge = document.getElementById('weekBadge');
   if (CURRENT_WEEK <= 3) badge.textContent = 'Week ' + CURRENT_WEEK + ' \u2014 Group Stage';
-  else if (CURRENT_WEEK === 4) badge.textContent = 'Week 4 \u2014 Round of 16';
-  else if (CURRENT_WEEK === 5) badge.textContent = 'Week 5 \u2014 Quarterfinals';
-  else if (CURRENT_WEEK === 6) badge.textContent = 'Week 6 \u2014 Semifinals';
-  else badge.textContent = 'Week 7 \u2014 Finals';
+  else if (CURRENT_WEEK === 4) badge.textContent = 'Week 4 \u2014 Quarterfinals';
+  else if (CURRENT_WEEK === 5) badge.textContent = 'Week 5 \u2014 Semifinals';
+  else badge.textContent = 'Week 6 \u2014 Finals';
 }
 
 function init() {
