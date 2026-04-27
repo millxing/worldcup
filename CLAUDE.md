@@ -11,9 +11,9 @@ A World Cup-themed league game for BSC soccer teams, running over 6 consecutive 
 - `information.xlsx` — Reference data: real 2026 World Cup rankings, groups, schedule, plus the original 33-team BSC roster
 - `scoresheet.xlsx` — Weekly score input from coaches. One tab per week (e.g. `week 1`). Column A = BSC team name, Column B = `Goals` (final integer per team, 0–5+). Cathleen fills this each Saturday after the 6 PM deadline; the app data is updated from it.
 
-## Teams (13 BSC teams)
+## Teams (14 BSC teams)
 
-After 7th/8th-grade opt-outs and the late G3 Dash withdrawal, the field is **13 BSC teams**. Roster lives in the `TEAMS` array of `index.html`, `newcoach.html`, and `admin.html` — all three files must stay in sync.
+After 7th/8th-grade opt-outs and the late G3 Dash withdrawal, the field is **14 BSC teams** (G6 Barcelona was added late as Mexico in Group B). Roster lives in the `TEAMS` array of `index.html`, `newcoach.html`, and `admin.html` — all three files must stay in sync.
 
 ## Tournament Structure (6-week plan)
 
@@ -27,16 +27,16 @@ After 7th/8th-grade opt-outs and the late G3 Dash withdrawal, the field is **13 
 ## Group Structure
 
 - **4 groups**:
-  - Groups A, B, C: 3 BSC teams + 1 challenge team each (USA, Mexico, Senegal respectively)
-  - Group D: 4 BSC teams, no challenge team
-- Round-robin per group of 4 over 3 weeks: Wk1 = 1v2 + 3v4, Wk2 = 1v3 + 2v4, Wk3 = 1v4 + 2v3 (positions 1–4; for A/B/C, position 4 = challenge)
+  - Groups A, C: 3 BSC teams + 1 challenge team each (USA, Senegal respectively)
+  - Groups B, D: 4 BSC teams, no challenge team (B includes Mexico via G6 Barcelona)
+- Round-robin per group of 4 over 3 weeks: Wk1 = 1v2 + 3v4, Wk2 = 1v3 + 2v4, Wk3 = 1v4 + 2v3 (positions 1–4; for A/C, position 4 = challenge)
 - Each BSC team plays 3 matches in the group stage (no byes)
 
 ## Challenge Matches
 
-- Groups A/B/C each have one fixed challenge country (USA, Mexico, Senegal). Group D has none.
+- Groups A and C each have one fixed challenge country (USA, Senegal). Groups B and D have none.
 - Challenge match results COUNT toward group standings
-- The challenge team's score each week = rounded average of all 13 BSC teams' goals scored that week
+- The challenge team's score each week = rounded average of all 14 BSC teams' goals scored that week
 - The organizer enters only each BSC team's final goal total; the app computes the challenge team's score dynamically
 
 ## Advancement
@@ -47,7 +47,7 @@ After 7th/8th-grade opt-outs and the late G3 Dash withdrawal, the field is **13 
 
 ## Scoring Title (Weeks 4–6)
 
-- All 13 BSC teams get 1 score per week in weeks 4–6
+- All 14 BSC teams get 1 score per week in weeks 4–6
 - Bracket teams: goals scored in their knockout match
 - Eliminated teams: goals scored in the weekly event/activity
 - Top 3 total goals = Scoring Title 1st/2nd/3rd

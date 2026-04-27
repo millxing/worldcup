@@ -437,7 +437,7 @@ const WEEK_LABELS = {
 
 const ANNOUNCEMENTS = [
   { date: "April 21, 2026", text: "Welcome to the BSC World Cup 2026! Opening ceremonies and Matchday 1 kick off on April 27." },
-  { date: "April 17, 2026", text: "The group draw is complete! 13 BSC teams have been assigned to 4 groups." }
+  { date: "April 17, 2026", text: "The group draw is complete! 14 BSC teams have been assigned to 4 groups." }
 ];
 
 const TEAMS = [
@@ -447,6 +447,7 @@ const TEAMS = [
   { id: 4,  bscName: "G6 Arsenal",     country: "Spain",        flag: "\u{1F1EA}\u{1F1F8}", group: "B", grade: "6th", gender: "Girls" },
   { id: 5,  bscName: "G7 Ajax",        country: "Netherlands",  flag: "\u{1F1F3}\u{1F1F1}", group: "B", grade: "7th", gender: "Girls" },
   { id: 6,  bscName: "B5 Dortmund",    country: "Germany",      flag: "\u{1F1E9}\u{1F1EA}", group: "B", grade: "5th", gender: "Boys" },
+  { id: 14, bscName: "G6 Barcelona",   country: "Mexico",       flag: "\u{1F1F2}\u{1F1FD}", group: "B", grade: "6th", gender: "Girls" },
   { id: 7,  bscName: "G7 Chelsea",     country: "Argentina",    flag: "\u{1F1E6}\u{1F1F7}", group: "C", grade: "7th", gender: "Girls" },
   { id: 8,  bscName: "G8 Pride",       country: "Brazil",       flag: "\u{1F1E7}\u{1F1F7}", group: "C", grade: "8th", gender: "Girls" },
   { id: 9,  bscName: "B3 Atalanta",    country: "Croatia",      flag: "\u{1F1ED}\u{1F1F7}", group: "C", grade: "3rd", gender: "Boys" },
@@ -458,14 +459,13 @@ const TEAMS = [
 
 const GROUPS = {
   A: [1, 2, 3],
-  B: [4, 5, 6],
+  B: [4, 5, 6, 14],
   C: [7, 8, 9],
   D: [10, 11, 12, 13]
 };
 
 const CHALLENGE_COUNTRIES = {
   A: [{ country: "USA",     flag: "\u{1F1FA}\u{1F1F8}" }],
-  B: [{ country: "Mexico",  flag: "\u{1F1F2}\u{1F1FD}" }],
   C: [{ country: "Senegal", flag: "\u{1F1F8}\u{1F1F3}" }]
 };
 
@@ -474,7 +474,7 @@ let SCHEDULE = {
     { home: 1,  away: 2,  group: "A", type: "group" },
     { home: 3,  away: "challenge:A:0", group: "A", type: "challenge" },
     { home: 4,  away: 5,  group: "B", type: "group" },
-    { home: 6,  away: "challenge:B:0", group: "B", type: "challenge" },
+    { home: 6,  away: 14, group: "B", type: "group" },
     { home: 7,  away: 8,  group: "C", type: "group" },
     { home: 9,  away: "challenge:C:0", group: "C", type: "challenge" },
     { home: 10, away: 11, group: "D", type: "group" },
@@ -484,7 +484,7 @@ let SCHEDULE = {
     { home: 1,  away: 3,  group: "A", type: "group" },
     { home: 2,  away: "challenge:A:0", group: "A", type: "challenge" },
     { home: 4,  away: 6,  group: "B", type: "group" },
-    { home: 5,  away: "challenge:B:0", group: "B", type: "challenge" },
+    { home: 5,  away: 14, group: "B", type: "group" },
     { home: 7,  away: 9,  group: "C", type: "group" },
     { home: 8,  away: "challenge:C:0", group: "C", type: "challenge" },
     { home: 10, away: 12, group: "D", type: "group" },
@@ -494,7 +494,7 @@ let SCHEDULE = {
     { home: 2,  away: 3,  group: "A", type: "group" },
     { home: 1,  away: "challenge:A:0", group: "A", type: "challenge" },
     { home: 5,  away: 6,  group: "B", type: "group" },
-    { home: 4,  away: "challenge:B:0", group: "B", type: "challenge" },
+    { home: 4,  away: 14, group: "B", type: "group" },
     { home: 8,  away: 9,  group: "C", type: "group" },
     { home: 7,  away: "challenge:C:0", group: "C", type: "challenge" },
     { home: 10, away: 13, group: "D", type: "group" },
@@ -1414,7 +1414,7 @@ function renderHome() {
     html += '<div class="card countdown-card card-reveal"><div class="label">Tournament Complete</div><div class="value">\ud83c\udfc6</div><div class="sub">Thanks for a great season!</div></div>';
   }
   html += '<div class="card card-reveal"><div class="card-title">How It Works</div><p style="font-size:0.85rem;line-height:1.6;">Every BSC team represents a real World Cup country. Each week at practice, your team competes in a fun soccer event and tries to score as many goals as possible.</p></div>';
-  html += '<div class="card card-reveal"><div class="card-title">At a Glance</div><div class="glance-grid"><div class="glance-item"><div class="glance-num">13</div><div class="glance-label">Teams</div></div><div class="glance-item"><div class="glance-num">4</div><div class="glance-label">Groups</div></div><div class="glance-item"><div class="glance-num">6</div><div class="glance-label">Weeks</div></div><div class="glance-item"><div class="glance-num">8</div><div class="glance-label">Knockout Spots</div></div></div></div>';
+  html += '<div class="card card-reveal"><div class="card-title">At a Glance</div><div class="glance-grid"><div class="glance-item"><div class="glance-num">14</div><div class="glance-label">Teams</div></div><div class="glance-item"><div class="glance-num">4</div><div class="glance-label">Groups</div></div><div class="glance-item"><div class="glance-num">6</div><div class="glance-label">Weeks</div></div><div class="glance-item"><div class="glance-num">8</div><div class="glance-label">Knockout Spots</div></div></div></div>';
   el.innerHTML = html;
 }
 
@@ -1453,7 +1453,7 @@ function renderTeams() {
   const el = document.getElementById('tab-teams');
   const gradeOrder = { '3rd': 3, '4th': 4, '5th': 5, '6th': 6, '7th': 7, '8th': 8 };
   const sorted = [...TEAMS].sort((a, b) => { if (a.gender !== b.gender) return a.gender === 'Girls' ? -1 : 1; return gradeOrder[a.grade] - gradeOrder[b.grade]; });
-  let html = '<div class="card card-reveal"><div class="card-title">All 13 Teams</div><div class="standings-table-wrap"><table class="standings-table"><colgroup><col style="width:28%"><col style="width:14%"><col style="width:14%"><col style="width:32%"><col style="width:12%"></colgroup>';
+  let html = '<div class="card card-reveal"><div class="card-title">All 14 Teams</div><div class="standings-table-wrap"><table class="standings-table"><colgroup><col style="width:28%"><col style="width:14%"><col style="width:14%"><col style="width:32%"><col style="width:12%"></colgroup>';
   html += '<thead><tr><th style="text-align:left;">BSC Team</th><th>Gender</th><th>Grade</th><th style="text-align:left;">Country</th><th>Group</th></tr></thead><tbody>';
   sorted.forEach(t => { html += '<tr><td style="text-align:left;font-weight:600;">' + t.bscName + '</td><td>' + t.gender + '</td><td>' + t.grade + '</td><td style="text-align:left;"><div class="team-cell"><span class="flag">' + t.flag + '</span> ' + t.country + '</div></td><td>' + t.group + '</td></tr>'; });
   html += '</tbody></table></div></div>';
