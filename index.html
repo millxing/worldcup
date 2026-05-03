@@ -689,7 +689,7 @@ a { color: var(--teal); }
 // progresses. Update ANNOUNCEMENTS with current news.
 // =============================================================================
 
-const CURRENT_WEEK = 1; // 1=Apr 27, 2=May 4, 3=May 11, 4=May 18, 5=May 25, 6=Jun 1
+const CURRENT_WEEK = 2; // 1=Apr 27, 2=May 4, 3=May 11, 4=May 18, 5=May 25, 6=Jun 1
 
 const WEEK_DATES = {
   1: "April 27",
@@ -833,10 +833,17 @@ const SCHEDULE = {
 
 // ===== RESULTS =====
 // Map of "weekNum-matchIndex" -> { homeScore, awayScore }
-// Example: "1-0": { homeScore: 2, awayScore: 1 } means Week 1, first match
-// Leave empty until results are submitted each week.
+// Challenge match awayScore is ignored (computed dynamically from BSC avg).
 const RESULTS = {
-  // "1-0": { homeScore: 2, awayScore: 1 },
+  // Week 1 — Apr 27
+  "1-0": { homeScore: 4, awayScore: 4 },  // France (Angel City) vs Morocco (Ipswich)
+  "1-1": { homeScore: 3, awayScore: 0 },  // Belgium (Reign) vs USA [challenge]
+  "1-2": { homeScore: 5, awayScore: 3 },  // Spain (Arsenal) vs Netherlands (Ajax)
+  "1-3": { homeScore: 3, awayScore: 4 },  // Germany (Dortmund) vs Mexico (Barcelona)
+  "1-4": { homeScore: 1, awayScore: 5 },  // Argentina (Chelsea) vs Brazil (Pride)
+  "1-5": { homeScore: 4, awayScore: 0 },  // Croatia (Atalanta) vs Senegal [challenge]
+  "1-6": { homeScore: 2, awayScore: 5 },  // England (Brentford) vs Portugal (Benfica)
+  "1-7": { homeScore: 4, awayScore: 5 }   // Italy (Napoli) vs Colombia (Courage)
 };
 
 // ===== BRACKET =====
