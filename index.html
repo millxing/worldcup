@@ -642,22 +642,22 @@ a { color: var(--teal); }
 <!-- Tab Navigation -->
 <nav class="tab-nav">
   <button class="active" onclick="switchTab('home')">Home</button>
+  <button onclick="switchTab('standings')">Standings</button>
+  <button onclick="switchTab('answers')">Answers</button>
   <button onclick="switchTab('groups')">Groups</button>
   <button onclick="switchTab('teams')">Teams</button>
-  <button onclick="switchTab('standings')">Standings</button>
   <button onclick="switchTab('schedule')">Schedule</button>
   <button onclick="switchTab('bracket')">Bracket</button>
-  <button onclick="switchTab('answers')">Answers</button>
 </nav>
 <nav class="tab-nav-mobile">
   <select onchange="switchTab(this.value)">
     <option value="home">Home</option>
+    <option value="standings">Standings</option>
+    <option value="answers">Answers</option>
     <option value="groups">Groups</option>
     <option value="teams">Teams</option>
-    <option value="standings">Standings</option>
     <option value="schedule">Schedule</option>
     <option value="bracket">Bracket</option>
-    <option value="answers">Answers</option>
   </select>
 </nav>
 <div class="week-badge" id="weekBadge">Week 1 &mdash; Group Stage</div>
