@@ -647,6 +647,7 @@ a { color: var(--teal); }
   <button onclick="switchTab('standings')">Standings</button>
   <button onclick="switchTab('schedule')">Schedule</button>
   <button onclick="switchTab('bracket')">Bracket</button>
+  <button onclick="switchTab('answers')">Answers</button>
 </nav>
 <nav class="tab-nav-mobile">
   <select onchange="switchTab(this.value)">
@@ -656,6 +657,7 @@ a { color: var(--teal); }
     <option value="standings">Standings</option>
     <option value="schedule">Schedule</option>
     <option value="bracket">Bracket</option>
+    <option value="answers">Answers</option>
   </select>
 </nav>
 <div class="week-badge" id="weekBadge">Week 1 &mdash; Group Stage</div>
@@ -677,6 +679,9 @@ a { color: var(--teal); }
 
 <!-- Bracket Tab -->
 <div id="tab-bracket" class="tab-content"></div>
+
+<!-- Answers Tab -->
+<div id="tab-answers" class="tab-content"></div>
 
 <!-- Footer -->
 <div class="footer">BSC World Cup 2026 &middot; Brookline Soccer Club<br>Built by <a href="https://www.entangledparticles.xyz" target="_blank">Entangled Particles</a></div>
@@ -863,6 +868,18 @@ const BRACKET = {
   ],
   third: { home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "3rd Place Match" },
   final: { home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "Final" }
+};
+
+// ===== ANSWERS =====
+// Posted after each week's deadline. Add a new entry per week.
+const ANSWERS = {
+  1: [
+    { q: "What year was the first FIFA Men's World Cup held?",          a: "1930" },
+    { q: "What year was the first FIFA Women's World Cup held?",        a: "1991" },
+    { q: "Which Men's team has won the most World Cup Championships?",  a: "Brazil" },
+    { q: "Which Women's team has won the most World Cup Championships?", a: "USA" },
+    { q: "Jumping jacks (in 1 minute) — league average",                a: "88.6" }
+  ]
 };
 
 // ===== SCORING TITLE =====
@@ -1066,6 +1083,7 @@ function switchTab(tabName) {
   if (tabName === 'standings') renderStandings();
   if (tabName === 'schedule') renderSchedule();
   if (tabName === 'bracket') renderBracket();
+  if (tabName === 'answers') renderAnswers();
   if (tabName === 'home') renderHome();
 }
 
@@ -1581,6 +1599,38 @@ function renderBracketMatchCard(m) {
 
   html += '</div>';
   return html;
+}
+
+// ===== RENDER: ANSWERS =====
+function renderAnswers() {
+  const el = document.getElementById('tab-answers');
+  let html = '';
+
+  const weeks = Object.keys(ANSWERS).map(Number).sort((a, b) => a - b);
+  if (weeks.length === 0) {
+    html += '<div class="card card-reveal">';
+    html += '<p style="font-size:0.82rem;color:var(--gray-mid);text-align:center;padding:12px 0;">Answers will be posted after each Saturday 6 PM deadline.</p>';
+    html += '</div>';
+    el.innerHTML = html;
+    return;
+  }
+
+  weeks.forEach(week => {
+    const dateLabel = WEEK_DATES[week] ? ' — ' + WEEK_DATES[week] : '';
+    html += '<div class="card group-card card-reveal">';
+    html += '<div class="group-header">Week ' + week + dateLabel + '</div>';
+    html += '<div style="padding:4px 0;">';
+    ANSWERS[week].forEach((entry, i) => {
+      html += '<div style="padding:10px 0;' + (i < ANSWERS[week].length - 1 ? 'border-bottom:1px solid var(--gray);' : '') + '">';
+      html += '<div style="font-size:0.82rem;color:var(--gray-dark);line-height:1.45;margin-bottom:4px;"><strong>Q' + (i + 1) + '.</strong> ' + entry.q + '</div>';
+      html += '<div style="font-family:Oswald,sans-serif;font-weight:600;font-size:0.95rem;color:var(--red);text-transform:uppercase;letter-spacing:0.04em;">' + entry.a + '</div>';
+      html += '</div>';
+    });
+    html += '</div>';
+    html += '</div>';
+  });
+
+  el.innerHTML = html;
 }
 
 // ===== WEEK BADGE =====
