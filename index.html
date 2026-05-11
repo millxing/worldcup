@@ -1637,7 +1637,10 @@ function renderAnswers() {
     ANSWERS[week].forEach((entry, i) => {
       html += '<div style="padding:10px 0;' + (i < ANSWERS[week].length - 1 ? 'border-bottom:1px solid var(--gray);' : '') + '">';
       html += '<div style="font-size:0.82rem;color:var(--gray-dark);line-height:1.45;margin-bottom:4px;"><strong>Q' + (i + 1) + '.</strong> ' + entry.q + '</div>';
-      html += '<div style="font-family:Oswald,sans-serif;font-weight:600;font-size:0.95rem;color:var(--red);text-transform:uppercase;letter-spacing:0.04em;">' + entry.a + '</div>';
+      html += '<div style="font-family:Oswald,sans-serif;font-weight:600;font-size:0.95rem;color:var(--red);text-transform:uppercase;letter-spacing:0.04em;display:flex;align-items:center;gap:8px;">';
+      if (entry.flag) html += '<img src="' + entry.flag + '" alt="" style="height:1.1em;width:auto;border:1px solid var(--gray);box-shadow:0 1px 2px rgba(0,0,0,0.1);">';
+      html += '<span>' + entry.a + '</span>';
+      html += '</div>';
       html += '</div>';
     });
     html += '</div>';
