@@ -624,6 +624,35 @@ body {
   color: var(--gray-dark);
 }
 
+.mc-options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin: 10px 0 6px 0;
+}
+.mc-option {
+  text-align: center;
+  font-size: 0.7rem;
+  line-height: 1.2;
+  color: var(--gray-dark);
+}
+.mc-option .mc-letter {
+  display: block;
+  font-weight: 700;
+  color: var(--gray-mid);
+  font-size: 0.72rem;
+  margin-bottom: 2px;
+}
+.mc-option img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 72px;
+  margin: 0 auto 4px;
+  border: 1px solid var(--gray);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
 .scoring-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -1035,7 +1064,41 @@ const SCORING_TITLE = {
 const COACH_WEEK_INSTRUCTIONS = {
   title: "Week " + CURRENT_WEEK + " Instructions",
   // Replace this text each week with specific activity instructions
-  instructions: "Use the schedule to see who your team is playing this week.<br><br><strong>Question 1</strong> &rarr; Which of these flags is not from a 2026 World Cup host country?<br>A) USA &nbsp;&nbsp; B) Canada &nbsp;&nbsp; C) France &nbsp;&nbsp; D) Mexico<br><em>(worth one goal)</em><br><br><strong>Question 2</strong> &rarr; Which flag represents the country that won the Men's 2022 World Cup Championship?<br>A) Argentina &nbsp;&nbsp; B) France &nbsp;&nbsp; C) Croatia &nbsp;&nbsp; D) Morocco<br><em>(worth one goal)</em><br><br><strong>Question 3</strong> &rarr; Which flag represents the country that won the Women's 2023 World Cup Championship?<br>A) Australia &nbsp;&nbsp; B) Sweden &nbsp;&nbsp; C) England &nbsp;&nbsp; D) Spain<br><em>(worth one goal)</em><br><br><strong>Question 4</strong> &rarr; Some say the best men's soccer player who ever lived is Pelé. Which flag represents the country he is from?<br>A) Argentina &nbsp;&nbsp; B) Brazil &nbsp;&nbsp; C) Colombia &nbsp;&nbsp; D) Uruguay<br><em>(worth one goal)</em><br><br><strong>Question 5</strong> &rarr; Choose a player to represent the team or have the whole team participate: how many juggles can you do in 1 min? Submit the highest number performed by a player. Of the two teams competing this week, the team with the higher number will score one goal.",
+  instructions:
+    "Use the schedule to see who your team is playing this week.<br><br>" +
+    "<strong>Question 1</strong> &rarr; Which of these flags is not from a 2026 World Cup host country?" +
+    "<div class=\"mc-options\">" +
+      "<div class=\"mc-option\"><span class=\"mc-letter\">A</span><img src=\"Flag_of_the_United_States.webp\" alt=\"USA flag\"><span>USA</span></div>" +
+      "<div class=\"mc-option\"><span class=\"mc-letter\">B</span><img src=\"Flag_of_Canada.webp\" alt=\"Canada flag\"><span>Canada</span></div>" +
+      "<div class=\"mc-option\"><span class=\"mc-letter\">C</span><img src=\"Flag_of_France.webp\" alt=\"France flag\"><span>France</span></div>" +
+      "<div class=\"mc-option\"><span class=\"mc-letter\">D</span><img src=\"Flag_of_Mexico.webp\" alt=\"Mexico flag\"><span>Mexico</span></div>" +
+    "</div>" +
+    "<em>(worth one goal)</em><br><br>" +
+    "<strong>Question 2</strong> &rarr; Which flag represents the country that won the Men's 2022 World Cup Championship?" +
+    "<div class=\"mc-options\">" +
+      "<div class=\"mc-option\"><span class=\"mc-letter\">A</span><img src=\"Flag_of_Argentina.webp\" alt=\"Argentina flag\"><span>Argentina</span></div>" +
+      "<div class=\"mc-option\"><span class=\"mc-letter\">B</span><img src=\"Flag_of_France.webp\" alt=\"France flag\"><span>France</span></div>" +
+      "<div class=\"mc-option\"><span class=\"mc-letter\">C</span><img src=\"Flag_of_Croatia.png\" alt=\"Croatia flag\"><span>Croatia</span></div>" +
+      "<div class=\"mc-option\"><span class=\"mc-letter\">D</span><img src=\"Flag_of_Morocco.png\" alt=\"Morocco flag\"><span>Morocco</span></div>" +
+    "</div>" +
+    "<em>(worth one goal)</em><br><br>" +
+    "<strong>Question 3</strong> &rarr; Which flag represents the country that won the Women's 2023 World Cup Championship?" +
+    "<div class=\"mc-options\">" +
+      "<div class=\"mc-option\"><span class=\"mc-letter\">A</span><img src=\"Flag_of_Australia.webp\" alt=\"Australia flag\"><span>Australia</span></div>" +
+      "<div class=\"mc-option\"><span class=\"mc-letter\">B</span><img src=\"Flag_of_Sweden.png\" alt=\"Sweden flag\"><span>Sweden</span></div>" +
+      "<div class=\"mc-option\"><span class=\"mc-letter\">C</span><img src=\"Flag_of_England.webp\" alt=\"England flag\"><span>England</span></div>" +
+      "<div class=\"mc-option\"><span class=\"mc-letter\">D</span><img src=\"Bandera_de_Espa%C3%B1a.webp\" alt=\"Spain flag\"><span>Spain</span></div>" +
+    "</div>" +
+    "<em>(worth one goal)</em><br><br>" +
+    "<strong>Question 4</strong> &rarr; Some say the best men's soccer player who ever lived is Pelé. Which flag represents the country he is from?" +
+    "<div class=\"mc-options\">" +
+      "<div class=\"mc-option\"><span class=\"mc-letter\">A</span><img src=\"Flag_of_Argentina.webp\" alt=\"Argentina flag\"><span>Argentina</span></div>" +
+      "<div class=\"mc-option\"><span class=\"mc-letter\">B</span><img src=\"Flag_of_Brazil.webp\" alt=\"Brazil flag\"><span>Brazil</span></div>" +
+      "<div class=\"mc-option\"><span class=\"mc-letter\">C</span><img src=\"Flag_of_Colombia.png\" alt=\"Colombia flag\"><span>Colombia</span></div>" +
+      "<div class=\"mc-option\"><span class=\"mc-letter\">D</span><img src=\"Flag_of_Uruguay.webp\" alt=\"Uruguay flag\"><span>Uruguay</span></div>" +
+    "</div>" +
+    "<em>(worth one goal)</em><br><br>" +
+    "<strong>Question 5</strong> &rarr; Choose a player to represent the team or have the whole team participate: how many juggles can you do in 1 min? Submit the highest number performed by a player. Of the two teams competing this week, the team with the higher number will score one goal.",
   reminders: [
     "Please try to complete your team's activity during the first practice of the week.",
     "Submit your team's goals scored before 6:00 PM each Saturday.",
