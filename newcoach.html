@@ -853,7 +853,7 @@ a { color: var(--teal); }
 // progresses. Update ANNOUNCEMENTS with current news.
 // =============================================================================
 
-const CURRENT_WEEK = 3; // 1=Apr 27, 2=May 4, 3=May 11, 4=May 18, 5=May 25, 6=Jun 1
+const CURRENT_WEEK = 4; // 1=Apr 27, 2=May 4, 3=May 11, 4=May 18, 5=May 25, 6=Jun 1
 
 const WEEK_DATES = {
   1: "April 27",
@@ -974,7 +974,12 @@ const SCHEDULE = {
   ],
 
   // ----- WEEK 4: Quarterfinals -----
-  4: [],
+  4: [
+    { home: 1,  away: 5, type: "qf", label: "QF1" },
+    { home: 8,  away: 11, type: "qf", label: "QF2" },
+    { home: 4,  away: 2, type: "qf", label: "QF3" },
+    { home: 13, away: 9, type: "qf", label: "QF4" }
+  ],
 
   // ----- WEEK 5: Semifinals -----
   5: [],
@@ -1022,10 +1027,10 @@ const RESULTS = {
 // Each slot: { teamId: null, score: null } or { teamId: 4, score: 2 }
 const BRACKET = {
   qf: [
-    { match: 1, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "QF1" },
-    { match: 2, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "QF2" },
-    { match: 3, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "QF3" },
-    { match: 4, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "QF4" }
+    { match: 1, home: { teamId: 1,  score: null }, away: { teamId: 5,  score: null }, label: "France vs Netherlands" },
+    { match: 2, home: { teamId: 8,  score: null }, away: { teamId: 11, score: null }, label: "Brazil vs Portugal" },
+    { match: 3, home: { teamId: 4,  score: null }, away: { teamId: 2,  score: null }, label: "Spain vs Morocco" },
+    { match: 4, home: { teamId: 13, score: null }, away: { teamId: 9,  score: null }, label: "Colombia vs Croatia" }
   ],
   sf: [
     { match: 1, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "W-QF.1 vs W-QF.2" },
@@ -1075,31 +1080,16 @@ const COACH_WEEK_INSTRUCTIONS = {
   // Replace this text each week with specific activity instructions
   instructions:
     "Use the schedule to see who your team is playing this week.<br><br>" +
-    "<strong>Question 1</strong> &rarr; Which of these flags is not from a 2026 World Cup host country?" +
-    "<div class=\"mc-options\">" +
-      "<div class=\"mc-option\"><span class=\"mc-letter\">A</span><img src=\"Flag_of_the_United_States.webp\" alt=\"USA flag\"></div>" +
-      "<div class=\"mc-option\"><span class=\"mc-letter\">B</span><img src=\"Flag_of_Canada.webp\" alt=\"Canada flag\"></div>" +
-      "<div class=\"mc-option\"><span class=\"mc-letter\">C</span><img src=\"Flag_of_France.webp\" alt=\"France flag\"></div>" +
-      "<div class=\"mc-option\"><span class=\"mc-letter\">D</span><img src=\"Flag_of_Mexico.webp\" alt=\"Mexico flag\"></div>" +
-    "</div>" +
+    "<strong>Question 1</strong> &rarr; In 1970, the men's semifinal known as the \"Game of the Century\" was played between Italy and West Germany. How many goals were scored in extra time?<br>" +
+    "A) 2 &nbsp;&nbsp; B) 1 &nbsp;&nbsp; C) 5 &nbsp;&nbsp; D) 15<br>" +
     "<em>(worth one goal)</em><br><br>" +
-    "<strong>Question 2</strong> &rarr; Which flag represents the country that won the Men's 2022 World Cup Championship?" +
-    "<div class=\"mc-options\">" +
-      "<div class=\"mc-option\"><span class=\"mc-letter\">A</span><img src=\"Flag_of_Argentina.webp\" alt=\"Argentina flag\"></div>" +
-      "<div class=\"mc-option\"><span class=\"mc-letter\">B</span><img src=\"Flag_of_France.webp\" alt=\"France flag\"></div>" +
-      "<div class=\"mc-option\"><span class=\"mc-letter\">C</span><img src=\"Flag_of_Croatia.png\" alt=\"Croatia flag\"></div>" +
-      "<div class=\"mc-option\"><span class=\"mc-letter\">D</span><img src=\"Flag_of_Morocco.png\" alt=\"Morocco flag\"></div>" +
-    "</div>" +
+    "<strong>Question 2</strong> &rarr; In the women's 2015 World Cup Final, USA beat Japan 5-2. Which USA player had the first-half hat-trick, including a goal from midfield?<br>" +
+    "A) Carli Lloyd &nbsp;&nbsp; B) Mia Hamm &nbsp;&nbsp; C) Trinity Rodman &nbsp;&nbsp; D) Sophia Wilson<br>" +
     "<em>(worth one goal)</em><br><br>" +
-    "<strong>Question 3</strong> &rarr; Which flag represents the country that won the Women's 2023 World Cup Championship?" +
-    "<div class=\"mc-options\">" +
-      "<div class=\"mc-option\"><span class=\"mc-letter\">A</span><img src=\"Flag_of_Australia.webp\" alt=\"Australia flag\"></div>" +
-      "<div class=\"mc-option\"><span class=\"mc-letter\">B</span><img src=\"Flag_of_Sweden.png\" alt=\"Sweden flag\"></div>" +
-      "<div class=\"mc-option\"><span class=\"mc-letter\">C</span><img src=\"Flag_of_England.webp\" alt=\"England flag\"></div>" +
-      "<div class=\"mc-option\"><span class=\"mc-letter\">D</span><img src=\"Bandera_de_Espa%C3%B1a.webp\" alt=\"Spain flag\"></div>" +
-    "</div>" +
+    "<strong>Question 3</strong> &rarr; In the World Cup, the <strong>top goalscorer</strong> of the tournament wins which award?<br>" +
+    "A) Golden Ball &nbsp;&nbsp; B) Golden Glove &nbsp;&nbsp; C) Golden Boot &nbsp;&nbsp; D) Golden Player<br>" +
     "<em>(worth one goal)</em><br><br>" +
-    "<strong>Question 4</strong> &rarr; Some say the best men's soccer player who ever lived is Pelé. Which flag represents the country he is from?" +
+    "<strong>Question 4</strong> &rarr; Some say the best women's soccer player who ever lived is Marta. Which flag represents the country she is from?" +
     "<div class=\"mc-options\">" +
       "<div class=\"mc-option\"><span class=\"mc-letter\">A</span><img src=\"Flag_of_Argentina.webp\" alt=\"Argentina flag\"></div>" +
       "<div class=\"mc-option\"><span class=\"mc-letter\">B</span><img src=\"Flag_of_Brazil.webp\" alt=\"Brazil flag\"></div>" +
@@ -1107,7 +1097,7 @@ const COACH_WEEK_INSTRUCTIONS = {
       "<div class=\"mc-option\"><span class=\"mc-letter\">D</span><img src=\"Flag_of_Uruguay.webp\" alt=\"Uruguay flag\"></div>" +
     "</div>" +
     "<em>(worth one goal)</em><br><br>" +
-    "<strong>Question 5</strong> &rarr; Choose a player to represent the team or have the whole team participate: how many juggles can you do in 1 min? Submit the highest number performed by a player. Of the two teams competing this week, the team with the higher number will score one goal.",
+    "<strong>Question 5</strong> &rarr; Choose a player to represent the team or have the whole team participate: how many tik toks can you do in 1 min? Submit the highest number performed by a player. (Right foot = 1 tik tok and Left foot = 1 tik tok.) Of the two teams competing this week, the team with the higher number will score one goal.",
   reminders: [
     "Please try to complete your team's activity during the first practice of the week.",
     "Submit your team's goals scored before 6:00 PM each Saturday.",

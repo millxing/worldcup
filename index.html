@@ -825,7 +825,12 @@ const SCHEDULE = {
   ],
 
   // ----- WEEK 4: Quarterfinals -----
-  4: [],
+  4: [
+    { home: 1,  away: 5, type: "qf", label: "QF1" },   // Angel City (France) vs Ajax (Netherlands)
+    { home: 8,  away: 11, type: "qf", label: "QF2" },  // Pride (Brazil) vs Benfica (Portugal)
+    { home: 4,  away: 2, type: "qf", label: "QF3" },   // Arsenal (Spain) vs Ipswich (Morocco)
+    { home: 13, away: 9, type: "qf", label: "QF4" }    // Courage (Colombia) vs Atalanta (Croatia)
+  ],
 
   // ----- WEEK 5: Semifinals -----
   5: [],
@@ -873,10 +878,10 @@ const RESULTS = {
 // Each slot: { teamId: null, score: null } or { teamId: 4, score: 2 }
 const BRACKET = {
   qf: [
-    { match: 1, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "QF1" },
-    { match: 2, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "QF2" },
-    { match: 3, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "QF3" },
-    { match: 4, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "QF4" }
+    { match: 1, home: { teamId: 1,  score: null }, away: { teamId: 5,  score: null }, label: "France vs Netherlands" },
+    { match: 2, home: { teamId: 8,  score: null }, away: { teamId: 11, score: null }, label: "Brazil vs Portugal" },
+    { match: 3, home: { teamId: 4,  score: null }, away: { teamId: 2,  score: null }, label: "Spain vs Morocco" },
+    { match: 4, home: { teamId: 13, score: null }, away: { teamId: 9,  score: null }, label: "Colombia vs Croatia" }
   ],
   sf: [
     { match: 1, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "W-QF.1 vs W-QF.2" },
