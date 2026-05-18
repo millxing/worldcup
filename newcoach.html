@@ -1004,7 +1004,16 @@ const RESULTS = {
   "2-4": { homeScore: 2, awayScore: 3 },
   "2-5": { homeScore: 4, awayScore: 0 },
   "2-6": { homeScore: 4, awayScore: 3 },
-  "2-7": { homeScore: 3, awayScore: 4 }
+  "2-7": { homeScore: 3, awayScore: 4 },
+  // Week 3 — May 11
+  "3-0": { homeScore: 4,   awayScore: 4 },
+  "3-1": { homeScore: 5,   awayScore: 4.5 },
+  "3-2": { homeScore: 4.5, awayScore: 4.5 },
+  "3-3": { homeScore: 5,   awayScore: 4 },
+  "3-4": { homeScore: 5,   awayScore: 4 },
+  "3-5": { homeScore: 4,   awayScore: 4.5 },
+  "3-6": { homeScore: 4.5, awayScore: 5 },
+  "3-7": { homeScore: 5,   awayScore: 4.5 }
 };
 
 // ===== BRACKET =====
@@ -1189,7 +1198,7 @@ function calcStandings(teamIds, weekFilter) {
         // BSC team's score = result.homeScore (what they actually scored)
         // Challenge team's score = challengeScore (computed average)
         const bscGoals = result.homeScore;
-        const challengeGoals = challengeScore;
+        const challengeGoals = (typeof result.awayScore === 'number' && result.awayScore > 0) ? result.awayScore : challengeScore;
 
         stats[hId].mp++;
         stats[hId].gf += bscGoals;
@@ -1398,7 +1407,7 @@ function renderCoach() {
       if (homeTeam) html += '<span class="bsc-label">' + homeTeam.bscName + '</span>';
       html += '</div>';
       if (result) {
-        var displayAway = isChallenge ? computeChallengeScore(CURRENT_WEEK) : result.awayScore;
+        var displayAway = isChallenge ? ((typeof result.awayScore === 'number' && result.awayScore > 0) ? result.awayScore : computeChallengeScore(CURRENT_WEEK)) : result.awayScore;
         html += '<div class="match-score">' + result.homeScore + ' \u2013 ' + displayAway + '</div>';
       } else {
         html += '<div class="match-vs">vs</div>';
@@ -1801,7 +1810,7 @@ function renderSchedule() {
         html += '</div>';
 
         if (result) {
-          var displayAway = isChallenge ? computeChallengeScore(week) : result.awayScore;
+          var displayAway = isChallenge ? ((typeof result.awayScore === 'number' && result.awayScore > 0) ? result.awayScore : computeChallengeScore(week)) : result.awayScore;
           html += '<div class="match-score">' + result.homeScore + ' \u2013 ' + displayAway + '</div>';
         } else {
           html += '<div class="match-vs">vs</div>';

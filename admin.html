@@ -422,7 +422,7 @@ a { color: var(--teal); }
 // ===== DATA SECTION (mutable for admin processing) ===========================
 // =============================================================================
 
-let CURRENT_WEEK = 3;
+let CURRENT_WEEK = 4;
 
 const WEEK_DATES = {
   1: "April 27", 2: "May 4", 3: "May 11",
@@ -519,7 +519,15 @@ let RESULTS = {
   "2-4": { homeScore: 2, awayScore: 3 },
   "2-5": { homeScore: 4, awayScore: 0 },
   "2-6": { homeScore: 4, awayScore: 3 },
-  "2-7": { homeScore: 3, awayScore: 4 }
+  "2-7": { homeScore: 3, awayScore: 4 },
+  "3-0": { homeScore: 4,   awayScore: 4 },
+  "3-1": { homeScore: 5,   awayScore: 4.5 },
+  "3-2": { homeScore: 4.5, awayScore: 4.5 },
+  "3-3": { homeScore: 5,   awayScore: 4 },
+  "3-4": { homeScore: 5,   awayScore: 4 },
+  "3-5": { homeScore: 4,   awayScore: 4.5 },
+  "3-6": { homeScore: 4.5, awayScore: 5 },
+  "3-7": { homeScore: 5,   awayScore: 4.5 }
 };
 
 let BRACKET = {
@@ -725,7 +733,7 @@ function calcStandings(teamIds, weekFilter) {
       if (!stats[hId]) return;
       if (isChallenge) {
         const bscGoals = result.homeScore;
-        const challengeGoals = challengeScore;
+        const challengeGoals = (typeof result.awayScore === 'number' && result.awayScore > 0) ? result.awayScore : challengeScore;
         stats[hId].mp++;
         stats[hId].gf += bscGoals;
         stats[hId].ga += challengeGoals;
@@ -1563,7 +1571,7 @@ function renderSchedule() {
         if (homeTeam) html += '<span class="bsc-label">' + homeTeam.bscName + '</span>';
         html += '</div>';
         if (result) {
-          var displayAway = isChallenge ? computeChallengeScore(week) : result.awayScore;
+          var displayAway = isChallenge ? ((typeof result.awayScore === 'number' && result.awayScore > 0) ? result.awayScore : computeChallengeScore(week)) : result.awayScore;
           html += '<div class="match-score">' + result.homeScore + ' \u2013 ' + displayAway + '</div>';
         } else { html += '<div class="match-vs">vs</div>'; }
         html += '<div class="match-team away"><span class="flag">' + awayFlag + '</span><span class="name">' + awayName + '</span>';
