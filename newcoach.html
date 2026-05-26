@@ -982,7 +982,10 @@ const SCHEDULE = {
   ],
 
   // ----- WEEK 5: Semifinals -----
-  5: [],
+  5: [
+    { home: 1, away: 8, type: "sf", label: "SF1" },
+    { home: 4, away: 13, type: "sf", label: "SF2" }
+  ],
 
   // ----- WEEK 6: Final + Third Place -----
   6: []
@@ -1018,7 +1021,12 @@ const RESULTS = {
   "3-4": { homeScore: 5, awayScore: 4 },
   "3-5": { homeScore: 4, awayScore: 5 },
   "3-6": { homeScore: 5, awayScore: 5 },
-  "3-7": { homeScore: 5, awayScore: 5 }
+  "3-7": { homeScore: 5, awayScore: 5 },
+  // Week 4 — May 18 (Quarterfinals)
+  "4-0": { homeScore: 5, awayScore: 3 },
+  "4-1": { homeScore: 4, awayScore: 3 },
+  "4-2": { homeScore: 5, awayScore: 4 },
+  "4-3": { homeScore: 5, awayScore: 4 }
 };
 
 // ===== BRACKET =====
@@ -1027,14 +1035,14 @@ const RESULTS = {
 // Each slot: { teamId: null, score: null } or { teamId: 4, score: 2 }
 const BRACKET = {
   qf: [
-    { match: 1, home: { teamId: 1,  score: null }, away: { teamId: 5,  score: null }, label: "France vs Netherlands" },
-    { match: 2, home: { teamId: 8,  score: null }, away: { teamId: 11, score: null }, label: "Brazil vs Portugal" },
-    { match: 3, home: { teamId: 4,  score: null }, away: { teamId: 2,  score: null }, label: "Spain vs Morocco" },
-    { match: 4, home: { teamId: 13, score: null }, away: { teamId: 9,  score: null }, label: "Colombia vs Croatia" }
+    { match: 1, home: { teamId: 1,  score: 5 }, away: { teamId: 5,  score: 3 }, label: "France vs Netherlands" },
+    { match: 2, home: { teamId: 8,  score: 4 }, away: { teamId: 11, score: 3 }, label: "Brazil vs Portugal" },
+    { match: 3, home: { teamId: 4,  score: 5 }, away: { teamId: 2,  score: 4 }, label: "Spain vs Morocco" },
+    { match: 4, home: { teamId: 13, score: 5 }, away: { teamId: 9,  score: 4 }, label: "Colombia vs Croatia" }
   ],
   sf: [
-    { match: 1, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "W-QF.1 vs W-QF.2" },
-    { match: 2, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "W-QF.3 vs W-QF.4" }
+    { match: 1, home: { teamId: 1, score: null }, away: { teamId: 8,  score: null }, label: "France vs Brazil" },
+    { match: 2, home: { teamId: 4, score: null }, away: { teamId: 13, score: null }, label: "Spain vs Colombia" }
   ],
   third: { home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "3rd Place Match" },
   final: { home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "Final" }
@@ -1064,8 +1072,7 @@ const ANSWERS = {
 // Bracket teams: goals from their knockout match. Non-bracket teams: goals from weekly event.
 // One entry per team per week. Organizer fills in after each week.
 const SCORING_TITLE = {
-  // 4: { 1: 3, 2: 0, 3: 5, ... },  // teamId: goals scored
-  // 5: {}, 6: {}
+  4: { 1: 4, 2: 4, 3: 2, 4: 4, 5: 3, 6: 3, 7: 3, 8: 3, 9: 4, 10: 4, 11: 3, 12: 3, 13: 4, 14: 3 }
 };
 
 // =============================================================================

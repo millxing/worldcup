@@ -422,7 +422,7 @@ a { color: var(--teal); }
 // ===== DATA SECTION (mutable for admin processing) ===========================
 // =============================================================================
 
-let CURRENT_WEEK = 4;
+let CURRENT_WEEK = 5;
 
 const WEEK_DATES = {
   1: "April 27", 2: "May 4", 3: "May 11",
@@ -506,7 +506,11 @@ let SCHEDULE = {
     { home: 4,  away: 2, type: "qf", label: "QF3" },
     { home: 13, away: 9, type: "qf", label: "QF4" }
   ],
-  5: [], 6: []
+  5: [
+    { home: 1, away: 8, type: "sf", label: "SF1" },
+    { home: 4, away: 13, type: "sf", label: "SF2" }
+  ],
+  6: []
 };
 
 let RESULTS = {
@@ -533,25 +537,31 @@ let RESULTS = {
   "3-4": { homeScore: 5, awayScore: 4 },
   "3-5": { homeScore: 4, awayScore: 5 },
   "3-6": { homeScore: 5, awayScore: 5 },
-  "3-7": { homeScore: 5, awayScore: 5 }
+  "3-7": { homeScore: 5, awayScore: 5 },
+  "4-0": { homeScore: 5, awayScore: 3 },
+  "4-1": { homeScore: 4, awayScore: 3 },
+  "4-2": { homeScore: 5, awayScore: 4 },
+  "4-3": { homeScore: 5, awayScore: 4 }
 };
 
 let BRACKET = {
   qf: [
-    { match: 1, home: { teamId: 1,  score: null }, away: { teamId: 5,  score: null }, label: "France vs Netherlands" },
-    { match: 2, home: { teamId: 8,  score: null }, away: { teamId: 11, score: null }, label: "Brazil vs Portugal" },
-    { match: 3, home: { teamId: 4,  score: null }, away: { teamId: 2,  score: null }, label: "Spain vs Morocco" },
-    { match: 4, home: { teamId: 13, score: null }, away: { teamId: 9,  score: null }, label: "Colombia vs Croatia" }
+    { match: 1, home: { teamId: 1,  score: 5 }, away: { teamId: 5,  score: 3 }, label: "France vs Netherlands" },
+    { match: 2, home: { teamId: 8,  score: 4 }, away: { teamId: 11, score: 3 }, label: "Brazil vs Portugal" },
+    { match: 3, home: { teamId: 4,  score: 5 }, away: { teamId: 2,  score: 4 }, label: "Spain vs Morocco" },
+    { match: 4, home: { teamId: 13, score: 5 }, away: { teamId: 9,  score: 4 }, label: "Colombia vs Croatia" }
   ],
   sf: [
-    { match: 1, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "W-QF.1 vs W-QF.2" },
-    { match: 2, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "W-QF.3 vs W-QF.4" }
+    { match: 1, home: { teamId: 1, score: null }, away: { teamId: 8,  score: null }, label: "France vs Brazil" },
+    { match: 2, home: { teamId: 4, score: null }, away: { teamId: 13, score: null }, label: "Spain vs Colombia" }
   ],
   third: { home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "3rd Place Match" },
   final: { home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "Final" }
 };
 
-let SCORING_TITLE = {};
+let SCORING_TITLE = {
+  4: { 1: 4, 2: 4, 3: 2, 4: 4, 5: 3, 6: 3, 7: 3, 8: 3, 9: 4, 10: 4, 11: 3, 12: 3, 13: 4, 14: 3 }
+};
 
 // =============================================================================
 // ===== ADMIN STATE ===========================================================

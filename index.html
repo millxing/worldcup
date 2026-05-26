@@ -692,7 +692,7 @@ a { color: var(--teal); }
 // progresses. Update ANNOUNCEMENTS with current news.
 // =============================================================================
 
-const CURRENT_WEEK = 4; // 1=Apr 27, 2=May 4, 3=May 11, 4=May 18, 5=May 25, 6=Jun 1
+const CURRENT_WEEK = 5; // 1=Apr 27, 2=May 4, 3=May 11, 4=May 18, 5=May 25, 6=Jun 1
 
 const WEEK_DATES = {
   1: "April 27",
@@ -833,7 +833,10 @@ const SCHEDULE = {
   ],
 
   // ----- WEEK 5: Semifinals -----
-  5: [],
+  5: [
+    { home: 1, away: 8, type: "sf", label: "SF1" },   // France (Angel City) vs Brazil (Pride)
+    { home: 4, away: 13, type: "sf", label: "SF2" }   // Spain (Arsenal) vs Colombia (Courage)
+  ],
 
   // ----- WEEK 6: Final + Third Place -----
   6: []
@@ -869,7 +872,12 @@ const RESULTS = {
   "3-4": { homeScore: 5, awayScore: 4 },  // Brazil (Pride) vs Croatia (Atalanta)
   "3-5": { homeScore: 4, awayScore: 5 },  // Argentina (Chelsea) vs Senegal [challenge]
   "3-6": { homeScore: 5, awayScore: 5 },  // England (Brentford) vs Colombia (Courage)
-  "3-7": { homeScore: 5, awayScore: 5 }   // Portugal (Benfica) vs Italy (Napoli)
+  "3-7": { homeScore: 5, awayScore: 5 },  // Portugal (Benfica) vs Italy (Napoli)
+  // Week 4 — May 18 (Quarterfinals)
+  "4-0": { homeScore: 5, awayScore: 3 },  // France (Angel City) vs Netherlands (Ajax)
+  "4-1": { homeScore: 4, awayScore: 3 },  // Brazil (Pride) vs Portugal (Benfica)
+  "4-2": { homeScore: 5, awayScore: 4 },  // Spain (Arsenal) vs Morocco (Ipswich)
+  "4-3": { homeScore: 5, awayScore: 4 }   // Colombia (Courage) vs Croatia (Atalanta)
 };
 
 // ===== BRACKET =====
@@ -878,14 +886,14 @@ const RESULTS = {
 // Each slot: { teamId: null, score: null } or { teamId: 4, score: 2 }
 const BRACKET = {
   qf: [
-    { match: 1, home: { teamId: 1,  score: null }, away: { teamId: 5,  score: null }, label: "France vs Netherlands" },
-    { match: 2, home: { teamId: 8,  score: null }, away: { teamId: 11, score: null }, label: "Brazil vs Portugal" },
-    { match: 3, home: { teamId: 4,  score: null }, away: { teamId: 2,  score: null }, label: "Spain vs Morocco" },
-    { match: 4, home: { teamId: 13, score: null }, away: { teamId: 9,  score: null }, label: "Colombia vs Croatia" }
+    { match: 1, home: { teamId: 1,  score: 5 }, away: { teamId: 5,  score: 3 }, label: "France vs Netherlands" },
+    { match: 2, home: { teamId: 8,  score: 4 }, away: { teamId: 11, score: 3 }, label: "Brazil vs Portugal" },
+    { match: 3, home: { teamId: 4,  score: 5 }, away: { teamId: 2,  score: 4 }, label: "Spain vs Morocco" },
+    { match: 4, home: { teamId: 13, score: 5 }, away: { teamId: 9,  score: 4 }, label: "Colombia vs Croatia" }
   ],
   sf: [
-    { match: 1, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "W-QF.1 vs W-QF.2" },
-    { match: 2, home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "W-QF.3 vs W-QF.4" }
+    { match: 1, home: { teamId: 1, score: null }, away: { teamId: 8,  score: null }, label: "France vs Brazil" },
+    { match: 2, home: { teamId: 4, score: null }, away: { teamId: 13, score: null }, label: "Spain vs Colombia" }
   ],
   third: { home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "3rd Place Match" },
   final: { home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "Final" }
@@ -915,8 +923,23 @@ const ANSWERS = {
 // Bracket teams: goals from their knockout match. Non-bracket teams: goals from weekly event.
 // One entry per team per week. Organizer fills in after each week.
 const SCORING_TITLE = {
-  // 4: { 1: 3, 2: 0, 3: 5, ... },  // teamId: goals scored
-  // 5: {}, 6: {}
+  // Week 4 — May 18 (quiz-only goals; bracket teams do NOT get the +1 tik tok bonus here)
+  4: {
+    1: 4,   // Angel City (France)
+    2: 4,   // Ipswich (Morocco)
+    3: 2,   // Reign (Belgium)
+    4: 4,   // Arsenal (Spain)
+    5: 3,   // Ajax (Netherlands)
+    6: 3,   // Dortmund (Germany)
+    7: 3,   // Chelsea (Argentina)
+    8: 3,   // Pride (Brazil)
+    9: 4,   // Atalanta (Croatia)
+    10: 4,  // Brentford (England)
+    11: 3,  // Benfica (Portugal)
+    12: 3,  // Napoli (Italy)
+    13: 4,  // Courage (Colombia)
+    14: 3   // Barcelona (Mexico)
+  }
 };
 
 // =============================================================================
