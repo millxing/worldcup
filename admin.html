@@ -422,7 +422,7 @@ a { color: var(--teal); }
 // ===== DATA SECTION (mutable for admin processing) ===========================
 // =============================================================================
 
-let CURRENT_WEEK = 5;
+let CURRENT_WEEK = 6;
 
 const WEEK_DATES = {
   1: "April 27", 2: "May 4", 3: "May 11",
@@ -510,7 +510,10 @@ let SCHEDULE = {
     { home: 1, away: 8, type: "sf", label: "SF1" },
     { home: 4, away: 13, type: "sf", label: "SF2" }
   ],
-  6: []
+  6: [
+    { home: 8, away: 4,  type: "third", label: "Third Place Match" },
+    { home: 1, away: 13, type: "final", label: "Final" }
+  ]
 };
 
 let RESULTS = {
@@ -541,7 +544,9 @@ let RESULTS = {
   "4-0": { homeScore: 5, awayScore: 3 },
   "4-1": { homeScore: 4, awayScore: 3 },
   "4-2": { homeScore: 5, awayScore: 4 },
-  "4-3": { homeScore: 5, awayScore: 4 }
+  "4-3": { homeScore: 5, awayScore: 4 },
+  "5-0": { homeScore: 5, awayScore: 4 },
+  "5-1": { homeScore: 5, awayScore: 5 }
 };
 
 let BRACKET = {
@@ -552,15 +557,16 @@ let BRACKET = {
     { match: 4, home: { teamId: 13, score: 5 }, away: { teamId: 9,  score: 4 }, label: "Colombia vs Croatia" }
   ],
   sf: [
-    { match: 1, home: { teamId: 1, score: null }, away: { teamId: 8,  score: null }, label: "France vs Brazil" },
-    { match: 2, home: { teamId: 4, score: null }, away: { teamId: 13, score: null }, label: "Spain vs Colombia" }
+    { match: 1, home: { teamId: 1, score: 5 }, away: { teamId: 8,  score: 4 }, label: "France vs Brazil" },
+    { match: 2, home: { teamId: 4, score: 5 }, away: { teamId: 13, score: 5 }, winnerId: 13, label: "Spain vs Colombia (Colombia won shootout)" }
   ],
-  third: { home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "3rd Place Match" },
-  final: { home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "Final" }
+  third: { home: { teamId: 8, score: null }, away: { teamId: 4,  score: null }, label: "Brazil vs Spain" },
+  final: { home: { teamId: 1, score: null }, away: { teamId: 13, score: null }, label: "France vs Colombia" }
 };
 
 let SCORING_TITLE = {
-  4: { 1: 5, 2: 4, 3: 2, 4: 5, 5: 4, 6: 3, 7: 3, 8: 4, 9: 4, 10: 4, 11: 3, 12: 3, 13: 5, 14: 4 }
+  4: { 1: 5, 2: 4, 3: 2, 4: 5, 5: 4, 6: 3, 7: 3, 8: 4, 9: 4, 10: 4, 11: 3, 12: 3, 13: 5, 14: 4 },
+  5: { 1: 4, 2: 4, 3: 5, 4: 4, 5: 4, 6: 4, 7: 5, 8: 4, 9: 5, 10: 4, 11: 4, 12: 4, 13: 4, 14: 5 }
 };
 
 // =============================================================================
@@ -1654,8 +1660,8 @@ function renderBracketRound(title, matches) {
 function renderBracketMatchCard(m) {
   const homeTeam = m.home.teamId ? getTeam(m.home.teamId) : null;
   const awayTeam = m.away.teamId ? getTeam(m.away.teamId) : null;
-  const homeWinner = m.home.score !== null && m.away.score !== null && m.home.score > m.away.score;
-  const awayWinner = m.home.score !== null && m.away.score !== null && m.away.score > m.home.score;
+  const homeWinner = (m.winnerId !== undefined ? m.winnerId === m.home.teamId : (m.home.score !== null && m.away.score !== null && m.home.score > m.away.score));
+  const awayWinner = (m.winnerId !== undefined ? m.winnerId === m.away.teamId : (m.home.score !== null && m.away.score !== null && m.away.score > m.home.score));
   let html = '<div class="bracket-match">';
   html += '<div class="bracket-team ' + (homeWinner ? 'winner' : '') + (homeTeam ? '' : ' tbd') + '"><span class="flag">' + (homeTeam ? homeTeam.flag : '') + '</span> ' + (homeTeam ? homeTeam.country : (m.label ? m.label.split(' vs ')[0] || 'TBD' : 'TBD'));
   if (m.home.score !== null) html += '<span class="score">' + m.home.score + '</span>';

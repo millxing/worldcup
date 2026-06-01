@@ -853,7 +853,7 @@ a { color: var(--teal); }
 // progresses. Update ANNOUNCEMENTS with current news.
 // =============================================================================
 
-const CURRENT_WEEK = 5; // 1=Apr 27, 2=May 4, 3=May 11, 4=May 18, 5=May 25, 6=Jun 1
+const CURRENT_WEEK = 6; // 1=Apr 27, 2=May 4, 3=May 11, 4=May 18, 5=May 25, 6=Jun 1
 
 const WEEK_DATES = {
   1: "April 27",
@@ -988,7 +988,10 @@ const SCHEDULE = {
   ],
 
   // ----- WEEK 6: Final + Third Place -----
-  6: []
+  6: [
+    { home: 8, away: 4,  type: "third", label: "Third Place Match" },
+    { home: 1, away: 13, type: "final", label: "Final" }
+  ]
 };
 
 // ===== RESULTS =====
@@ -1026,7 +1029,10 @@ const RESULTS = {
   "4-0": { homeScore: 5, awayScore: 3 },
   "4-1": { homeScore: 4, awayScore: 3 },
   "4-2": { homeScore: 5, awayScore: 4 },
-  "4-3": { homeScore: 5, awayScore: 4 }
+  "4-3": { homeScore: 5, awayScore: 4 },
+  // Week 5 — May 25 (Semifinals)
+  "5-0": { homeScore: 5, awayScore: 4 },
+  "5-1": { homeScore: 5, awayScore: 5 }
 };
 
 // ===== BRACKET =====
@@ -1041,11 +1047,11 @@ const BRACKET = {
     { match: 4, home: { teamId: 13, score: 5 }, away: { teamId: 9,  score: 4 }, label: "Colombia vs Croatia" }
   ],
   sf: [
-    { match: 1, home: { teamId: 1, score: null }, away: { teamId: 8,  score: null }, label: "France vs Brazil" },
-    { match: 2, home: { teamId: 4, score: null }, away: { teamId: 13, score: null }, label: "Spain vs Colombia" }
+    { match: 1, home: { teamId: 1, score: 5 }, away: { teamId: 8,  score: 4 }, label: "France vs Brazil" },
+    { match: 2, home: { teamId: 4, score: 5 }, away: { teamId: 13, score: 5 }, winnerId: 13, label: "Spain vs Colombia (Colombia won shootout)" }
   ],
-  third: { home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "3rd Place Match" },
-  final: { home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "Final" }
+  third: { home: { teamId: 8, score: null }, away: { teamId: 4,  score: null }, label: "Brazil vs Spain" },
+  final: { home: { teamId: 1, score: null }, away: { teamId: 13, score: null }, label: "France vs Colombia" }
 };
 
 // ===== ANSWERS =====
@@ -1072,7 +1078,8 @@ const ANSWERS = {
 // Bracket teams: goals from their knockout match. Non-bracket teams: goals from weekly event.
 // One entry per team per week. Organizer fills in after each week.
 const SCORING_TITLE = {
-  4: { 1: 5, 2: 4, 3: 2, 4: 5, 5: 4, 6: 3, 7: 3, 8: 4, 9: 4, 10: 4, 11: 3, 12: 3, 13: 5, 14: 4 }
+  4: { 1: 5, 2: 4, 3: 2, 4: 5, 5: 4, 6: 3, 7: 3, 8: 4, 9: 4, 10: 4, 11: 3, 12: 3, 13: 5, 14: 4 },
+  5: { 1: 4, 2: 4, 3: 5, 4: 4, 5: 4, 6: 4, 7: 5, 8: 4, 9: 5, 10: 4, 11: 4, 12: 4, 13: 4, 14: 5 }
 };
 
 // =============================================================================
@@ -1087,22 +1094,19 @@ const COACH_WEEK_INSTRUCTIONS = {
   // Replace this text each week with specific activity instructions
   instructions:
     "Use the schedule to see who your team is playing this week.<br><br>" +
-    "<strong>Question 1</strong> &rarr; For the 2010 men's World Cup in South Africa, which music artist performed this World Cup song, \"Waka Waka\"?<br>" +
-    "A) Jennifer Lopez &nbsp;&nbsp; B) Shakira &nbsp;&nbsp; C) Pitbull &nbsp;&nbsp; D) Jelly Roll<br>" +
+    "<strong>Question 1</strong> &rarr; Which women's player has played in the most World Cup tournaments (7, from 1995 to 2019)?<br>" +
+    "A) Kristine Lilly (USA) &nbsp;&nbsp; B) Formiga (BRA) &nbsp;&nbsp; C) Abby Wambach (USA) &nbsp;&nbsp; D) Homare Sawa (JPN)<br>" +
     "<em>(worth one goal)</em><br><br>" +
-    "<strong>Question 2</strong> &rarr; In the men's 1986 World Cup quarterfinal between Argentina and England, which player punched the ball into the net with his hand? The referee mistook it for a header. Some nicknamed it a \"hand of God\" goal.<br>" +
-    "A) Pelé &nbsp;&nbsp; B) Michel Platini &nbsp;&nbsp; C) Maradona &nbsp;&nbsp; D) Gary Lineker<br>" +
+    "<strong>Question 2</strong> &rarr; Which men's player has won the most (3) World Cup titles?<br>" +
+    "A) Pelé &nbsp;&nbsp; B) Messi &nbsp;&nbsp; C) Ronaldo (POR) &nbsp;&nbsp; D) Mbappe<br>" +
     "<em>(worth one goal)</em><br><br>" +
-    "<strong>Question 3</strong> &rarr; In the women's 1999 World Cup finals, after 120 min it was 0-0 between the USA and China. In PK's, the USA won 5-4. After scoring the winning PK, what did Brandi Chastain do?<br>" +
-    "A) she took off her headband and threw it in the air<br>" +
-    "B) she took off her cleat and threw it in the air<br>" +
-    "C) she took off her jersey and whipped it around in celebration<br>" +
-    "D) she did a backflip on the field<br>" +
+    "<strong>Question 3</strong> &rarr; Which women's player has scored the most World Cup goals (17, she has the record for both the men's and women's)?<br>" +
+    "A) Birgit Prinz (GER) &nbsp;&nbsp; B) Marta (BRA) &nbsp;&nbsp; C) Michelle Akers (USA) &nbsp;&nbsp; D) Abby Wambach (USA)<br>" +
     "<em>(worth one goal)</em><br><br>" +
-    "<strong>Question 4</strong> &rarr; In the World Cup, the <strong>best overall player</strong> of the tournament wins which award?<br>" +
-    "A) Golden Ball &nbsp;&nbsp; B) Golden Glove &nbsp;&nbsp; C) Golden Boot &nbsp;&nbsp; D) Golden Head<br>" +
+    "<strong>Question 4</strong> &rarr; Which men's player has scored the most World Cup goals (16)?<br>" +
+    "A) Miroslav Klose (GER) &nbsp;&nbsp; B) Ronaldo (BRA) &nbsp;&nbsp; C) Gerd Müller (W. GER) &nbsp;&nbsp; D) Messi (ARG)<br>" +
     "<em>(worth one goal)</em><br><br>" +
-    "<strong>Question 5</strong> &rarr; Choose a player to represent the team or have the whole team participate: how many jumping jacks can you do in 1 min? Submit the highest number performed by a player. Of the two teams competing this week, the team with the higher number will score one goal.",
+    "<strong>Question 5</strong> &rarr; Choose a player to represent the team or have the whole team participate: how many toe taps can you do in 1 min? Submit the highest number performed by a player. (Right foot = 1 toe tap and Left foot = 1 toe tap.) Of the two teams competing this week, the team with the higher number will score one goal.",
   reminders: [
     "Please try to complete your team's activity during the first practice of the week.",
     "Submit your team's goals scored before 6:00 PM each Saturday.",
@@ -1926,8 +1930,8 @@ function renderBracketMatchCard(m) {
   const homeTeam = m.home.teamId ? getTeam(m.home.teamId) : null;
   const awayTeam = m.away.teamId ? getTeam(m.away.teamId) : null;
 
-  const homeWinner = m.home.score !== null && m.away.score !== null && m.home.score > m.away.score;
-  const awayWinner = m.home.score !== null && m.away.score !== null && m.away.score > m.home.score;
+  const homeWinner = (m.winnerId !== undefined ? m.winnerId === m.home.teamId : (m.home.score !== null && m.away.score !== null && m.home.score > m.away.score));
+  const awayWinner = (m.winnerId !== undefined ? m.winnerId === m.away.teamId : (m.home.score !== null && m.away.score !== null && m.away.score > m.home.score));
 
   html += '<div class="bracket-team ' + (homeWinner ? 'winner' : '') + (homeTeam ? '' : ' tbd') + '">';
   html += '<span class="flag">' + (homeTeam ? homeTeam.flag : '') + '</span> ';

@@ -692,7 +692,7 @@ a { color: var(--teal); }
 // progresses. Update ANNOUNCEMENTS with current news.
 // =============================================================================
 
-const CURRENT_WEEK = 5; // 1=Apr 27, 2=May 4, 3=May 11, 4=May 18, 5=May 25, 6=Jun 1
+const CURRENT_WEEK = 6; // 1=Apr 27, 2=May 4, 3=May 11, 4=May 18, 5=May 25, 6=Jun 1
 
 const WEEK_DATES = {
   1: "April 27",
@@ -839,7 +839,10 @@ const SCHEDULE = {
   ],
 
   // ----- WEEK 6: Final + Third Place -----
-  6: []
+  6: [
+    { home: 8, away: 4,  type: "third", label: "Third Place Match" },  // Brazil (Pride) vs Spain (Arsenal)
+    { home: 1, away: 13, type: "final", label: "Final" }                // France (Angel City) vs Colombia (Courage)
+  ]
 };
 
 // ===== RESULTS =====
@@ -877,7 +880,10 @@ const RESULTS = {
   "4-0": { homeScore: 5, awayScore: 3 },  // France (Angel City) vs Netherlands (Ajax)
   "4-1": { homeScore: 4, awayScore: 3 },  // Brazil (Pride) vs Portugal (Benfica)
   "4-2": { homeScore: 5, awayScore: 4 },  // Spain (Arsenal) vs Morocco (Ipswich)
-  "4-3": { homeScore: 5, awayScore: 4 }   // Colombia (Courage) vs Croatia (Atalanta)
+  "4-3": { homeScore: 5, awayScore: 4 },  // Colombia (Courage) vs Croatia (Atalanta)
+  // Week 5 — May 25 (Semifinals)
+  "5-0": { homeScore: 5, awayScore: 4 },  // France (Angel City) vs Brazil (Pride)
+  "5-1": { homeScore: 5, awayScore: 5 }   // Spain (Arsenal) vs Colombia (Courage) — Courage won shootout
 };
 
 // ===== BRACKET =====
@@ -892,11 +898,11 @@ const BRACKET = {
     { match: 4, home: { teamId: 13, score: 5 }, away: { teamId: 9,  score: 4 }, label: "Colombia vs Croatia" }
   ],
   sf: [
-    { match: 1, home: { teamId: 1, score: null }, away: { teamId: 8,  score: null }, label: "France vs Brazil" },
-    { match: 2, home: { teamId: 4, score: null }, away: { teamId: 13, score: null }, label: "Spain vs Colombia" }
+    { match: 1, home: { teamId: 1, score: 5 }, away: { teamId: 8,  score: 4 }, label: "France vs Brazil" },
+    { match: 2, home: { teamId: 4, score: 5 }, away: { teamId: 13, score: 5 }, winnerId: 13, label: "Spain vs Colombia (Colombia won shootout)" }
   ],
-  third: { home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "3rd Place Match" },
-  final: { home: { teamId: null, score: null }, away: { teamId: null, score: null }, label: "Final" }
+  third: { home: { teamId: 8, score: null }, away: { teamId: 4,  score: null }, label: "Brazil vs Spain" },
+  final: { home: { teamId: 1, score: null }, away: { teamId: 13, score: null }, label: "France vs Colombia" }
 };
 
 // ===== ANSWERS =====
@@ -939,6 +945,23 @@ const SCORING_TITLE = {
     12: 3,  // Napoli (Italy)
     13: 5,  // Courage (Colombia)
     14: 4   // Barcelona (Mexico)
+  },
+  // Week 5 — May 25 (bracket teams: quiz-only; non-bracket teams: per spreadsheet, default 4 for no-submit)
+  5: {
+    1: 4,   // Angel City (France)
+    2: 4,   // Ipswich (Morocco) — default
+    3: 5,   // Reign (Belgium)
+    4: 4,   // Arsenal (Spain)
+    5: 4,   // Ajax (Netherlands) — default
+    6: 4,   // Dortmund (Germany) — default
+    7: 5,   // Chelsea (Argentina)
+    8: 4,   // Pride (Brazil)
+    9: 5,   // Atalanta (Croatia)
+    10: 4,  // Brentford (England)
+    11: 4,  // Benfica (Portugal) — default
+    12: 4,  // Napoli (Italy) — default
+    13: 4,  // Courage (Colombia)
+    14: 5   // Barcelona (Mexico)
   }
 };
 
@@ -1633,8 +1656,8 @@ function renderBracketMatchCard(m) {
   const homeTeam = m.home.teamId ? getTeam(m.home.teamId) : null;
   const awayTeam = m.away.teamId ? getTeam(m.away.teamId) : null;
 
-  const homeWinner = m.home.score !== null && m.away.score !== null && m.home.score > m.away.score;
-  const awayWinner = m.home.score !== null && m.away.score !== null && m.away.score > m.home.score;
+  const homeWinner = (m.winnerId !== undefined ? m.winnerId === m.home.teamId : (m.home.score !== null && m.away.score !== null && m.home.score > m.away.score));
+  const awayWinner = (m.winnerId !== undefined ? m.winnerId === m.away.teamId : (m.home.score !== null && m.away.score !== null && m.away.score > m.home.score));
 
   html += '<div class="bracket-team ' + (homeWinner ? 'winner' : '') + (homeTeam ? '' : ' tbd') + '">';
   html += '<span class="flag">' + (homeTeam ? homeTeam.flag : '') + '</span> ';
