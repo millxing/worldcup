@@ -20,7 +20,20 @@
       "Bash(git add *)",
       "Bash(git push *)",
       "Bash(git restore *)",
-      "Bash(rm -f '/Users/robschoen/Dropbox/CC/worldcup/~$scoresheet.xlsx')"
+      "Bash(rm -f '/Users/robschoen/Dropbox/CC/worldcup/~$scoresheet.xlsx')",
+      "Bash(mkdir -p \"/Users/robschoen/Dropbox/CC/Brookline/build\")",
+      "Read(//Users/robschoen/Dropbox/CC/Brookline/**)",
+      "Bash(xxd)",
+      "Bash(grep -iE \"flag|bandera|\\\\.webp$|\\\\.svg$|\\\\.png$|\\\\.jpg$\")",
+      "Bash(perl -i -pe 's|<span>__TRACKED_VAR__</span>||g' newcoach.html)",
+      "Bash(curl -s -I https://millxing.github.io/worldcup/index.html)",
+      "Bash(curl -s https://millxing.github.io/worldcup/index.html)",
+      "Bash(curl -s https://millxing.github.io/worldcup/index.html?cb=__TRACKED_VAR__)",
+      "Bash(curl -sI https://millxing.github.io/worldcup/index.html?nocache=__TRACKED_VAR__)",
+      "Bash(curl -s https://millxing.github.io/worldcup/index.html?nocache=__TRACKED_VAR__)",
+      "Bash(gh run *)",
+      "Bash(gh api *)",
+      "Bash(curl -s https://millxing.github.io/worldcup/index.html?nc=__TRACKED_VAR__)"
     ]
   }
 }
